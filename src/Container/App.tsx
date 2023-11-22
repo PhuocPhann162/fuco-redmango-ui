@@ -1,8 +1,14 @@
 import React from "react";
-import "./App.css";
+import { Footer, Header } from "../Components/Layout";
 
 function App() {
-  return <div className="App">App</div>;
+  return (
+    <div>
+      <Header />
+      Main Component
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
