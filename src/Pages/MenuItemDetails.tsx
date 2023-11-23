@@ -1,7 +1,14 @@
 import React from "react";
-import { menuItemModel } from "../Interfaces";
+import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
 
-function MenuItemDetails() {
+interface Props {
+  menuItemId: number;
+}
+
+function MenuItemDetails(props: Props) {
+  const {data, isLoading} = useGetMenuItemByIdQuery(props.menuItemId);
+
+
   return (
     <div className="container pt-4 pt-md-5">
       <div className="row">
