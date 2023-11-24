@@ -33,8 +33,6 @@ function MenuItemDetails() {
       updateQuantityBy: quantity,
     });
 
-    console.log(response);
-
     setIsAddingToCart(false);
   };
 
