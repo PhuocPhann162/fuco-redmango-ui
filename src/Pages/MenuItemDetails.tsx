@@ -4,6 +4,7 @@ import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
+import { MainLoader, MiniLoader } from "../Components/Page/Common";
 
 // USER ID: 59acaa8e-160f-4a88-b755-ba23cb8cdd62
 
@@ -84,12 +85,21 @@ function MenuItemDetails() {
             </span>
             <div className="row pt-4">
               <div className="col-5">
-                <button
-                  className="btn btn-success form-control"
-                  onClick={handleAddToCart}
-                >
-                  Add to Cart
-                </button>
+                {isAddingToCart ? (
+                  <button disabled
+                    className="btn btn-success form-control"
+                    onClick={handleAddToCart}
+                  >
+                   <MiniLoader />
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success form-control"
+                    onClick={handleAddToCart}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
 
               <div className="col-5 ">
@@ -116,7 +126,7 @@ function MenuItemDetails() {
           className="d-flex justify-content-center"
           style={{ width: "100%" }}
         >
-          <div>Loading...</div>
+          <MainLoader />
         </div>
       )}
     </div>
