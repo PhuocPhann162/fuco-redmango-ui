@@ -1,6 +1,6 @@
 import React from "react";
 import { Footer, Header } from "../Components/Layout";
-import { Home, MenuItemDetails, NotFound } from "../Pages";
+import { Home, MenuItemDetails, NotFound, ShoppingCart } from "../Pages";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetails />}
           ></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
         </Routes>
       </div>
       <Footer />
