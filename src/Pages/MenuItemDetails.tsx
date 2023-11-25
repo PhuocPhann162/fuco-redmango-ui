@@ -88,9 +88,8 @@ function MenuItemDetails() {
                 {isAddingToCart ? (
                   <button disabled
                     className="btn btn-success form-control"
-                    onClick={handleAddToCart}
                   >
-                   <MiniLoader />
+                   <MiniLoader size={60} />
                   </button>
                 ) : (
                   <button
