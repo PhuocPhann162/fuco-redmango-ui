@@ -8,7 +8,6 @@ function ShoppingCart() {
   const { data, isLoading } = useGetShoppingCartQuery(
     "59acaa8e-160f-4a88-b755-ba23cb8cdd62"
   );
-  console.log(data);
 
   return (
     <div className="row w-100" style={{ marginTop: "10px" }}>
