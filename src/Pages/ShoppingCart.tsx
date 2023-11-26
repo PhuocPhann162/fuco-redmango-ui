@@ -2,7 +2,7 @@ import React from "react";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { MainLoader } from "../Components/Page/Common";
 import { cartItemModel } from "../Interfaces";
-import { CartSummary } from "../Components/Page/ShoppingCarts";
+import { CartPickUpDetail, CartSummary } from "../Components/Page/Cart";
 
 function ShoppingCart() {
   const { data, isLoading } = useGetShoppingCartQuery(
@@ -14,7 +14,9 @@ function ShoppingCart() {
       <div className="col-lg-6 col-12" style={{ fontWeight: 300 }}>
         <CartSummary />
       </div>
-      <div className="col-lg-6 col-12 p-4">User Details</div>
+      <div className="col-lg-6 col-12 p-4">
+        <CartPickUpDetail />
+      </div>
     </div>
   );
 }
