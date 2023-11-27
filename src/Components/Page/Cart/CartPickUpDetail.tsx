@@ -89,7 +89,8 @@ function CartPickUpDetail() {
         </div>
         <button
           type="submit"
-          className="btn btn-lg btn-success form-control mt-3" disabled={loading}
+          className="btn btn-lg btn-success form-control mt-3"
+          disabled={loading}
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
         </button>
