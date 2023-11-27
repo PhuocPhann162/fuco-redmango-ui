@@ -1,7 +1,5 @@
 import React from "react";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
-import { MainLoader } from "../Components/Page/Common";
-import { cartItemModel } from "../Interfaces";
 import { CartPickUpDetail, CartSummary } from "../Components/Page/Cart";
 
 function ShoppingCart() {
