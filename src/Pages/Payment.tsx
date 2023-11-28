@@ -22,11 +22,13 @@ function Payment() {
       <div className="container m-5 p-5">
         <div className="row">
           <div className="col-md-7">
-            <OrderSummary />
+            <OrderSummary data={apiResult} userInput={userInput} />
           </div>
-          <div className="col-md-5">
-            <h3 className="text-success mb-2">Payment</h3>
-            <PaymentForm />
+          <div className="col-md-4 offset-md-1">
+            <h3>Payment</h3>
+            <div className="mt-5">
+              <PaymentForm />
+            </div>
           </div>
         </div>
       </div>

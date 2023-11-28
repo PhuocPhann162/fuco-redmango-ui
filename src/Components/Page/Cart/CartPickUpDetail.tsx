@@ -48,7 +48,7 @@ function CartPickUpDetail() {
    
     if (data?.result && data.isSuccess) {
       navigate("/payment", {
-        state: { apiResult: data?.result, userInput },
+        state: { apiResult: data?.result, userInput: userInput },
       });
     }
 

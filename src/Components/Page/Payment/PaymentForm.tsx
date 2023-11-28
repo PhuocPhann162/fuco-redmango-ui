@@ -4,7 +4,7 @@ const PaymentForm = () => {
   return (
     <form>
       <PaymentElement />
-      <button>Submit</button>
+      <button className="btn btn-success w-100 mt-5">Submit Order</button>
     </form>
   );
 };
