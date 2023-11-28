@@ -32,7 +32,6 @@ function Login() {
       userName: userInput.userName,
       password: userInput.password,
     });
-    console.log(response.data);
     if (response.data) {
       const { token } = response.data.result;
       const { fullName, id, email, role }: userModel = jwtDecode(token);
