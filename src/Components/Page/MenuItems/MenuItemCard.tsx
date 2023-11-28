@@ -1,30 +1,38 @@
 import React, { useState } from "react";
-import { apiResponse, menuItemModel } from "../../../Interfaces";
-import { Link } from "react-router-dom";
+import { apiResponse, menuItemModel, userModel } from "../../../Interfaces";
+import { Link, useNavigate } from "react-router-dom";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
 import { MiniLoader } from "../Common";
 import { toastNotify } from "../../../Helper";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../Storage/Redux/store";
 
 interface Props {
   menuItem: menuItemModel;
 }
 
 function MenuItemCard(props: Props) {
+  const navigate = useNavigate();
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   const handleUpdateShoppingCart = async () => {
+    if (!userData.id) {
+      navigate("/login");
+      return;
+    }
     setIsAddingToCart(true);
-
     const response: apiResponse = await updateShoppingCart({
-      userId: "59acaa8e-160f-4a88-b755-ba23cb8cdd62",
+      userId: userData.id,
       menuItemId: props.menuItem.id,
       updateQuantityBy: 1,
     });
     if (response.data && response.data.isSuccess) {
       toastNotify("Item added to cart successfully");
     }
-
     setIsAddingToCart(false);
   };
   return (

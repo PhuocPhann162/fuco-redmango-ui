@@ -5,19 +5,24 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
 import { MainLoader, MiniLoader } from "../Components/Page/Common";
-import { apiResponse } from "../Interfaces";
+import { apiResponse, userModel } from "../Interfaces";
 import { toastNotify } from "../Helper";
+import { useSelector } from "react-redux";
+import { RootState } from "../Storage/Redux/store";
 
 // USER ID: 59acaa8e-160f-4a88-b755-ba23cb8cdd62
 
 function MenuItemDetails() {
+  const navigate = useNavigate();
   const { menuItemId } = useParams();
   const { data, isLoading } = useGetMenuItemByIdQuery(menuItemId);
-  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   const handleQuantity = (counter: number) => {
     let newQuantity = quantity + counter;
@@ -29,17 +34,20 @@ function MenuItemDetails() {
   };
 
   const handleAddToCart = async () => {
+    if (!userData.id) {
+      navigate("/login");
+      return;
+    }
     setIsAddingToCart(true);
-    const response : apiResponse = await updateShoppingCart({
-      userId: "59acaa8e-160f-4a88-b755-ba23cb8cdd62",
+    const response: apiResponse = await updateShoppingCart({
+      userId: userData.id,
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     });
 
-    if(response.data && response.data.isSuccess) {
+    if (response.data && response.data.isSuccess) {
       toastNotify("Item added to cart successfully");
     }
-
     setIsAddingToCart(false);
   };
 
@@ -92,10 +100,8 @@ function MenuItemDetails() {
             <div className="row pt-4">
               <div className="col-5">
                 {isAddingToCart ? (
-                  <button disabled
-                    className="btn btn-success form-control"
-                  >
-                   <MiniLoader size={60} />
+                  <button disabled className="btn btn-success form-control">
+                    <MiniLoader size={60} />
                   </button>
                 ) : (
                   <button

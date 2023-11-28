@@ -80,7 +80,7 @@ function Login() {
         </div>
 
         <div className="mt-2">
-          <button
+          <button disabled={loading}
             type="submit"
             className="btn btn-success"
             style={{ width: "200px" }}

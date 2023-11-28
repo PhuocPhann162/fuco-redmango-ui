@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { apiResponse, cartItemModel } from "../../../Interfaces";
+import { apiResponse, cartItemModel, userModel } from "../../../Interfaces";
 import { RootState } from "../../../Storage/Redux/store";
 import {
   removeFromCart,
@@ -13,6 +13,9 @@ function CartSummary() {
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? null
+  );
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
   );
 
   if (!shoppingCartFromStore) {
@@ -29,17 +32,16 @@ function CartSummary() {
     ) {
       // remove the item
       updateShoppingCart({
-        userId: "59acaa8e-160f-4a88-b755-ba23cb8cdd62",
+        userId: userData.id,
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: 0,
       });
-
 
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
     } else {
       // update the quantity with the new quantity
       updateShoppingCart({
-        userId: "59acaa8e-160f-4a88-b755-ba23cb8cdd62",
+        userId: userData.id,
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: updateQuantityBy,
       });

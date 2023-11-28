@@ -19,9 +19,9 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    dispatch(setLoggedInUser({...emptyUserState}));
+    dispatch(setLoggedInUser({ ...emptyUserState }));
     navigate("/");
-  }
+  };
 
   return (
     <div>
@@ -54,11 +54,26 @@ function Header() {
                   aria-current="page"
                   to="/shoppingCart"
                 >
-                  <i className="bi bi-cart"></i> (
-                  {shoppingCartFromStore?.length
-                    ? shoppingCartFromStore?.length
-                    : 0}
-                  )
+                  <i className="bi bi-cart"></i>
+                  {userData.id && `(${shoppingCartFromStore.length})`}
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  to="/authentication"
+                >
+                  Authentication
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  to="/authorization"
+                >
+                  Authorization
                 </NavLink>
               </li>
               <li className="nav-item dropdown">
@@ -100,7 +115,9 @@ function Header() {
                           background: "transparent",
                           border: 0,
                         }}
-                      >Welcome, {userData.fullName} !</button>
+                      >
+                        Welcome, {userData.fullName} !
+                      </button>
                     </li>
                     <li className="nav-item">
                       <button
