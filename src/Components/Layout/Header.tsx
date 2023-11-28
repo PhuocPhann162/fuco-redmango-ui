@@ -1,11 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RootState } from "../../Storage/Redux/store";
 import { cartItemModel, userModel } from "../../Interfaces";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { emptyUserState, setLoggedInUser } from "../../Storage/Redux/authSlice";
 let logo = require("../../Assets/Images/mango.png");
 
 function Header() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? null
   );
@@ -13,6 +16,12 @@ function Header() {
   const userData: userModel = useSelector(
     (state: RootState) => state.userAuthStore
   );
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(setLoggedInUser({...emptyUserState}));
+    navigate("/");
+  }
 
   return (
     <div>
@@ -91,7 +100,7 @@ function Header() {
                           background: "transparent",
                           border: 0,
                         }}
-                      >Welcome, {userData.fullName}</button>
+                      >Welcome, {userData.fullName} !</button>
                     </li>
                     <li className="nav-item">
                       <button
@@ -101,6 +110,7 @@ function Header() {
                           height: "40px",
                           width: "100px",
                         }}
+                        onClick={handleLogout}
                       >
                         Logout
                       </button>
@@ -110,6 +120,11 @@ function Header() {
 
                 {!userData.id && (
                   <>
+                    <li className="nav-item text-white">
+                      <NavLink className="nav-link" to="/register">
+                        Register
+                      </NavLink>
+                    </li>
                     <li className="nav-item text-white">
                       <NavLink
                         className="btn btn-success btn-outlined rounded-pill text-white mx-2"
@@ -121,11 +136,6 @@ function Header() {
                         to="/login"
                       >
                         Login
-                      </NavLink>
-                    </li>
-                    <li className="nav-item text-white">
-                      <NavLink className="nav-link" to="/register">
-                        Register
                       </NavLink>
                     </li>
                   </>
