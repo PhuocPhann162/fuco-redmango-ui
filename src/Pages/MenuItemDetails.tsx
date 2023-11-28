@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
 import { MainLoader, MiniLoader } from "../Components/Page/Common";
+import { apiResponse } from "../Interfaces";
+import { toastNotify } from "../Helper";
 
 // USER ID: 59acaa8e-160f-4a88-b755-ba23cb8cdd62
 
@@ -28,11 +30,15 @@ function MenuItemDetails() {
 
   const handleAddToCart = async () => {
     setIsAddingToCart(true);
-    const response = await updateShoppingCart({
+    const response : apiResponse = await updateShoppingCart({
       userId: "59acaa8e-160f-4a88-b755-ba23cb8cdd62",
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     });
+
+    if(response.data && response.data.isSuccess) {
+      toastNotify("Item added to cart successfully");
+    }
 
     setIsAddingToCart(false);
   };

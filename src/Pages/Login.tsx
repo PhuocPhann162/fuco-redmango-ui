@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { inputHelper } from "../Helper";
+import { inputHelper, toastNotify } from "../Helper";
 import { useLoginUserMutation } from "../Apis/authApi";
 import { apiResponse, userModel } from "../Interfaces";
 import { MainLoader } from "../Components/Page/Common";
@@ -32,16 +32,16 @@ function Login() {
       userName: userInput.userName,
       password: userInput.password,
     });
-
+    console.log(response.data);
     if (response.data) {
-      console.log(response.data);
       const { token } = response.data.result;
       const { fullName, id, email, role }: userModel = jwtDecode(token);
       localStorage.setItem("token", token);
       dispatch(setLoggedInUser({ fullName, id, email, role }));
+      toastNotify("Login successfully");
       navigate("/");
     } else if (response.error) {
-      console.log(response.error.data.errorMessages[0]);
+      toastNotify(response.error.data.errorMessages[0], "error");
       setError(response.error.data.errorMessages[0]);
     }
 
@@ -80,7 +80,6 @@ function Login() {
         </div>
 
         <div className="mt-2">
-          {error && <p className="text-danger">{error}</p>}
           <button
             type="submit"
             className="btn btn-success"

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartItemModel } from "../../../Interfaces";
+import { apiResponse, cartItemModel } from "../../../Interfaces";
 import { RootState } from "../../../Storage/Redux/store";
 import {
   removeFromCart,
@@ -33,6 +33,7 @@ function CartSummary() {
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: 0,
       });
+
 
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
     } else {
