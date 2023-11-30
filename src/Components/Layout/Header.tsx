@@ -4,6 +4,7 @@ import { RootState } from "../../Storage/Redux/store";
 import { cartItemModel, userModel } from "../../Interfaces";
 import { useSelector, useDispatch } from "react-redux";
 import { emptyUserState, setLoggedInUser } from "../../Storage/Redux/authSlice";
+import { SD_Roles } from "../../Utility/SD";
 let logo = require("../../Assets/Images/mango.png");
 
 function Header() {
@@ -28,7 +29,12 @@ function Header() {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <NavLink className="nav-link" aria-current="page" to="/">
-            <img src={logo} alt="Logo" style={{ height: "40px" }} className="m-1" />
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ height: "40px" }}
+              className="m-1"
+            />
           </NavLink>
           <button
             className="navbar-toggler"
@@ -48,6 +54,51 @@ function Header() {
                   Home
                 </NavLink>
               </li>
+              {userData.role == SD_Roles.ADMIN ? (
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Admin Panel
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/order/myOrders")}
+                    >
+                      My Orders
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/order/allOrders")}
+                    >
+                      All Orders
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Something else here
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/order/myOrders"
+                  >
+                    Orders
+                  </NavLink>
+                </li>
+              )}
+
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
@@ -57,39 +108,6 @@ function Header() {
                   <i className="bi bi-cart"></i>
                   {userData.id && `(${shoppingCartFromStore?.length})`}
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/order/myOrders">
-                  Orders
-                </NavLink>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Admin Panel
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Mange Order
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Menu Item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
               </li>
               <div className="d-flex" style={{ marginLeft: "auto" }}>
                 {userData.id && (

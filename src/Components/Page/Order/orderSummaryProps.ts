@@ -1,4 +1,5 @@
 import { shoppingCartModel } from "../../../Interfaces";
+import { SD_Status } from "../../../Utility/SD";
 
 export default interface orderSummaryProps {
   data: {
@@ -7,7 +8,7 @@ export default interface orderSummaryProps {
     cartTotal?: number;
     userId?: string;
     stripePaymentIntentId?: string;
-    status?: string;
+    status?: SD_Status;
   };
   userInput: {
     name?: string;

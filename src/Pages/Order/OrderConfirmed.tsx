@@ -17,6 +17,7 @@ function OrderConfirmed() {
           <h5 className="mt-3">Your order ID: {id}</h5>
           <p>We will soon start to cook the delicous food you ordered. </p>
           <img
+            alt="Confirmation"
             src={confirmedImage}
             style={{ width: "40%", borderRadius: "30px" }}
           ></img>

@@ -14,7 +14,6 @@ import {
 import { useCreateOrderMutation } from "../../../Apis/orderApi";
 import { SD_Status } from "../../../Utility/SD";
 import { useNavigate } from "react-router-dom";
-import { MiniLoader } from "../Common";
 
 const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const stripe = useStripe();

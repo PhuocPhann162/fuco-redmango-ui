@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useGetOrderDetailsQuery } from "../../Apis/orderApi";
 import { OrderSummary } from "../../Components/Page/Order";
 import { MainLoader } from "../../Components/Page/Common";
-import { shoppingCartModel } from "../../Interfaces";
 
 function OrderDetails() {
   const { id } = useParams();
