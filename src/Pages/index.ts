@@ -9,6 +9,8 @@ import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
 import AccessDenied from "./AccessDenied";
 import Payment from "./Payment";
 import OrderConfirmed from "./Order/OrderConfirmed";
+import MyOrders from "./Order/MyOrders";
+import OrderList from "../Components/Page/Order/OrderList";
 export {
   Home,
   NotFound,
@@ -21,4 +23,6 @@ export {
   AccessDenied,
   Payment,
   OrderConfirmed,
+  MyOrders,
+  OrderList
 };

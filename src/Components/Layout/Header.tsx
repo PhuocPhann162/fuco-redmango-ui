@@ -58,6 +58,11 @@ function Header() {
                   {userData.id && `(${shoppingCartFromStore?.length})`}
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to="/order/myOrders">
+                  Orders
+                </NavLink>
+              </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"

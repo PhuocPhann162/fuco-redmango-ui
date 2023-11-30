@@ -4,5 +4,16 @@ import cartItemModel from "./cartItemModel";
 import userModel from "./userModel";
 import apiResponse from "./apiResponse";
 import orderDetailsDTOModel from "./orderDetailsDTOModel";
+import orderDetailModel from "./orderDetailModel";
+import orderHeaderModel from "./orderHeaderModel";
 
-export type { menuItemModel, shoppingCartModel, cartItemModel, userModel, apiResponse, orderDetailsDTOModel };
+export type {
+  menuItemModel,
+  shoppingCartModel,
+  cartItemModel,
+  userModel,
+  apiResponse,
+  orderDetailsDTOModel,
+  orderDetailModel,
+  orderHeaderModel,
+};

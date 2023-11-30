@@ -45,10 +45,6 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       toastNotify("An unexpected error occured", "error");
       setIsProcessing(false);
     } else {
-      console.log(result);
-
-      // "stripePaymentIntentID": "string",
-      // "status": "string",
       let totalItems = 0;
 
       const orderDetailsDTO: orderDetailsDTOModel[] = [];
@@ -78,14 +74,13 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
         orderDetailsDTO: orderDetailsDTO,
       });
 
-      console.log(response);
-
       if (response) {
         if (response.data?.result.status === SD_Status.CONFIRMED) {
           navigate(
             `/order/orderConfirmed/${response.data.result.orderHeaderId}`
           );
         } else {
+          setIsProcessing(false);
           navigate("/failed");
         }
       } else {
@@ -99,8 +94,13 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button disabled={isProcessing} className="btn btn-success w-100 mt-5">
-        {isProcessing ? <MiniLoader /> : "Submit Order"}
+      <button
+        disabled={!stripe || isProcessing}
+        className="btn btn-success w-100 mt-5"
+      >
+        <span id="button-text">
+          {isProcessing ? "Processing..." : "Submit Order"}
+        </span>
       </button>
     </form>
   );

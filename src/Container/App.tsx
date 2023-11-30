@@ -1,4 +1,5 @@
 import React from "react";
+import jwt_decode from "jwt-decode";
 import { Footer, Header } from "../Components/Layout";
 import {
   AccessDenied,
@@ -7,6 +8,7 @@ import {
   Home,
   Login,
   MenuItemDetails,
+  MyOrders,
   NotFound,
   OrderConfirmed,
   Payment,
@@ -19,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 import { userModel } from "../Interfaces";
-import jwt_decode from "jwt-decode";
 import { setLoggedInUser } from "../Storage/Redux/authSlice";
 import { RootState } from "../Storage/Redux/store";
 
@@ -73,6 +74,7 @@ function App() {
             path="/order/orderConfirmed/:orderHeaderId"
             element={<OrderConfirmed />}
           ></Route>
+          <Route path="/order/myOrders/" element={<MyOrders />}></Route>
 
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

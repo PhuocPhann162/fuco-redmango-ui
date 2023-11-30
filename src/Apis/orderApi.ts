@@ -18,8 +18,29 @@ const orderApi = createApi({
       }),
       invalidatesTags: ["Orders"],
     }),
+    getAllOrders: builder.query({
+      query: (userId) => ({
+        url: "order",
+        method: "GET",
+        params: {
+          userId: userId,
+        },
+      }),
+      providesTags: ["Orders"],
+    }),
+    getOrderDetails: builder.query({
+      query: (id) => ({
+        url: `order/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Orders"],
+    }),
   }),
 });
 
 export default orderApi;
-export const { useCreateOrderMutation } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetAllOrdersQuery,
+  useGetOrderDetailsQuery,
+} = orderApi;
