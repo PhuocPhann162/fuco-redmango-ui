@@ -48,7 +48,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       let totalItems = 0;
 
       const orderDetailsDTO: orderDetailsDTOModel[] = [];
-      data.cartItems.map((item: cartItemModel) => {
+      data.cartItems?.map((item: cartItemModel) => {
         const tempOrderDetails: orderDetailsDTOModel = {
           menuItemId: item.menuItemId!,
           quantity: item.quantity!,

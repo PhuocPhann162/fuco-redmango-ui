@@ -28,7 +28,7 @@ function Header() {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <NavLink className="nav-link" aria-current="page" to="/">
-            <img src={logo} style={{ height: "40px" }} className="m-1" />
+            <img src={logo} alt="Logo" style={{ height: "40px" }} className="m-1" />
           </NavLink>
           <button
             className="navbar-toggler"
@@ -76,12 +76,12 @@ function Header() {
                 <ul className="dropdown-menu">
                   <li>
                     <a className="dropdown-item" href="#">
-                      Action
+                      Mange Order
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Another action
+                      Menu Item
                     </a>
                   </li>
                   <li>

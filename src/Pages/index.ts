@@ -11,6 +11,8 @@ import Payment from "./Payment";
 import OrderConfirmed from "./Order/OrderConfirmed";
 import MyOrders from "./Order/MyOrders";
 import OrderList from "../Components/Page/Order/OrderList";
+import OrderDetails from "./Order/OrderDetails";
+
 export {
   Home,
   NotFound,
@@ -24,5 +26,6 @@ export {
   Payment,
   OrderConfirmed,
   MyOrders,
-  OrderList
+  OrderList,
+  OrderDetails,
 };

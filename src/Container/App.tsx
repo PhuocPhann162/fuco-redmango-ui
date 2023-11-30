@@ -11,6 +11,7 @@ import {
   MyOrders,
   NotFound,
   OrderConfirmed,
+  OrderDetails,
   Payment,
   Register,
   ShoppingCart,
@@ -71,10 +72,14 @@ function App() {
           <Route path="/payment" element={<Payment />}></Route>
 
           <Route
-            path="/order/orderConfirmed/:orderHeaderId"
+            path="/order/orderConfirmed/:id"
             element={<OrderConfirmed />}
           ></Route>
           <Route path="/order/myOrders/" element={<MyOrders />}></Route>
+          <Route
+            path="/order/orderDetails/:id"
+            element={<OrderDetails />}
+          ></Route>
 
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
