@@ -1,14 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../Storage/Redux/store";
-import { useGetAllOrdersQuery } from "../../../Apis/orderApi";
 import { MainLoader } from "../Common";
 import { orderHeaderModel } from "../../../Interfaces";
+import OrderListProps from "./orderListType";
 
-function OrderList() {
-  const userData = useSelector((state: RootState) => state.userAuthStore);
-  const { data, isLoading } = useGetAllOrdersQuery(userData.id);
-
+function OrderList({ orderData, isLoading }: OrderListProps) {
   return (
     <>
       {isLoading && <MainLoader />}
@@ -25,7 +20,7 @@ function OrderList() {
               <div className="col-2">Date</div>
               <div className="col-2"></div>
             </div>
-            {data.result.map((orderItem: orderHeaderModel) => (
+            {orderData.map((orderItem: orderHeaderModel) => (
               <div className="row border" key={orderItem.orderHeaderId}>
                 <div className="col-1">{orderItem.orderHeaderId}</div>
                 <div className="col-3">{orderItem.pickupName}</div>
