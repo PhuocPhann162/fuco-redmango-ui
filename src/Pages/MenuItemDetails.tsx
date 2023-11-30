@@ -101,7 +101,7 @@ function MenuItemDetails() {
               <div className="col-5">
                 {isAddingToCart ? (
                   <button disabled className="btn btn-success form-control">
-                    <MiniLoader size={60} />
+                    <MiniLoader />
                   </button>
                 ) : (
                   <button

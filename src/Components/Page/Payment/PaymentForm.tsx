@@ -6,11 +6,19 @@ import {
 import { useState } from "react";
 import { toastNotify } from "../../../Helper";
 import orderSummaryProps from "../Order";
-import { cartItemModel, orderDetailsDTOModel } from "../../../Interfaces";
+import {
+  apiResponse,
+  cartItemModel,
+  orderDetailsDTOModel,
+} from "../../../Interfaces";
 import { useCreateOrderMutation } from "../../../Apis/orderApi";
+import { SD_Status } from "../../../Utility/SD";
+import { useNavigate } from "react-router-dom";
+import { MiniLoader } from "../Common";
 
 const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const stripe = useStripe();
+  const navigate = useNavigate();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const [createOrder] = useCreateOrderMutation();
@@ -55,7 +63,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
         totalItems += item.quantity!;
       });
 
-      const response = await createOrder({
+      const response: apiResponse = await createOrder({
         pickupName: userInput.name,
         pickupPhoneNumber: userInput.phoneNumber,
         pickupEmail: userInput.email,
@@ -63,15 +71,37 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
         totalItems: totalItems,
         applicationUserId: data.userId,
         stripePaymentIntentID: data.stripePaymentIntentId,
-        status: result.paymentIntent.status,
+        status:
+          result.paymentIntent.status === "succeeded"
+            ? SD_Status.CONFIRMED
+            : SD_Status.PENDING,
+        orderDetailsDTO: orderDetailsDTO,
       });
+
+      console.log(response);
+
+      if (response) {
+        if (response.data?.result.status === SD_Status.CONFIRMED) {
+          navigate(
+            `/order/orderConfirmed/${response.data.result.orderHeaderId}`
+          );
+        } else {
+          navigate("/failed");
+        }
+      } else {
+        toastNotify("An unexpected error occured", "error");
+        navigate("/failed");
+      }
     }
+    setIsProcessing(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button className="btn btn-success w-100 mt-5">Submit Order</button>
+      <button disabled={isProcessing} className="btn btn-success w-100 mt-5">
+        {isProcessing ? <MiniLoader /> : "Submit Order"}
+      </button>
     </form>
   );
 };
