@@ -7,17 +7,6 @@ const orderApi = createApi({
   }),
   tagTypes: ["Orders"],
   endpoints: (builder) => ({
-    createOrder: builder.mutation({
-      query: (orderDetails) => ({
-        url: "order",
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: orderDetails,
-      }),
-      invalidatesTags: ["Orders"],
-    }),
     getAllOrders: builder.query({
       query: (userId) => ({
         url: "order",
@@ -35,6 +24,28 @@ const orderApi = createApi({
       }),
       providesTags: ["Orders"],
     }),
+    createOrder: builder.mutation({
+      query: (orderDetails) => ({
+        url: "order",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: orderDetails,
+      }),
+      invalidatesTags: ["Orders"],
+    }),
+    updateOrderHeader: builder.mutation({
+      query: (orderDetails) => ({
+        url: "order/" + orderDetails.orderHeaderId,
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: orderDetails,
+      }),
+      invalidatesTags: ["Orders"],
+    }),
   }),
 });
 
@@ -43,4 +54,5 @@ export const {
   useCreateOrderMutation,
   useGetAllOrdersQuery,
   useGetOrderDetailsQuery,
+  useUpdateOrderHeaderMutation,
 } = orderApi;

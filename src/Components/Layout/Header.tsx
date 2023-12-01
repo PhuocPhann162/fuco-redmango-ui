@@ -80,10 +80,12 @@ function Header() {
                     >
                       All Orders
                     </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/menuItem/menuItemList")}
+                    >
+                      Menu Item 
                     </li>
                   </ul>
                 </li>

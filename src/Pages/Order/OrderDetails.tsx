@@ -7,7 +7,6 @@ import { MainLoader } from "../../Components/Page/Common";
 function OrderDetails() {
   const { id } = useParams();
   const { data, isLoading } = useGetOrderDetailsQuery(id);
-  console.log(data);
 
   let userInput, orderDetails;
 

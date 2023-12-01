@@ -3,11 +3,14 @@ import jwt_decode from "jwt-decode";
 import { Footer, Header } from "../Components/Layout";
 import {
   AccessDenied,
+  AllOrders,
   AuthenticationTest,
   AuthenticationTestAdmin,
   Home,
   Login,
   MenuItemDetails,
+  MenuItemList,
+  MenuItemUpsert,
   MyOrders,
   NotFound,
   OrderConfirmed,
@@ -79,6 +82,19 @@ function App() {
           <Route
             path="/order/orderDetails/:id"
             element={<OrderDetails />}
+          ></Route>
+          <Route path="/order/allOrders" element={<AllOrders />}></Route>
+          <Route
+            path="/menuItem/menuItemList"
+            element={<MenuItemList />}
+          ></Route>
+          <Route
+            path="/menuItem/menuItemUpsert"
+            element={<MenuItemUpsert />}
+          ></Route>
+          <Route
+            path="/menuItem/menuItemUpsert/:id"
+            element={<MenuItemUpsert />}
           ></Route>
 
           <Route path="/*" element={<NotFound />}></Route>
