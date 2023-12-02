@@ -7,7 +7,6 @@ import { MainLoader } from "../../Components/Page/Common";
 function MenuItemList() {
   const navigate = useNavigate();
   const { data, isLoading } = useGetMenuItemsQuery("");
-  console.log(data);
 
   return (
     <>
