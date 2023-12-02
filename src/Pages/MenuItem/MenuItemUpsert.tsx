@@ -1,25 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetMenuItemByIdQuery } from "../../Apis/menuItemApi";
+import {
+  useCreateMenuItemMutation,
+  useGetMenuItemByIdQuery,
+  useUpdateMenuItemMutation,
+} from "../../Apis/menuItemApi";
 import { MainLoader } from "../../Components/Page/Common";
 import { inputHelper, toastNotify } from "../../Helper";
+import { SD_Categories } from "../../Utility/SD";
+
+const Categories = [
+  SD_Categories.APPETIZER,
+  SD_Categories.BEVERAGES,
+  SD_Categories.DESSERT,
+  SD_Categories.ENTRÉE,
+];
 
 const menuItemData = {
   name: "",
   description: "",
   specialTag: "",
-  category: "",
+  category: Categories[0],
   price: "",
-  image: "",
 };
 
 function MenuItemUpsert() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [imageToBeStore, setImageToBeStore] = useState<any>();
-  const [imageToBeDisplay, setImageToBeDisplay] = useState<any>("");
+  const [loading, setIsLoading] = useState(false);
+  const [imageToStore, setImageToStore] = useState<any>();
+  const [imageToDisplay, setImageToDisplay] = useState<any>("");
   const [menuItemInputs, setMenuItemInputs] = useState(menuItemData);
-  const hadnleMenuItemInput = (
+  const [createMenuItem] = useCreateMenuItemMutation();
+  const [updateMenuItem] = useUpdateMenuItemMutation();
+
+  const { data } = useGetMenuItemByIdQuery(id);
+
+  useEffect(() => {
+    if (data && data.result) {
+      const tempData = {
+        name: data.result.name,
+        description: data.result.description,
+        specialTag: data.result.specialTag,
+        category: data.result.category,
+        price: data.result.price,
+      };
+      setMenuItemInputs(tempData);
+      setImageToDisplay(data.result.image);
+    }
+  }, [data]);
+
+  const handleMenuItemInput = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
@@ -40,110 +71,171 @@ function MenuItemUpsert() {
       });
 
       if (file.size > 1000 * 1024) {
-        setImageToBeStore("");
+        setImageToStore("");
         toastNotify("File must be less than 1MB", "error");
         return;
       } else if (isImageTypeValid.length === 0) {
-        setImageToBeStore("");
+        setImageToStore("");
         toastNotify("File must be in jpeg, jpg or png", "error");
         return;
       }
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      setImageToBeStore(file);
+      setImageToStore(file);
       reader.onload = (e) => {
         const imgUrl = e.target?.result as string;
-        setImageToBeDisplay(imgUrl);
+        setImageToDisplay(imgUrl);
       };
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+    if (!imageToStore && !id) {
+      toastNotify("Please upload an image", "error");
+      setIsLoading(false);
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("Name", menuItemInputs.name);
+    formData.append("Description", menuItemInputs.description);
+    formData.append("SpecialTag", menuItemInputs.specialTag ?? "");
+    formData.append("Category", menuItemInputs.category);
+    formData.append("Price", menuItemInputs.price);
+    if (imageToDisplay) {
+      formData.append("File", imageToStore);
+    }
+
+    let response;
+
+    if (!id) {
+      // create
+      response = await createMenuItem(formData);
+      if (response) {
+        setIsLoading(false);
+        toastNotify("Menu Item created successfully");
+        navigate("/menuItem/menuItemList");
+      } else {
+        toastNotify("An unexpected error occured", "error");
+      }
+    } else {
+      // update
+      formData.append("Id", id);
+      response = await updateMenuItem({ data: formData, id: id });
+      if (response) {
+        toastNotify("Menu Item updated successfully", "success");
+        navigate("/menuItem/menuItemList");
+      } else {
+        toastNotify("An unexpected error occured", "error");
+      }
+    }
+
+    setIsLoading(false);
+  };
+
   return (
-    <>
-      <div className="container border mt-5 p-5">
-        <h3 className="offset-2 px-2 text-success">
-          {!id ? "Add" : "Update"} Product
-        </h3>
-        <form method="post" encType="multipart/form-data">
-          <div className="row mt-3">
-            <div className="col-md-5 offset-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Name"
-                name="name"
-                value={menuItemInputs.name}
-                onChange={hadnleMenuItemInput}
-                required
-              />
-              <textarea
-                className="form-control mt-3"
-                placeholder="Enter Description"
-                name="description"
-                rows={10}
-                value={menuItemInputs.description}
-                onChange={hadnleMenuItemInput}
-              ></textarea>
-              <input
-                type="text"
-                className="form-control mt-3"
-                placeholder="Enter Special Tag"
-                name="specialTag"
-                value={menuItemInputs.specialTag}
-                onChange={hadnleMenuItemInput}
-              />
-              <input
-                type="text"
-                className="form-control mt-3"
-                placeholder="Enter Category"
-                name="category"
-                value={menuItemInputs.category}
-                onChange={hadnleMenuItemInput}
-              />
-              <input
-                type="number"
-                className="form-control mt-3"
-                required
-                placeholder="Enter Price"
-                name="price"
-                value={menuItemInputs.price}
-                onChange={hadnleMenuItemInput}
-              />
-              <input
-                type="file"
-                className="form-control mt-3"
-                onChange={handleFileChange}
-              />
-              <div className="d-flex">
-                <button
-                  type="submit"
-                  style={{ width: "50%" }}
-                  className="btn btn-success mt-5"
+    <div className="container border mt-5 p-5 bg-light">
+      {loading && <MainLoader />}
+      {!loading && (
+        <>
+          <h3 className="px-2 text-success">
+            {!id ? "Add" : "Update"} Menu Item
+          </h3>
+          <form
+            method="post"
+            encType="multipart/form-data"
+            onSubmit={handleSubmit}
+          >
+            <div className="row mt-3">
+              <div className="col-md-7">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Name"
+                  name="name"
+                  value={menuItemInputs.name}
+                  onChange={handleMenuItemInput}
+                  required
+                />
+                <textarea
+                  className="form-control mt-3"
+                  placeholder="Enter Description"
+                  name="description"
+                  rows={10}
+                  value={menuItemInputs.description}
+                  onChange={handleMenuItemInput}
+                ></textarea>
+                <input
+                  type="text"
+                  className="form-control mt-3"
+                  placeholder="Enter Special Tag"
+                  name="specialTag"
+                  value={menuItemInputs.specialTag}
+                  onChange={handleMenuItemInput}
+                />
+                <select
+                  className="form-control mt-3 form-select"
+                  placeholder="Enter Category"
+                  name="category"
+                  value={menuItemInputs.category}
+                  onChange={handleMenuItemInput}
                 >
-                  {id ? "Update" : "Add"}
-                </button>{" "}
-                &nbsp;
-                <button
-                  className="btn btn-secondary mt-5"
-                  style={{ width: "50%" }}
-                  onClick={() => navigate(-1)}
-                >
-                  Back to List
-                </button>
+                  {Categories.map((category) => (
+                    <option value={category} key={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="number"
+                  className="form-control mt-3"
+                  required
+                  placeholder="Enter Price"
+                  name="price"
+                  value={menuItemInputs.price}
+                  onChange={handleMenuItemInput}
+                />
+                <input
+                  type="file"
+                  className="form-control mt-3"
+                  onChange={handleFileChange}
+                />
+                <div className="row">
+                  <div className="col-6">
+                    <button
+                      type="submit"
+                      className="btn btn-success form-control mt-5"
+                    >
+                      {!id ? "Add" : "Update"}
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <a
+                      className="btn btn-secondary form-control mt-5"
+                      onClick={() => navigate("/menuItem/menuItemList")}
+                    >
+                      Back to List
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-5 text-center">
+                <img
+                  src={imageToDisplay}
+                  style={{ width: "100%", borderRadius: "30px" }}
+                  alt="Upload Image"
+                />
               </div>
             </div>
-            <div className="col-md-5 text-center">
-              <img
-                src={imageToBeDisplay}
-                style={{ width: "100%", borderRadius: "30px" }}
-                alt="Product Image"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-    </>
+          </form>
+        </>
+      )}
+    </div>
   );
 }
 
