@@ -17,7 +17,9 @@ function CartPickUpDetail() {
 
   let grandTotal = 0;
   let totalItems = 0;
-  const userData = useSelector((state: RootState) => state.userAuthStore);
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   const initialUserData = {
     name: userData.fullName,
