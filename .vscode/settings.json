@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/33a5c429-c83b-4254-bce9-7f11cb451496/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/fucoredmango",
+    "appService.deploySubpath": "."
+}
