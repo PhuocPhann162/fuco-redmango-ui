@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useGetAllOrdersQuery } from "../../Apis/orderApi";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Storage/Redux/store";
 import { MainLoader } from "../../Components/Page/Common";
 import { OrderList } from "../../Components/Page/Order";
 import { withAdminAuth } from "../../HOC";
 import { SD_Status } from "../../Utility/SD";
 import { inputHelper } from "../../Helper";
-import { orderHeaderModel } from "../../Interfaces";
 
 const filterOptions = [
   "All",
@@ -18,11 +15,25 @@ const filterOptions = [
 ];
 
 function AllOrders() {
-  const { data, isLoading } = useGetAllOrdersQuery("");
   const [orderData, setOrderData] = useState([]);
   const [filters, setFilters] = useState({
     searchString: "",
     status: "",
+  });
+  const [apiFilters, setApiFilters] = useState({
+    searchString: "",
+    status: "",
+  });
+  const { data, isLoading } = useGetAllOrdersQuery({
+    ...(apiFilters && {
+      searchString: apiFilters.searchString,
+      status: apiFilters.status,
+    }),
+  });
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [pageOptions, setPageOptions] = useState({
+    pageNumber: 1,
+    pageSize: 5,
   });
 
   const handleChange = (
@@ -33,39 +44,18 @@ function AllOrders() {
   };
 
   const handleFilters = () => {
-    const tempData = data.result.filter((orderItem: orderHeaderModel) => {
-      if (
-        (orderItem.pickupName &&
-          orderItem.pickupName
-            ?.toLowerCase()
-            .includes(filters.searchString.toLowerCase())) ||
-        (orderItem.pickupEmail &&
-          orderItem.pickupEmail
-            ?.toLowerCase()
-            .includes(filters.searchString.toLowerCase())) ||
-        (orderItem.pickupPhoneNumber &&
-          orderItem.pickupPhoneNumber?.includes(filters.searchString))
-      ) {
-        return orderItem;
-      }
+    setApiFilters({
+      searchString: filters.searchString,
+      status: filters.status,
     });
-
-    const finalArray = tempData.filter((orderItem: orderHeaderModel) => {
-      if(filters.status !== "") {
-        if(orderItem.status === filters.status) {
-          return orderItem;
-        }
-        return null;
-      }
-      return orderItem;
-    });
-
-    setOrderData(finalArray);
   };
 
   useEffect(() => {
     if (data) {
-      setOrderData(data.result);
+      setOrderData(data.apiResponse.result);
+      const { TotalRecords } = JSON.parse(data.totalRecords);
+      console.log(data.totalRecords);
+      setTotalRecords(TotalRecords);
     }
   }, [data]);
 

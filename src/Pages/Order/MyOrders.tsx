@@ -16,8 +16,8 @@ const filterOptions = [
 ];
 
 function MyOrders() {
-  const userData = useSelector((state: RootState) => state.userAuthStore);
-  const { data, isLoading } = useGetAllOrdersQuery(userData.id);
+  const userId = useSelector((state: RootState) => state.userAuthStore.id);
+  const { data, isLoading } = useGetAllOrdersQuery({ userId });
   return (
     <>
       {isLoading && <MainLoader />}
@@ -26,7 +26,10 @@ function MyOrders() {
           <div className="d-flex justify-content-between align-items-center mx-5 mt-5">
             <h1 className="text-success">My Orders</h1>
           </div>
-          <OrderList orderData={data.result} isLoading={isLoading} />
+          <OrderList
+            orderData={data?.apiResponse.result}
+            isLoading={isLoading}
+          />
         </>
       )}
     </>
