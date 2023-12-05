@@ -24,16 +24,18 @@ function AllOrders() {
     searchString: "",
     status: "",
   });
-  const { data, isLoading } = useGetAllOrdersQuery({
-    ...(apiFilters && {
-      searchString: apiFilters.searchString,
-      status: apiFilters.status,
-    }),
-  });
   const [totalRecords, setTotalRecords] = useState(0);
   const [pageOptions, setPageOptions] = useState({
     pageNumber: 1,
     pageSize: 5,
+  });
+  const { data, isLoading } = useGetAllOrdersQuery({
+    ...(apiFilters && {
+      searchString: apiFilters.searchString,
+      status: apiFilters.status,
+      pageNumber: pageOptions.pageNumber,
+      pageSize: pageOptions.pageSize,
+    }),
   });
 
   const handleChange = (
