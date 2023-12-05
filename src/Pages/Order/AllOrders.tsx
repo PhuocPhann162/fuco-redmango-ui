@@ -54,10 +54,27 @@ function AllOrders() {
     if (data) {
       setOrderData(data.apiResponse.result);
       const { TotalRecords } = JSON.parse(data.totalRecords);
-      console.log(data.totalRecords);
       setTotalRecords(TotalRecords);
     }
   }, [data]);
+
+  const getPageDetails = () => {
+    const dataStartRecordNumber =
+      (pageOptions.pageNumber - 1) * pageOptions.pageSize + 1;
+    const dataEndRecordNumber = pageOptions.pageNumber * pageOptions.pageSize;
+
+    return `${dataStartRecordNumber} - ${
+      dataEndRecordNumber < totalRecords ? dataEndRecordNumber : totalRecords
+    } of ${totalRecords}`;
+  };
+
+  const handlePaginationClick = (direction: string) => {
+    if (direction === "prev") {
+      setPageOptions({ pageSize: 5, pageNumber: pageOptions.pageNumber - 1 });
+    } else if (direction === "next") {
+      setPageOptions({ pageSize: 5, pageNumber: pageOptions.pageNumber + 1 });
+    }
+  };
 
   return (
     <>
@@ -96,6 +113,25 @@ function AllOrders() {
             </div>
           </div>
           <OrderList orderData={orderData} isLoading={isLoading} />
+          <div className="d-flex mx-5 justify-content-end align-items-center">
+            <div className="mx-2">{getPageDetails()}</div>
+            <button
+              onClick={() => handlePaginationClick("prev")}
+              disabled={pageOptions.pageNumber === 1}
+              className="btn btn-outline-primary px-3 mx-2"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              onClick={() => handlePaginationClick("next")}
+              disabled={
+                pageOptions.pageNumber * pageOptions.pageSize >= totalRecords
+              }
+              className="btn btn-outline-primary px-3 mx-2"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
         </>
       )}
     </>
