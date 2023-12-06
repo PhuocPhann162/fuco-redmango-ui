@@ -29,6 +29,7 @@ function AllOrders() {
     pageNumber: 1,
     pageSize: 5,
   });
+  const [currentPageSize, setCurrentPageSize] = useState(pageOptions.pageSize);
   const { data, isLoading } = useGetAllOrdersQuery({
     ...(apiFilters && {
       searchString: apiFilters.searchString,
@@ -70,11 +71,22 @@ function AllOrders() {
     } of ${totalRecords}`;
   };
 
-  const handlePaginationClick = (direction: string) => {
+  const handlePageOptionsChange = (direction: string, pageSize?: number) => {
     if (direction === "prev") {
-      setPageOptions({ pageSize: 5, pageNumber: pageOptions.pageNumber - 1 });
+      setPageOptions({
+        pageSize: currentPageSize,
+        pageNumber: pageOptions.pageNumber - 1,
+      });
     } else if (direction === "next") {
-      setPageOptions({ pageSize: 5, pageNumber: pageOptions.pageNumber + 1 });
+      setPageOptions({
+        pageSize: currentPageSize,
+        pageNumber: pageOptions.pageNumber + 1,
+      });
+    } else if (direction === "change") {
+      setPageOptions({
+        pageSize: pageSize ? pageSize : 5,
+        pageNumber: 1,
+      });
     }
   };
 
@@ -116,16 +128,33 @@ function AllOrders() {
           </div>
           <OrderList orderData={orderData} isLoading={isLoading} />
           <div className="d-flex mx-5 justify-content-end align-items-center">
+            <div>Row per page: </div>
+            <div>
+              <select
+                className="form-select mx-2"
+                style={{ width: "80px" }}
+                value={currentPageSize}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  handlePageOptionsChange("change", Number(e.target.value));
+                  setCurrentPageSize(Number(e.target.value));
+                }}
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </div>
             <div className="mx-2">{getPageDetails()}</div>
             <button
-              onClick={() => handlePaginationClick("prev")}
+              onClick={() => handlePageOptionsChange("prev")}
               disabled={pageOptions.pageNumber === 1}
               className="btn btn-outline-primary px-3 mx-2"
             >
               <i className="bi bi-chevron-left"></i>
             </button>
             <button
-              onClick={() => handlePaginationClick("next")}
+              onClick={() => handlePageOptionsChange("next")}
               disabled={
                 pageOptions.pageNumber * pageOptions.pageSize >= totalRecords
               }
