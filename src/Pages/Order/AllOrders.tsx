@@ -84,7 +84,7 @@ function AllOrders() {
       });
     } else if (direction === "change") {
       setPageOptions({
-        pageSize: pageSize ? pageSize : 5,
+        pageSize: pageSize ? pageSize : currentPageSize,
         pageNumber: 1,
       });
     }
@@ -127,7 +127,7 @@ function AllOrders() {
             </div>
           </div>
           <OrderList orderData={orderData} isLoading={isLoading} />
-          <div className="d-flex mx-5 justify-content-end align-items-center">
+          <div className="d-flex mx-5 justify-content-end align-items-center mb-5">
             <div>Row per page: </div>
             <div>
               <select

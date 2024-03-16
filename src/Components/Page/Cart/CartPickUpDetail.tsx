@@ -29,7 +29,7 @@ function CartPickUpDetail() {
 
   const [userInput, setUserInput] = useState(initialUserData);
 
-  shoppingCartFromStore.map((cartItem: cartItemModel) => {
+  shoppingCartFromStore?.map((cartItem: cartItemModel) => {
     grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
     totalItems += cartItem.quantity!;
     return null;

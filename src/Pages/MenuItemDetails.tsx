@@ -105,7 +105,7 @@ function MenuItemDetails() {
                   </button>
                 ) : (
                   <button
-                    className="btn btn-success form-control"
+                    className="btn btn-warning form-control"
                     onClick={handleAddToCart}
                   >
                     Add to Cart
