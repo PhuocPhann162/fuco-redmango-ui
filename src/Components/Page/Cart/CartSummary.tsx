@@ -20,13 +20,14 @@ function CartSummary() {
 
   if (!shoppingCartFromStore) {
     return (
-      <div className="row justify-content-center mt-4">
+      <div className="row justify-content-center mt-5">
         <div className="col-md-6">
           <div
-            className="alert alert-info empty-cart-alert font-weight-bold"
+            style={{ fontWeight: 450 }}
+            className="alert alert-secondary empty-cart-alert"
             role="alert"
           >
-            Your shopping cart is empty. Add products to continue shopping!
+            Your shopping cart is empty. Add products to continue shopping 🍜
           </div>
         </div>
       </div>
