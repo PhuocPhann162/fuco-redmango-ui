@@ -180,7 +180,7 @@ function MenuItemUpsert() {
                 />
                 <select
                   className="form-control mt-3 form-select"
-                  placeholder="Enter Category"
+                  // placeholder="Enter Category"
                   name="category"
                   value={menuItemInputs.category}
                   onChange={handleMenuItemInput}
