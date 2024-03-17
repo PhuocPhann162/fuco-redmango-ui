@@ -29,7 +29,7 @@ function CartPickUpDetail() {
 
   const [userInput, setUserInput] = useState(initialUserData);
 
-  shoppingCartFromStore.map((cartItem: cartItemModel) => {
+  shoppingCartFromStore?.map((cartItem: cartItemModel) => {
     grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
     totalItems += cartItem.quantity!;
     return null;
@@ -65,13 +65,13 @@ function CartPickUpDetail() {
 
   return (
     <div className="border pb-5 pt-3">
-      <h1 style={{ fontWeight: "300" }} className="text-center text-success">
+      <h1 style={{ fontWeight: "350" }} className="text-center text-success">
         Pickup Details
       </h1>
       <hr />
       <form onSubmit={handleSubmit} className="col-10 mx-auto">
         <div className="form-group mt-3">
-          Pickup Name
+          -Pickup Name-
           <input
             type="text"
             value={userInput.name}
@@ -83,7 +83,7 @@ function CartPickUpDetail() {
           />
         </div>
         <div className="form-group mt-3">
-          Pickup Email
+          -Pickup Email-
           <input
             type="email"
             value={userInput.email}
@@ -96,7 +96,7 @@ function CartPickUpDetail() {
         </div>
 
         <div className="form-group mt-3">
-          Pickup Phone Number
+          -Pickup Phone Number-
           <input
             type="number"
             value={userInput.phoneNumber}

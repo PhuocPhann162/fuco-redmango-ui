@@ -85,7 +85,7 @@ function Header() {
                       className="dropdown-item"
                       onClick={() => navigate("/menuItem/menuItemList")}
                     >
-                      Menu Item 
+                      Menu Item
                     </li>
                   </ul>
                 </li>
@@ -108,7 +108,12 @@ function Header() {
                   to="/shoppingCart"
                 >
                   <i className="bi bi-cart"></i>
-                  {userData.id && `(${shoppingCartFromStore?.length})`}
+                  {userData.id &&
+                    `(${
+                      shoppingCartFromStore?.length > 0
+                        ? shoppingCartFromStore.length
+                        : 0
+                    })`}
                 </NavLink>
               </li>
               <div className="d-flex" style={{ marginLeft: "auto" }}>

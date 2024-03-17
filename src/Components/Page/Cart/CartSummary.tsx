@@ -19,7 +19,19 @@ function CartSummary() {
   );
 
   if (!shoppingCartFromStore) {
-    return <div>Shopping Cart Empty</div>;
+    return (
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-6">
+          <div
+            style={{ fontWeight: 450 }}
+            className="alert alert-secondary empty-cart-alert"
+            role="alert"
+          >
+            Your shopping cart is empty. Add products to continue shopping 🍜
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const hanldeUpdateQuantity = (
