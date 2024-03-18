@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   useDeleteMenuItemMutation,
   useGetMenuItemsQuery,
 } from "../../Apis/menuItemApi";
 import { menuItemModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
-import { AlertDialog, MainLoader } from "../../Components/Page/Common";
+import { MainLoader } from "../../Components/Page/Common";
 import { toast } from "react-toastify";
 
 function MenuItemList() {
   const navigate = useNavigate();
   const { data, isLoading } = useGetMenuItemsQuery("");
   const [deleteMenuItem] = useDeleteMenuItemMutation();
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setShowContent(true);
+    }
+  }, [isLoading]);
 
   const handleDeleteMenuItem = async (id: number) => {
     toast.promise(
@@ -26,10 +33,11 @@ function MenuItemList() {
       }
     );
   };
+
   return (
     <>
       {isLoading && <MainLoader />}
-      {!isLoading && (
+      {showContent && (
         <div className="table p-5">
           <div className="d-flex align-items-center justify-content-between">
             <h1 className="text-success">MenuItem List</h1>
@@ -44,7 +52,7 @@ function MenuItemList() {
           </div>
 
           <div className="p-2">
-            <div className="row border">
+            <div style={{ fontWeight: 700 }} className="row border ">
               <div className="col-1">Image</div>
               <div className="col-1">ID</div>
               <div className="col-2">Name</div>

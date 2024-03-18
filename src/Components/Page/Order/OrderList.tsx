@@ -11,54 +11,76 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
     <>
       {isLoading && <MainLoader />}
       {!isLoading && (
-        <div className="table px-5">
-          <div className="p-2">
-            <div className="row border">
-              <div className="col-1">ID</div>
-              <div className="col-2">Name</div>
-              <div className="col-2">Phone</div>
-              <div className="col-1">Total</div>
-              <div className="col-1">Discount</div>
-              <div className="col-1">Items</div>
-              <div className="col-1">Date</div>
-              <div className="col-2">Status</div>
-              <div className="col-1"></div>
-            </div>
-            {orderData.map((orderItem: orderHeaderModel) => (
-              <div className="row border" key={orderItem.orderHeaderId}>
-                <div className="col-1">{orderItem.orderHeaderId}</div>
-                <div className="col-2">{orderItem.pickupName}</div>
-                <div className="col-2">{orderItem.pickupPhoneNumber}</div>
-                <div className="col-1">
-                  $ {orderItem.orderTotal!.toFixed(2)}
-                </div>
-                <div className="col-1">$ {orderItem.discountAmount!}</div>
-                <div className="col-1"># {orderItem.totalItems}</div>
-                <div className="col-1">
-                  {new Date(orderItem.orderDate!).toLocaleDateString()}
-                </div>
-                <div className="col-1">
-                  <span
-                    className={`badge bg-${getStatusColor(orderItem.status!)}`}
-                  >
-                    {orderItem.status}
-                  </span>
-                </div>
-                <div className="col-2 text-center">
-                  <button
-                    className="btn btn-success"
-                    onClick={() => {
-                      navigate(
-                        "/order/orderDetails/" + orderItem.orderHeaderId
-                      );
-                    }}
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="table-responsive px-5 px-md-5">
+          <table className="table table-bordered table-striped table-hover px-5 fade-in">
+            <thead>
+              <tr className="border">
+                <th scope="col" className="col-1">
+                  ID
+                </th>
+                <th scope="col" className="col-2">
+                  Name
+                </th>
+                <th scope="col" className="col-2">
+                  Phone
+                </th>
+                <th scope="col" className="col-1">
+                  Total
+                </th>
+                <th scope="col" className="col-1">
+                  Discount
+                </th>
+                <th scope="col" className="col-1">
+                  Items
+                </th>
+                <th scope="col" className="col-1">
+                  Date
+                </th>
+                <th scope="col" className="col-2">
+                  Status
+                </th>
+                <th scope="col" className="col-1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderData.map((orderItem: orderHeaderModel) => (
+                <tr className="border" key={orderItem.orderHeaderId}>
+                  <td className="col-1">{orderItem.orderHeaderId}</td>
+                  <td className="col-2">{orderItem.pickupName}</td>
+                  <td className="col-2">{orderItem.pickupPhoneNumber}</td>
+                  <td className="col-1">
+                    $ {orderItem.orderTotal!.toFixed(2)}
+                  </td>
+                  <td className="col-1">$ {orderItem.discountAmount!}</td>
+                  <td className="col-1">{orderItem.totalItems}</td>
+                  <td className="col-1">
+                    {new Date(orderItem.orderDate!).toLocaleDateString()}
+                  </td>
+                  <td className="col-2">
+                    <span
+                      className={`badge bg-${getStatusColor(
+                        orderItem.status!
+                      )}`}
+                    >
+                      {orderItem.status}
+                    </span>
+                  </td>
+                  <td className="col-1 text-center">
+                    <button
+                      className="btn btn-success"
+                      onClick={() => {
+                        navigate(
+                          "/order/orderDetails/" + orderItem.orderHeaderId
+                        );
+                      }}
+                    >
+                      Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </>

@@ -87,6 +87,13 @@ function Header() {
                     >
                       Menu Item
                     </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/menuItem/menuItemList")}
+                    >
+                      Coupon
+                    </li>
                   </ul>
                 </li>
               ) : (
@@ -133,7 +140,7 @@ function Header() {
                     </li>
                     <li className="nav-item">
                       <button
-                        className="btn btn-success btn-outlined rounded-pill text-white mx-2"
+                        className="btn btn-warning btn-outlined rounded-pill  mx-2"
                         style={{
                           border: "none",
                           height: "40px",

@@ -34,3 +34,37 @@ code {
   box-shadow: 0 0 5px #000;
   transform: scale(1.05);
 }
+
+.fade-in {
+  animation: fadeInAnimation 1s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.row.border {
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.row.border:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  font-weight: bold;
+  color: #333; /* Màu sắc tùy chọn */
+}
+
+.table th {
+  font-family: "Arial", sans-serif; /* Kiểu chữ tùy chọn */
+  font-size: 16px; /* Cỡ chữ tùy chọn */
+  background-color: #f8f9fa; /* Màu nền tùy chọn */
+  border-color: #dee2e6; /* Màu border tùy chọn */
+}
