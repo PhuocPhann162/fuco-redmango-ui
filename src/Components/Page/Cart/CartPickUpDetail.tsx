@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { apiResponse, cartItemModel, userModel } from "../../../Interfaces";
+import {
+  apiResponse,
+  cartItemModel,
+  shoppingCartModel,
+  userModel,
+} from "../../../Interfaces";
 import { RootState } from "../../../Storage/Redux/store";
 import { inputHelper } from "../../../Helper";
 import { MiniLoader } from "../Common";
@@ -11,8 +16,8 @@ function CartPickUpDetail() {
   const navigate = useNavigate();
   const [loading, setIsLoading] = useState(false);
   const [initiatePayment] = useInitiatePaymentMutation();
-  const shoppingCartFromStore: cartItemModel[] = useSelector(
-    (state: RootState) => state.shoppingCartStore.cartItems ?? null
+  const shoppingCartFromStore: shoppingCartModel = useSelector(
+    (state: RootState) => state.shoppingCartStore ?? null
   );
 
   let grandTotal = 0;
@@ -29,11 +34,19 @@ function CartPickUpDetail() {
 
   const [userInput, setUserInput] = useState(initialUserData);
 
-  shoppingCartFromStore?.map((cartItem: cartItemModel) => {
-    grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
-    totalItems += cartItem.quantity!;
-    return null;
-  });
+  shoppingCartFromStore &&
+    shoppingCartFromStore?.cartItems.map((cartItem: cartItemModel) => {
+      grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
+      totalItems += cartItem.quantity!;
+
+      return null;
+    });
+
+  grandTotal =
+    grandTotal -
+    (shoppingCartFromStore.discount != null
+      ? shoppingCartFromStore.discount
+      : 0);
 
   useEffect(() => {
     setUserInput({
@@ -53,6 +66,7 @@ function CartPickUpDetail() {
     setIsLoading(true);
 
     const { data }: apiResponse = await initiatePayment(userData.id);
+    console.log(data);
 
     if (data?.result && data.isSuccess) {
       navigate("/payment", {
@@ -71,7 +85,7 @@ function CartPickUpDetail() {
       <hr />
       <form onSubmit={handleSubmit} className="col-10 mx-auto">
         <div className="form-group mt-3">
-          -Pickup Name-
+          Pickup Name
           <input
             type="text"
             value={userInput.name}
@@ -83,7 +97,7 @@ function CartPickUpDetail() {
           />
         </div>
         <div className="form-group mt-3">
-          -Pickup Email-
+          Pickup Email
           <input
             type="email"
             value={userInput.email}
@@ -96,7 +110,7 @@ function CartPickUpDetail() {
         </div>
 
         <div className="form-group mt-3">
-          -Pickup Phone Number-
+          Pickup Phone Number
           <input
             type="number"
             value={userInput.phoneNumber}
@@ -110,6 +124,12 @@ function CartPickUpDetail() {
         <div className="form-group mt-3">
           <div className="card p-3" style={{ background: "ghostwhite" }}>
             <h5>Grand Total : ${grandTotal.toFixed(2)}</h5>
+            <h5>
+              Discount : $
+              {shoppingCartFromStore.discount != null
+                ? shoppingCartFromStore.discount.toFixed(2)
+                : 0}
+            </h5>
             <h5>No of items : {totalItems}</h5>
           </div>
         </div>

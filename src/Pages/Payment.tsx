@@ -15,13 +15,14 @@ function Payment() {
   const options = {
     // passing the client secret obtained from the server
     clientSecret: apiResult.clientSecret,
-    secretKey: "sk_test_51OF8z1EbY7sfcwm6yhvmei46XUb8q870naEZQhmlHul04mz722bx3qjizm2VpNpobbE79p97jl1iQtKMiX7agDoH00vKB1bVWi",
+    secretKey:
+      "sk_test_51OF8z1EbY7sfcwm6yhvmei46XUb8q870naEZQhmlHul04mz722bx3qjizm2VpNpobbE79p97jl1iQtKMiX7agDoH00vKB1bVWi",
   };
 
   return (
     <Elements stripe={stripePromise} options={options}>
       <div className="container m-5 p-5">
-        <div className="row">  
+        <div className="row">
           <div className="col-md-7">
             <OrderSummary data={apiResult} userInput={userInput} />
           </div>

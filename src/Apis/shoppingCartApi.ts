@@ -33,9 +33,20 @@ const shoppingCartApi = createApi({
       }),
       invalidatesTags: ["ShoppingCarts"],
     }),
+    applyCoupon: builder.mutation({
+      query: (data) => ({
+        url: `shoppingCart/applyCoupon`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["ShoppingCarts"],
+    }),
   }),
 });
 
 export default shoppingCartApi;
-export const { useGetShoppingCartQuery, useUpdateShoppingCartMutation } =
-  shoppingCartApi;
+export const {
+  useGetShoppingCartQuery,
+  useUpdateShoppingCartMutation,
+  useApplyCouponMutation,
+} = shoppingCartApi;

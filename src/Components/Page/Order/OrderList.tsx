@@ -18,8 +18,9 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
               <div className="col-2">Name</div>
               <div className="col-2">Phone</div>
               <div className="col-1">Total</div>
+              <div className="col-1">Discount</div>
               <div className="col-1">Items</div>
-              <div className="col-2">Date</div>
+              <div className="col-1">Date</div>
               <div className="col-2">Status</div>
               <div className="col-1"></div>
             </div>
@@ -31,8 +32,9 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
                 <div className="col-1">
                   $ {orderItem.orderTotal!.toFixed(2)}
                 </div>
+                <div className="col-1">$ {orderItem.discountAmount!}</div>
                 <div className="col-1"># {orderItem.totalItems}</div>
-                <div className="col-2">
+                <div className="col-1">
                   {new Date(orderItem.orderDate!).toLocaleDateString()}
                 </div>
                 <div className="col-1">

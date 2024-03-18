@@ -5,8 +5,10 @@ export default interface orderSummaryProps {
   data: {
     id?: number;
     cartItems?: shoppingCartModel[];
+    couponCode?: string;
     cartTotal?: number;
     userId?: string;
+    discount?: number;
     stripePaymentIntentId?: string;
     status?: SD_Status;
   };

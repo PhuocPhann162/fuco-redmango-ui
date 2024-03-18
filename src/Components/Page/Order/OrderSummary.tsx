@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import orderSummaryProps from "./orderSummaryProps";
 import { cartItemModel } from "../../../Interfaces";
 import { getStatusColor } from "../../../Helper";
@@ -26,6 +26,12 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
           value: SD_Status.COMPLETED,
         };
 
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  }, [data]);
+
   const handleNextStatus = async () => {
     setIsLoading(true);
     await updateOrderHeader({
@@ -45,6 +51,8 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
     setIsLoading(false);
   };
 
+  const totalPrice = data.cartTotal! - (data.discount ? data.discount : 0);
+
   return (
     <div>
       {loading && <MainLoader />}
@@ -56,7 +64,7 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
               {data.status}
             </span>
           </div>
-          <div className="mt-3">
+          <div className="mt-2">
             <div className="border py-3 px-2">Name : {userInput.name}</div>
             <div className="border py-3 px-2">Email : {userInput.email}</div>
             <div className="border py-3 px-2">
@@ -84,9 +92,24 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
                 )}
 
                 <hr />
-                <h4 className="text-danger" style={{ textAlign: "right" }}>
-                  ${data.cartTotal?.toFixed(2)}
-                </h4>
+                <div className="d-flex align-items-center justify-content-between">
+                  <span>Total Cart Price: </span>
+                  <h4 className="" style={{ textAlign: "right" }}>
+                    ${data.cartTotal?.toFixed(2)}
+                  </h4>
+                </div>
+                <div className="d-flex align-items-center justify-content-between">
+                  <span>Discount Amount: </span>
+                  <h4 className="" style={{ textAlign: "right" }}>
+                    ${data.discount?.toFixed(2)}
+                  </h4>
+                </div>
+                <div className="d-flex align-items-center justify-content-between">
+                  <span>Total Price After Discount: </span>
+                  <h4 className="text-danger" style={{ textAlign: "right" }}>
+                    ${totalPrice.toFixed(2)}
+                  </h4>
+                </div>
               </div>
             </div>
           </div>
