@@ -27,6 +27,8 @@ import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/authSlice";
 import { RootState } from "../Storage/Redux/store";
+import CouponList from "../Pages/Coupon/CouponList";
+import CouponUpsert from "../Pages/Coupon/CouponUpsert";
 
 function App() {
   const dispatch = useDispatch();
@@ -82,7 +84,7 @@ function App() {
           ></Route>
           <Route path="/accessDenied" element={<AccessDenied />}></Route>
           <Route path="/payment" element={<Payment />}></Route>
-
+          {/* Order */}
           <Route
             path="/order/orderConfirmed/:id"
             element={<OrderConfirmed />}
@@ -93,6 +95,7 @@ function App() {
             element={<OrderDetails />}
           ></Route>
           <Route path="/order/allOrders" element={<AllOrders />}></Route>
+          {/* MenuItem */}
           <Route
             path="/menuItem/menuItemList"
             element={<MenuItemList />}
@@ -104,6 +107,13 @@ function App() {
           <Route
             path="/menuItem/menuItemUpsert/:id"
             element={<MenuItemUpsert />}
+          ></Route>
+          {/* Coupon */}
+          <Route path="/coupon/couponList" element={<CouponList />} />
+          <Route path="/coupon/couponUpsert" element={<CouponUpsert />}></Route>
+          <Route
+            path="/coupon/couponUpsert/:id"
+            element={<CouponUpsert />}
           ></Route>
 
           <Route path="/*" element={<NotFound />}></Route>

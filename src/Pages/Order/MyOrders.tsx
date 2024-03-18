@@ -7,7 +7,7 @@ import { MainLoader } from "../../Components/Page/Common";
 import { OrderList } from "../../Components/Page/Order";
 import { SD_Status } from "../../Utility/SD";
 
-let test = require("../../Assets/Images/test.jpg");
+let decoration = require("../../Assets/Images/decoration_2.jpg");
 
 const filterOptions = [
   "All",
@@ -29,7 +29,7 @@ function MyOrders() {
             <div className="row justify-content-center align-items-center">
               <div className="col-auto">
                 <img
-                  src={test}
+                  src={decoration}
                   alt="Image"
                   style={{
                     width: "100px",

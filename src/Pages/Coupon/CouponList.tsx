@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from "react";
-import {
-  useDeleteMenuItemMutation,
-  useGetMenuItemsQuery,
-} from "../../Apis/menuItemApi";
-import { menuItemModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
+import {
+  useDeleteCouponMutation,
+  useGetCouponsQuery,
+} from "../../Apis/couponApi";
 import { MainLoader } from "../../Components/Page/Common";
+import { couponModel } from "../../Interfaces";
 import { toast } from "react-toastify";
 
-let decoration = require("../../Assets/Images/decoration_1.png");
+let decoration = require("../../Assets/Images/decoration_4.png");
 
-function MenuItemList() {
+export default function CouponList() {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetMenuItemsQuery("");
-  const [deleteMenuItem] = useDeleteMenuItemMutation();
+  const { data, isLoading } = useGetCouponsQuery("");
   const [showContent, setShowContent] = useState(false);
+  const [deleteCoupon] = useDeleteCouponMutation();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && data) {
       setShowContent(true);
     }
   }, [isLoading]);
 
-  const handleDeleteMenuItem = async (id: number) => {
+  const handleDeleteCoupon = async (id: number) => {
     toast.promise(
-      deleteMenuItem(id),
+      deleteCoupon(id),
       {
         pending: "Processing your request...",
-        success: "Menu Item Deleted Successfully 👌",
+        success: "Coupon Deleted Successfully 👌",
         error: "An unexpected error occured 🤯",
       },
       {
@@ -56,59 +56,45 @@ function MenuItemList() {
                 />
               </div>
               <div className="col">
-                <h1 className="text-success">MenuItem List</h1>
+                <h1 className="text-success">Coupon List</h1>
               </div>
             </div>
             <button
               className="btn btn-success"
               onClick={() => {
-                navigate("/menuItem/menuItemUpsert");
+                navigate("/coupon/couponUpsert");
               }}
             >
-              Add New Menu Item
+              Add New Coupon Code
             </button>
           </div>
 
           <div className="p-2">
             <div style={{ fontWeight: 700 }} className="row border ">
-              <div className="col-2">Image</div>
-              <div className="col-1" hidden>
-                ID
-              </div>
-              <div className="col-2">Name</div>
-              <div className="col-2">Category</div>
-              <div className="col-1">Price</div>
-              <div className="col-2">Special Tag</div>
-              <div className="col-1">Action</div>
+              <div className="col-3">Code</div>
+              <div className="col-4">Discount Amount</div>
+              <div className="col-4">Min Amount</div>
+              <div className="col-1"></div>
             </div>
-            {data.result.map((menuItem: menuItemModel) => (
-              <div className="row border" key={menuItem.id}>
-                <div className="col-2">
-                  <img
-                    src={menuItem.image}
-                    alt="no content"
-                    style={{ width: "100%", maxWidth: "120px" }}
-                  />
+            {data.result.map((coupon: couponModel) => (
+              <div className="row border" key={coupon.id}>
+                <div className="col-3">{coupon.code}</div>
+                <div className="col-4">
+                  $ {coupon.discountAmount?.toFixed(2)}
                 </div>
-                <div className="col-1" hidden>
-                  {menuItem.id}
-                </div>
-                <div className="col-2">{menuItem.name}</div>
-                <div className="col-2">{menuItem.category}</div>
-                <div className="col-1">{menuItem.price}</div>
-                <div className="col-2">{menuItem.specialTag}</div>
+                <div className="col-4">$ {coupon.minAmount?.toFixed(2)}</div>
                 <div className="col-1">
                   <button
                     className="btn btn-warning"
                     onClick={() =>
-                      navigate("/menuItem/menuItemUpsert/" + menuItem.id)
+                      navigate("/coupon/couponUpsert/" + coupon.id)
                     }
                   >
                     <i className="bi bi-pencil-fill"></i>
                   </button>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => handleDeleteMenuItem(menuItem.id)}
+                    onClick={() => handleDeleteCoupon(coupon.id!)}
                   >
                     <i className="bi bi-trash-fill"></i>
                   </button>
@@ -121,5 +107,3 @@ function MenuItemList() {
     </>
   );
 }
-
-export default MenuItemList;

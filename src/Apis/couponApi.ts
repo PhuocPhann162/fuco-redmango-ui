@@ -41,8 +41,8 @@ export const couponApi = createApi({
       invalidatesTags: ["Coupons"],
     }),
     updateCoupon: builder.mutation({
-      query: (data) => ({
-        url: "Coupon",
+      query: ({ data, id }) => ({
+        url: `Coupon/${id}`,
         method: "PUT",
         body: data,
       }),

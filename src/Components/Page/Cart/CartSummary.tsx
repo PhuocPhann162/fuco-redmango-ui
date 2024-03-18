@@ -43,6 +43,17 @@ function CartSummary() {
 
   const [userInput, setUserInput] = useState(initialUserData);
 
+  let grandTotal = 0;
+  let totalItems = 0;
+
+  shoppingCartFromStore &&
+    shoppingCartFromStore?.cartItems.map((cartItem: cartItemModel) => {
+      grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
+      totalItems += cartItem.quantity!;
+
+      return null;
+    });
+
   useEffect(() => {
     if (!loading && data) {
       console.log(data);
@@ -218,11 +229,15 @@ function CartSummary() {
                 required
               >
                 <option value="">Select a coupon code</option>
-                {couponList.map((coupon: couponModel) => (
-                  <option key={coupon.id} value={coupon.code}>
-                    Sale {coupon.discountAmount}$
-                  </option>
-                ))}
+                {couponList.map((coupon: couponModel) => {
+                  if (coupon.minAmount! <= grandTotal) {
+                    return (
+                      <option key={coupon.id} value={coupon.code}>
+                        Sale {coupon.discountAmount}$
+                      </option>
+                    );
+                  }
+                })}
               </select>
             </div>
             <button

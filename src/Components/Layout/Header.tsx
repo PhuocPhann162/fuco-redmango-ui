@@ -90,7 +90,7 @@ function Header() {
                     <li
                       style={{ cursor: "pointer" }}
                       className="dropdown-item"
-                      onClick={() => navigate("/menuItem/menuItemList")}
+                      onClick={() => navigate("/coupon/couponList")}
                     >
                       Coupon
                     </li>
