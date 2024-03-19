@@ -7,6 +7,7 @@ import { menuItemModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
 import { MainLoader } from "../../Components/Page/Common";
 import { toast } from "react-toastify";
+import { Modal } from "../../Components/Layout";
 
 let decoration = require("../../Assets/Images/decoration_1.png");
 
@@ -15,6 +16,9 @@ function MenuItemList() {
   const { data, isLoading } = useGetMenuItemsQuery("");
   const [deleteMenuItem] = useDeleteMenuItemMutation();
   const [showContent, setShowContent] = useState(false);
+  const [isModalShow, setIsModalShow] = useState(false);
+
+  let cnt = 1;
 
   useEffect(() => {
     if (!isLoading) {
@@ -34,6 +38,7 @@ function MenuItemList() {
         theme: "dark",
       }
     );
+    setIsModalShow(false);
   };
 
   return (
@@ -70,11 +75,10 @@ function MenuItemList() {
           </div>
 
           <div className="p-2">
-            <div style={{ fontWeight: 700 }} className="row border ">
-              <div className="col-2">Image</div>
-              <div className="col-1" hidden>
-                ID
-              </div>
+            <div style={{ fontWeight: 700 }} className="row border">
+              <div className="col-1">Image</div>
+              <div className="col-1"></div>
+              <div className="col-1">ID</div>
               <div className="col-2">Name</div>
               <div className="col-2">Category</div>
               <div className="col-1">Price</div>
@@ -83,16 +87,15 @@ function MenuItemList() {
             </div>
             {data.result.map((menuItem: menuItemModel) => (
               <div className="row border" key={menuItem.id}>
-                <div className="col-2">
+                <div className="col-1">
                   <img
                     src={menuItem.image}
                     alt="no content"
                     style={{ width: "100%", maxWidth: "120px" }}
                   />
                 </div>
-                <div className="col-1" hidden>
-                  {menuItem.id}
-                </div>
+                <div className="col-1"></div>
+                <div className="col-1">{cnt++}</div>
                 <div className="col-2">{menuItem.name}</div>
                 <div className="col-2">{menuItem.category}</div>
                 <div className="col-1">{menuItem.price}</div>
@@ -108,10 +111,17 @@ function MenuItemList() {
                   </button>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => handleDeleteMenuItem(menuItem.id)}
+                    onClick={() => setIsModalShow(true)}
                   >
                     <i className="bi bi-trash-fill"></i>
                   </button>
+                  <Modal
+                    title=" Are you sure?"
+                    content="Do you really want to delete this menu item? This process cannot be undone."
+                    isShow={isModalShow}
+                    onClose={() => setIsModalShow(false)}
+                    onConfirm={() => handleDeleteMenuItem(menuItem.id!)}
+                  />
                 </div>
               </div>
             ))}

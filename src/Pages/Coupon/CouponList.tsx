@@ -7,6 +7,7 @@ import {
 import { MainLoader } from "../../Components/Page/Common";
 import { couponModel } from "../../Interfaces";
 import { toast } from "react-toastify";
+import { Modal } from "../../Components/Layout";
 
 let decoration = require("../../Assets/Images/decoration_4.png");
 
@@ -15,9 +16,10 @@ export default function CouponList() {
   const { data, isLoading } = useGetCouponsQuery("");
   const [showContent, setShowContent] = useState(false);
   const [deleteCoupon] = useDeleteCouponMutation();
+  const [isModalShow, setIsModalShow] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && data) {
+    if (!isLoading) {
       setShowContent(true);
     }
   }, [isLoading]);
@@ -34,7 +36,10 @@ export default function CouponList() {
         theme: "dark",
       }
     );
+    setIsModalShow(false);
   };
+
+  let cnt = 1;
 
   return (
     <>
@@ -71,19 +76,21 @@ export default function CouponList() {
 
           <div className="p-2">
             <div style={{ fontWeight: 700 }} className="row border ">
-              <div className="col-3">Code</div>
-              <div className="col-4">Discount Amount</div>
-              <div className="col-4">Min Amount</div>
-              <div className="col-1"></div>
+              <div className="col-2">Id</div>
+              <div className="col-2">Code</div>
+              <div className="col-3">Discount Amount</div>
+              <div className="col-3">Min Amount</div>
+              <div className="col-2">Action</div>
             </div>
             {data.result.map((coupon: couponModel) => (
               <div className="row border" key={coupon.id}>
-                <div className="col-3">{coupon.code}</div>
-                <div className="col-4">
+                <div className="col-2">{cnt++}</div>
+                <div className="col-2">{coupon.code}</div>
+                <div className="col-3">
                   $ {coupon.discountAmount?.toFixed(2)}
                 </div>
-                <div className="col-4">$ {coupon.minAmount?.toFixed(2)}</div>
-                <div className="col-1">
+                <div className="col-3">$ {coupon.minAmount?.toFixed(2)}</div>
+                <div className="col-2">
                   <button
                     className="btn btn-warning"
                     onClick={() =>
@@ -94,10 +101,17 @@ export default function CouponList() {
                   </button>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => handleDeleteCoupon(coupon.id!)}
+                    onClick={() => setIsModalShow(true)}
                   >
                     <i className="bi bi-trash-fill"></i>
                   </button>
+                  <Modal
+                    title=" Are you sure?"
+                    content="Do you really want to delete this coupon? This process cannot be undone."
+                    isShow={isModalShow}
+                    onClose={() => setIsModalShow(false)}
+                    onConfirm={() => handleDeleteCoupon(coupon.id!)}
+                  />
                 </div>
               </div>
             ))}

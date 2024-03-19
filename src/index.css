@@ -68,3 +68,25 @@ code {
   background-color: #f8f9fa; /* Màu nền tùy chọn */
   border-color: #dee2e6; /* Màu border tùy chọn */
 }
+
+.wrapper-modal {
+  background: rgb(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 0 32%;
+  padding-bottom: 25%;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-modal .modal-body {
+  height: auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+  z-index: 1000;
+}

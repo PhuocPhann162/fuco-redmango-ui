@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./banner.css";
 import { useDispatch } from "react-redux";
-import { inputHelper } from "../../../Helper";
 import { setSearchItems } from "../../../Storage/Redux/menuItemSlice";
 
 function Banner() {
