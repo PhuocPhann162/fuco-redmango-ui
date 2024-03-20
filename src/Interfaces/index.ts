@@ -6,6 +6,7 @@ import apiResponse from "./apiResponse";
 import orderDetailsDTOModel from "./orderDetailsDTOModel";
 import orderDetailModel from "./orderDetailModel";
 import orderHeaderModel from "./orderHeaderModel";
+import couponModel from "./couponModel";
 
 export type {
   menuItemModel,
@@ -16,4 +17,5 @@ export type {
   orderDetailsDTOModel,
   orderDetailModel,
   orderHeaderModel,
+  couponModel,
 };

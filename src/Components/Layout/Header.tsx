@@ -91,6 +91,70 @@ function Header() {
                     >
                       Menu Item
                     </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/coupon/couponList")}
+                    >
+                      Coupon
+                    </li>
+                    <hr />
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/register")}
+                    >
+                      Register Users
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/manageUser")}
+                    >
+                      Manager Users
+                    </li>
+                  </ul>
+                </li>
+              ) : userData.role === SD_Roles.EMPLOYEE ? (
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Employee Panel
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/order/myOrders")}
+                    >
+                      My Orders
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/order/allOrders")}
+                    >
+                      All Orders
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/menuItem/menuItemList")}
+                    >
+                      Menu Item
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/coupon/couponList")}
+                    >
+                      Coupon
+                    </li>
                   </ul>
                 </li>
               ) : (
@@ -138,7 +202,7 @@ function Header() {
                     </li>
                     <li className="nav-item">
                       <button
-                        className="btn btn-success btn-outlined rounded-pill text-white mx-2"
+                        className="btn btn-warning btn-outlined rounded-pill  mx-2"
                         style={{
                           border: "none",
                           height: "40px",

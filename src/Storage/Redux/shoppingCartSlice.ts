@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { shoppingCartModel } from "../../Interfaces";
+import { act } from "react-dom/test-utils";
+import { stat } from "fs";
 
 const initialState: shoppingCartModel = {
   cartItems: [],
+  cartTotal: 0,
+  couponCode: "",
+  discount: 0,
 };
 
 export const shoppingCartSlice = createSlice({
@@ -10,7 +15,14 @@ export const shoppingCartSlice = createSlice({
   initialState: initialState,
   reducers: {
     setShoppingCart: (state, action) => {
-      state.cartItems = action.payload;
+      state.cartItems = action.payload.cartItems;
+      state.couponCode = action.payload.couponCode;
+      state.discount = action.payload.discount;
+      state.cartTotal = action.payload.cartTotal;
+    },
+    applyOrRemoveCoupon: (state, action) => {
+      state.couponCode = action.payload.couponCode;
+      state.discount = action.payload.discount;
     },
     updateQuantity: (state, action) => {
       // payload - cartitem that needs to be updated, newquantity
@@ -32,6 +44,10 @@ export const shoppingCartSlice = createSlice({
   },
 });
 
-export const { setShoppingCart, updateQuantity, removeFromCart } =
-  shoppingCartSlice.actions;
+export const {
+  setShoppingCart,
+  updateQuantity,
+  removeFromCart,
+  applyOrRemoveCoupon,
+} = shoppingCartSlice.actions;
 export const shoppingCartReducer = shoppingCartSlice.reducer;

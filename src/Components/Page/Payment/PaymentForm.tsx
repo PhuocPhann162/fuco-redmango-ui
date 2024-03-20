@@ -21,7 +21,6 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const [createOrder] = useCreateOrderMutation();
-  const createItem = useState();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,6 +63,8 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
         pickupEmail: userInput.email,
         orderTotal: data.cartTotal,
         totalItems: totalItems,
+        discountAmount: data.discount,
+        couponCode: data.couponCode,
         applicationUserId: data.userId,
         stripePaymentIntentID: data.stripePaymentIntentId,
         status:

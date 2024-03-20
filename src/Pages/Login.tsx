@@ -34,9 +34,31 @@ function Login() {
     });
     if (response.data) {
       const { token } = response.data.result;
-      const { fullName, id, email, role }: userModel = jwtDecode(token);
+      const {
+        fullName,
+        phoneNumber,
+        streetAddress,
+        city,
+        state,
+        postalCode,
+        id,
+        email,
+        role,
+      }: userModel = jwtDecode(token);
       localStorage.setItem("token", token);
-      dispatch(setLoggedInUser({ fullName, id, email, role }));
+      dispatch(
+        setLoggedInUser({
+          fullName,
+          phoneNumber,
+          streetAddress,
+          city,
+          state,
+          postalCode,
+          id,
+          email,
+          role,
+        })
+      );
       toastNotify("Login successfully");
       navigate("/");
     } else if (response.error) {
@@ -79,7 +101,8 @@ function Login() {
         </div>
 
         <div className="mt-2">
-          <button disabled={loading}
+          <button
+            disabled={loading}
             type="submit"
             className="btn btn-success"
             style={{ width: "200px" }}

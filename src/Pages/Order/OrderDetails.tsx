@@ -20,6 +20,8 @@ function OrderDetails() {
       id: data.result[0].orderHeaderId,
       cartItems: data.result[0].orderDetails,
       cartTotal: data.result[0].orderTotal,
+      discount: data.result[0].discountAmount,
+      couponCode: data.result[0].couponCode,
       status: data.result[0].status,
     };
   }

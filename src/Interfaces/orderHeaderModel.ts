@@ -8,6 +8,8 @@ export default interface orderHeaderModel {
   pickupEmail?: string;
   pickupPhoneNumber?: string;
   applicationUserId?: string;
+  couponCode?: string;
+  discountAmount?: number;
   user?: userModel;
   orderTotal?: number;
   orderDate?: Date;

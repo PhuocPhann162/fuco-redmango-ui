@@ -4,11 +4,12 @@ import { Footer, Header } from "../Components/Layout";
 import {
   AccessDenied,
   AllOrders,
-  AuthenticationTest,
-  AuthenticationTestAdmin,
+  CouponList,
+  CouponUpsert,
   Home,
   Information,
   Login,
+  ManageUsers,
   MenuItemDetails,
   MenuItemList,
   MenuItemUpsert,
@@ -17,6 +18,7 @@ import {
   OrderConfirmed,
   OrderDetails,
   Payment,
+  PermissionUsers,
   Register,
   ShoppingCart,
 } from "../Pages";
@@ -42,14 +44,36 @@ function App() {
   useEffect(() => {
     const localToken = localStorage.getItem("token");
     if (localToken) {
-      const { fullName, id, email, role }: userModel = jwt_decode(localToken);
-      dispatch(setLoggedInUser({ fullName, id, email, role }));
+      const {
+        fullName,
+        phoneNumber,
+        streetAddress,
+        city,
+        state,
+        postalCode,
+        id,
+        email,
+        role,
+      }: userModel = jwt_decode(localToken);
+      dispatch(
+        setLoggedInUser({
+          fullName,
+          phoneNumber,
+          streetAddress,
+          city,
+          state,
+          postalCode,
+          id,
+          email,
+          role,
+        })
+      );
     }
   }, []);
 
   useEffect(() => {
     if (!isLoading && data) {
-      dispatch(setShoppingCart(data.result?.cartItems));
+      dispatch(setShoppingCart(data.result));
     }
   }, [data]);
 
@@ -73,17 +97,9 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
 
-          <Route
-            path="/authentication"
-            element={<AuthenticationTest />}
-          ></Route>
-          <Route
-            path="/authorization"
-            element={<AuthenticationTestAdmin />}
-          ></Route>
           <Route path="/accessDenied" element={<AccessDenied />}></Route>
           <Route path="/payment" element={<Payment />}></Route>
-
+          {/* Order */}
           <Route
             path="/order/orderConfirmed/:id"
             element={<OrderConfirmed />}
@@ -94,6 +110,7 @@ function App() {
             element={<OrderDetails />}
           ></Route>
           <Route path="/order/allOrders" element={<AllOrders />}></Route>
+          {/* MenuItem */}
           <Route
             path="/menuItem/menuItemList"
             element={<MenuItemList />}
@@ -106,6 +123,16 @@ function App() {
             path="/menuItem/menuItemUpsert/:id"
             element={<MenuItemUpsert />}
           ></Route>
+          {/* Coupon */}
+          <Route path="/coupon/couponList" element={<CouponList />} />
+          <Route path="/coupon/couponUpsert" element={<CouponUpsert />}></Route>
+          <Route
+            path="/coupon/couponUpsert/:id"
+            element={<CouponUpsert />}
+          ></Route>
+          {/* Manage User */}
+          <Route path="/manageUser" element={<ManageUsers />} />
+          <Route path="/user/permissionUser" element={<PermissionUsers />} />
 
           <Route path="/Information" element={<Information/>}></Route>
 

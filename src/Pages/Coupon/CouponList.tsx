@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
-import {
-  useDeleteMenuItemMutation,
-  useGetMenuItemsQuery,
-} from "../../Apis/menuItemApi";
-import { menuItemModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
+import {
+  useDeleteCouponMutation,
+  useGetCouponsQuery,
+} from "../../Apis/couponApi";
 import { MainLoader } from "../../Components/Page/Common";
+import { couponModel } from "../../Interfaces";
 import { toast } from "react-toastify";
 import { Modal } from "../../Components/Layout";
 
-let decoration = require("../../Assets/Images/decoration_1.png");
+let decoration = require("../../Assets/Images/decoration_4.png");
 
-function MenuItemList() {
+export default function CouponList() {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetMenuItemsQuery("");
-  const [deleteMenuItem] = useDeleteMenuItemMutation();
+  const { data, isLoading } = useGetCouponsQuery("");
   const [showContent, setShowContent] = useState(false);
+  const [deleteCoupon] = useDeleteCouponMutation();
   const [isModalShow, setIsModalShow] = useState(false);
-
-  let cnt = 1;
 
   useEffect(() => {
     if (!isLoading) {
@@ -26,12 +24,12 @@ function MenuItemList() {
     }
   }, [isLoading]);
 
-  const handleDeleteMenuItem = async (id: number) => {
+  const handleDeleteCoupon = async (id: number) => {
     toast.promise(
-      deleteMenuItem(id),
+      deleteCoupon(id),
       {
         pending: "Processing your request...",
-        success: "Menu Item Deleted Successfully 👌",
+        success: "Coupon Deleted Successfully 👌",
         error: "An unexpected error occured 🤯",
       },
       {
@@ -40,6 +38,8 @@ function MenuItemList() {
     );
     setIsModalShow(false);
   };
+
+  let cnt = 1;
 
   return (
     <>
@@ -61,50 +61,40 @@ function MenuItemList() {
                 />
               </div>
               <div className="col">
-                <h1 className="text-success">MenuItem List</h1>
+                <h1 className="text-success">Coupon List</h1>
               </div>
             </div>
             <button
               className="btn btn-success"
               onClick={() => {
-                navigate("/menuItem/menuItemUpsert");
+                navigate("/coupon/couponUpsert");
               }}
             >
-              Add New Menu Item
+              Add New Coupon Code
             </button>
           </div>
 
           <div className="p-2">
-            <div style={{ fontWeight: 700 }} className="row border">
-              <div className="col-1">Image</div>
-              <div className="col-1"></div>
-              <div className="col-1">ID</div>
-              <div className="col-2">Name</div>
-              <div className="col-2">Category</div>
-              <div className="col-1">Price</div>
-              <div className="col-2">Special Tag</div>
-              <div className="col-1">Action</div>
+            <div style={{ fontWeight: 700 }} className="row border ">
+              <div className="col-2">Id</div>
+              <div className="col-2">Code</div>
+              <div className="col-3">Discount Amount</div>
+              <div className="col-3">Min Amount</div>
+              <div className="col-2">Action</div>
             </div>
-            {data.result.map((menuItem: menuItemModel) => (
-              <div className="row border" key={menuItem.id}>
-                <div className="col-1">
-                  <img
-                    src={menuItem.image}
-                    alt="no content"
-                    style={{ width: "100%", maxWidth: "120px" }}
-                  />
+            {data.result.map((coupon: couponModel) => (
+              <div className="row border" key={coupon.id}>
+                <div className="col-2">{cnt++}</div>
+                <div className="col-2">{coupon.code}</div>
+                <div className="col-3">
+                  $ {coupon.discountAmount?.toFixed(2)}
                 </div>
-                <div className="col-1"></div>
-                <div className="col-1">{cnt++}</div>
-                <div className="col-2">{menuItem.name}</div>
-                <div className="col-2">{menuItem.category}</div>
-                <div className="col-1">{menuItem.price}</div>
-                <div className="col-2">{menuItem.specialTag}</div>
-                <div className="col-1">
+                <div className="col-3">$ {coupon.minAmount?.toFixed(2)}</div>
+                <div className="col-2">
                   <button
                     className="btn btn-warning"
                     onClick={() =>
-                      navigate("/menuItem/menuItemUpsert/" + menuItem.id)
+                      navigate("/coupon/couponUpsert/" + coupon.id)
                     }
                   >
                     <i className="bi bi-pencil-fill"></i>
@@ -117,10 +107,10 @@ function MenuItemList() {
                   </button>
                   <Modal
                     title=" Are you sure?"
-                    content="Do you really want to delete this menu item? This process cannot be undone."
+                    content="Do you really want to delete this coupon? This process cannot be undone."
                     isShow={isModalShow}
                     onClose={() => setIsModalShow(false)}
-                    onConfirm={() => handleDeleteMenuItem(menuItem.id!)}
+                    onConfirm={() => handleDeleteCoupon(coupon.id!)}
                   />
                 </div>
               </div>
@@ -131,5 +121,3 @@ function MenuItemList() {
     </>
   );
 }
-
-export default MenuItemList;
