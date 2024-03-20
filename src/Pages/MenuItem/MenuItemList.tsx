@@ -51,7 +51,7 @@ function MenuItemList() {
               <div className="col-auto">
                 <img
                   src={decoration}
-                  alt="Image"
+                  alt="Decoration"
                   style={{
                     width: "100px",
                     height: "100px",

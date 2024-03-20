@@ -18,9 +18,16 @@ const userApi = createApi({
       }),
       providesTags: ["Users"],
     }),
+    getUserInfoAndRoles: builder.query({
+      query: (userId) => ({
+        url: `User/${userId}`,
+        method: "GET",
+      }),
+      providesTags: ["Users"],
+    }),
     lockUnLockUser: builder.mutation({
       query: (id) => ({
-        url: `User/lockUnlock`,
+        url: `User/lockUnlock/${id}`,
         method: "POST",
         body: id,
       }),
@@ -40,6 +47,7 @@ const userApi = createApi({
 export default userApi;
 export const {
   useGetAllUsersQuery,
+  useGetUserInfoAndRolesQuery,
   useLockUnLockUserMutation,
   useRoleManagementMutation,
 } = userApi;

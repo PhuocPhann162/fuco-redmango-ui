@@ -62,7 +62,7 @@ function Header() {
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href="/#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -109,7 +109,7 @@ function Header() {
                     <li
                       style={{ cursor: "pointer" }}
                       className="dropdown-item"
-                      onClick={() => navigate("/manageUser")}
+                      onClick={() => navigate("/user/manageUsers")}
                     >
                       Manager Users
                     </li>
@@ -119,7 +119,7 @@ function Header() {
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href="/#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"

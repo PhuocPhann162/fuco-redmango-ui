@@ -6,12 +6,16 @@ import {
 } from "../../Apis/userApi";
 import { MainLoader } from "../../Components/Page/Common";
 import { apiResponse, userModel } from "../../Interfaces";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "../../Components/Layout";
+import { toastNotify } from "../../Helper";
 
 let decoration = require("../../Assets/Images/decoration_5.jpg");
 
 export default function ManageUsers() {
+  const navigate = useNavigate();
   const [userList, setUserList] = useState([]);
-  const [isLock, setIsLock] = useState(false);
+  // const [isModalShow, setIsModalShow] = useState(false);
   const { data, isLoading } = useGetAllUsersQuery("");
   const [lockUnLockUser] = useLockUnLockUserMutation();
   const [roleManagement] = useRoleManagementMutation();
@@ -25,6 +29,10 @@ export default function ManageUsers() {
   const handleLockUnLockUser = async (id: string) => {
     const response: apiResponse = await lockUnLockUser(id);
     console.log(response);
+    if (response) {
+      const notify = response.data?.result.toString() ?? "";
+      toastNotify(notify);
+    }
   };
 
   return (
@@ -37,7 +45,7 @@ export default function ManageUsers() {
               <div className="col-auto">
                 <img
                   src={decoration}
-                  alt="Image"
+                  alt="Decoration"
                   style={{
                     width: "100px",
                     height: "100px",
@@ -47,7 +55,7 @@ export default function ManageUsers() {
                 />
               </div>
               <div className="col">
-                <h1 className="text-success">Manager Users</h1>
+                <h1 className="text-success">Manage Users</h1>
               </div>
             </div>
           </div>
@@ -81,15 +89,43 @@ export default function ManageUsers() {
                         user.role?.slice(1)}
                     </td>
                     <td className="col-3 text-center d-flex w-100 gap-3">
+                      {user.lockoutEnd &&
+                      new Date(user.lockoutEnd).getTime() > Date.now() ? (
+                        <button
+                          className="btn btn-warning form-control"
+                          onClick={() => handleLockUnLockUser(user.id)}
+                        >
+                          Unlock <i className="bi bi-unlock-fill"></i>
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-danger form-control"
+                          onClick={() => handleLockUnLockUser(user.id)}
+                        >
+                          Lock <i className="bi bi-lock-fill"></i>
+                        </button>
+                      )}
+
                       <button
-                        className="btn btn-danger form-control"
-                        onClick={() => handleLockUnLockUser(user.id)}
+                        className="btn btn-info form-control"
+                        onClick={() =>
+                          navigate(`/user/permissionUser/${user.id}`)
+                        }
                       >
-                        Lock <i className="bi bi-lock-fill"></i>
-                      </button>
-                      <button className="btn btn-info form-control">
                         Permission
                       </button>
+                      {/* <Modal
+                        title=" Are you sure?"
+                        content="Do you really want to lock this user? This process cannot be undone."
+                        contentButton={
+                          new Date(user.lockoutEnd!).getTime() > Date.now()
+                            ? "Unlock"
+                            : "Lock"
+                        }
+                        isShow={isModalShow}
+                        onClose={() => setIsModalShow(false)}
+                        onConfirm={() => handleLockUnLockUser(user.id)}
+                      /> */}
                     </td>
                   </tr>
                 ))}

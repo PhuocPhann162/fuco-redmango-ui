@@ -5,6 +5,7 @@ type Props = {
   children?: ReactElement;
   title?: string;
   content?: string;
+  contentButton?: string;
   isShow?: boolean;
   onClose?: () => void;
   onConfirm?: () => void;
@@ -15,6 +16,7 @@ export default function Modal({
   title,
   content,
   isShow,
+  contentButton = "Delete",
   onClose,
   onConfirm,
 }: Props) {
@@ -57,7 +59,7 @@ export default function Modal({
                     Cancel
                   </button>
                   <button className="btn btn-danger" onClick={onConfirm}>
-                    Delete
+                    {contentButton}
                   </button>
                 </div>
               </div>

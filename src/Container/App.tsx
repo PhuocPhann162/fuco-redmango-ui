@@ -131,13 +131,15 @@ function App() {
             element={<CouponUpsert />}
           ></Route>
           {/* Manage User */}
-          <Route path="/manageUser" element={<ManageUsers />} />
-          <Route path="/user/permissionUser" element={<PermissionUsers />} />
+          <Route path="/user/manageUsers" element={<ManageUsers />} />
+          <Route
+            path="/user/permissionUser/:userId"
+            element={<PermissionUsers />}
+          />
 
-          <Route path="/Information" element={<Information/>}></Route>
+          <Route path="/Information" element={<Information />}></Route>
 
           <Route path="/*" element={<NotFound />}></Route>
-
         </Routes>
       </div>
       <Footer />
