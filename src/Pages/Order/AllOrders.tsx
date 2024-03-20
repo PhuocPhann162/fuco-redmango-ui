@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useGetAllOrdersQuery } from "../../Apis/orderApi";
 import { MainLoader } from "../../Components/Page/Common";
 import { OrderList } from "../../Components/Page/Order";
-import { withAdminAuth } from "../../HOC";
 import { SD_Status } from "../../Utility/SD";
 import { inputHelper } from "../../Helper";
+import { withAdminAndEmployeeAuth } from "../../HOC";
 
 let decoration = require("../../Assets/Images/decoration_3.jpg");
 
@@ -187,4 +187,4 @@ function AllOrders() {
   );
 }
 
-export default withAdminAuth(AllOrders);
+export default withAdminAndEmployeeAuth(AllOrders);

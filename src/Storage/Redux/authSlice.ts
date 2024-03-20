@@ -3,6 +3,11 @@ import { userModel } from "../../Interfaces";
 
 export const emptyUserState: userModel = {
   fullName: "",
+  phoneNumber: "",
+  streetAddress: "",
+  city: "",
+  state: "",
+  postalCode: "",
   id: "",
   email: "",
   role: "",
@@ -14,6 +19,11 @@ export const userAuthSlice = createSlice({
   reducers: {
     setLoggedInUser: (state, action) => {
       state.fullName = action.payload.fullName;
+      state.phoneNumber = action.payload.phoneNumber;
+      state.streetAddress = action.payload.streetAddress;
+      state.city = action.payload.city;
+      state.state = action.payload.state;
+      state.postalCode = action.payload.postalCode;
       state.id = action.payload.id;
       state.email = action.payload.email;
       state.role = action.payload.role;

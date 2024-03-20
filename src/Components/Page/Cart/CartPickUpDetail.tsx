@@ -20,7 +20,6 @@ function CartPickUpDetail() {
     (state: RootState) => state.shoppingCartStore ?? null
   );
 
-  let grandTotal = 0;
   let totalItems = 0;
   const userData: userModel = useSelector(
     (state: RootState) => state.userAuthStore
@@ -29,30 +28,23 @@ function CartPickUpDetail() {
   const initialUserData = {
     name: userData.fullName,
     email: userData.email,
-    phoneNumber: "",
+    phoneNumber: userData.phoneNumber,
   };
 
   const [userInput, setUserInput] = useState(initialUserData);
 
   shoppingCartFromStore &&
     shoppingCartFromStore?.cartItems.map((cartItem: cartItemModel) => {
-      grandTotal += cartItem.quantity! * cartItem.menuItem?.price!;
       totalItems += cartItem.quantity!;
 
       return null;
     });
 
-  grandTotal =
-    grandTotal -
-    (shoppingCartFromStore.discount != null
-      ? shoppingCartFromStore.discount
-      : 0);
-
   useEffect(() => {
     setUserInput({
       name: userData.fullName,
       email: userData.email,
-      phoneNumber: "",
+      phoneNumber: userData.phoneNumber,
     });
   }, [userData]);
 
@@ -123,7 +115,9 @@ function CartPickUpDetail() {
         </div>
         <div className="form-group mt-3">
           <div className="card p-3" style={{ background: "ghostwhite" }}>
-            <h5>Grand Total : ${grandTotal.toFixed(2)}</h5>
+            <h5>
+              Grand Total : ${shoppingCartFromStore.cartTotal!.toFixed(2)}
+            </h5>
             <h5>
               Discount : $
               {shoppingCartFromStore.discount != null

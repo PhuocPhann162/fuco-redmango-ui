@@ -4,10 +4,11 @@ import { Footer, Header } from "../Components/Layout";
 import {
   AccessDenied,
   AllOrders,
-  AuthenticationTest,
-  AuthenticationTestAdmin,
+  CouponList,
+  CouponUpsert,
   Home,
   Login,
+  ManageUsers,
   MenuItemDetails,
   MenuItemList,
   MenuItemUpsert,
@@ -16,6 +17,7 @@ import {
   OrderConfirmed,
   OrderDetails,
   Payment,
+  PermissionUsers,
   Register,
   ShoppingCart,
 } from "../Pages";
@@ -27,8 +29,6 @@ import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/authSlice";
 import { RootState } from "../Storage/Redux/store";
-import CouponList from "../Pages/Coupon/CouponList";
-import CouponUpsert from "../Pages/Coupon/CouponUpsert";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,8 +43,30 @@ function App() {
   useEffect(() => {
     const localToken = localStorage.getItem("token");
     if (localToken) {
-      const { fullName, id, email, role }: userModel = jwt_decode(localToken);
-      dispatch(setLoggedInUser({ fullName, id, email, role }));
+      const {
+        fullName,
+        phoneNumber,
+        streetAddress,
+        city,
+        state,
+        postalCode,
+        id,
+        email,
+        role,
+      }: userModel = jwt_decode(localToken);
+      dispatch(
+        setLoggedInUser({
+          fullName,
+          phoneNumber,
+          streetAddress,
+          city,
+          state,
+          postalCode,
+          id,
+          email,
+          role,
+        })
+      );
     }
   }, []);
 
@@ -74,14 +96,6 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
 
-          <Route
-            path="/authentication"
-            element={<AuthenticationTest />}
-          ></Route>
-          <Route
-            path="/authorization"
-            element={<AuthenticationTestAdmin />}
-          ></Route>
           <Route path="/accessDenied" element={<AccessDenied />}></Route>
           <Route path="/payment" element={<Payment />}></Route>
           {/* Order */}
@@ -115,6 +129,9 @@ function App() {
             path="/coupon/couponUpsert/:id"
             element={<CouponUpsert />}
           ></Route>
+          {/* Manage User */}
+          <Route path="/manageUser" element={<ManageUsers />} />
+          <Route path="/user/permissionUser" element={<PermissionUsers />} />
 
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

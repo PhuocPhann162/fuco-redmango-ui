@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { shoppingCartModel } from "../../Interfaces";
 import { act } from "react-dom/test-utils";
+import { stat } from "fs";
 
 const initialState: shoppingCartModel = {
   cartItems: [],
+  cartTotal: 0,
   couponCode: "",
   discount: 0,
 };
@@ -16,6 +18,7 @@ export const shoppingCartSlice = createSlice({
       state.cartItems = action.payload.cartItems;
       state.couponCode = action.payload.couponCode;
       state.discount = action.payload.discount;
+      state.cartTotal = action.payload.cartTotal;
     },
     applyOrRemoveCoupon: (state, action) => {
       state.couponCode = action.payload.couponCode;

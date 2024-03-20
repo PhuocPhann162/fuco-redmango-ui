@@ -1,4 +1,5 @@
 import withAuth from "./withAuth";
 import withAdminAuth from "./withAdminAuth";
+import withAdminAndEmployeeAuth from "./withAdminAndEmployeeAuth";
 
-export { withAuth, withAdminAuth };
+export { withAuth, withAdminAuth, withAdminAndEmployeeAuth };
