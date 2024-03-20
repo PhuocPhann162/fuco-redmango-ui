@@ -7,6 +7,7 @@ import {
   AuthenticationTest,
   AuthenticationTestAdmin,
   Home,
+  Information,
   Login,
   MenuItemDetails,
   MenuItemList,
@@ -106,7 +107,10 @@ function App() {
             element={<MenuItemUpsert />}
           ></Route>
 
+          <Route path="/Information" element={<Information/>}></Route>
+
           <Route path="/*" element={<NotFound />}></Route>
+
         </Routes>
       </div>
       <Footer />

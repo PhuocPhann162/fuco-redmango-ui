@@ -24,6 +24,10 @@ function Header() {
     navigate("/");
   };
 
+  const handleInformation = () => {
+    navigate("/Information");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -127,6 +131,7 @@ function Header() {
                           background: "transparent",
                           border: 0,
                         }}
+                        onClick={handleInformation}
                       >
                         Welcome, {userData.fullName} !
                       </button>

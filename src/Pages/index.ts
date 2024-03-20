@@ -15,7 +15,7 @@ import OrderDetails from "./Order/OrderDetails";
 import AllOrders from "./Order/AllOrders";
 import MenuItemList from "./MenuItem/MenuItemList";
 import MenuItemUpsert from "./MenuItem/MenuItemUpsert";
-
+import Information from "./Information";
 export {
   Home,
   NotFound,
@@ -23,6 +23,7 @@ export {
   ShoppingCart,
   Register,
   Login,
+  Information,
   AuthenticationTest,
   AuthenticationTestAdmin,
   AccessDenied,
