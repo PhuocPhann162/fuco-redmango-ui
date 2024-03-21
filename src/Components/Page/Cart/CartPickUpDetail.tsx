@@ -29,6 +29,9 @@ function CartPickUpDetail() {
     name: userData.fullName,
     email: userData.email,
     phoneNumber: userData.phoneNumber,
+    city: userData.city,
+    state: userData.state,
+    postalCode: userData.postalCode,
   };
 
   const [userInput, setUserInput] = useState(initialUserData);
@@ -45,6 +48,9 @@ function CartPickUpDetail() {
       name: userData.fullName,
       email: userData.email,
       phoneNumber: userData.phoneNumber,
+      city: userData.city,
+      state: userData.state,
+      postalCode: userData.postalCode,
     });
   }, [userData]);
 
@@ -70,26 +76,28 @@ function CartPickUpDetail() {
   };
 
   return (
-    <div className="border pb-5 pt-3">
-      <h1 style={{ fontWeight: "350" }} className="text-center text-success">
+    <div className="border shadow pb-5 pt-3">
+      <h1
+        style={{ fontWeight: "450", color: "#5D3D2E" }}
+        className="text-center"
+      >
         Pickup Details
       </h1>
-      <hr />
-      <form onSubmit={handleSubmit} className="col-10 mx-auto">
-        <div className="form-group mt-3">
-          Pickup Name
+      <hr className="text-white" />
+      <form onSubmit={handleSubmit} className="row col-11 mx-auto">
+        <div className="form-floating mb-3 col-md-6">
           <input
             type="text"
             value={userInput.name}
             className="form-control"
-            placeholder="name..."
+            placeholder="Name..."
             name="name"
             onChange={handleUserInput}
             required
           />
+          <label className="ms-2 text-muted">Full Name</label>
         </div>
-        <div className="form-group mt-3">
-          Pickup Email
+        <div className="form-floating mb-3 col-md-6">
           <input
             type="email"
             value={userInput.email}
@@ -99,10 +107,9 @@ function CartPickUpDetail() {
             onChange={handleUserInput}
             required
           />
+          <label className="ms-2 text-muted">Email</label>
         </div>
-
-        <div className="form-group mt-3">
-          Pickup Phone Number
+        <div className="form-floating mb-3 col-md-6">
           <input
             type="number"
             value={userInput.phoneNumber}
@@ -112,7 +119,45 @@ function CartPickUpDetail() {
             onChange={handleUserInput}
             required
           />
+          <label className="ms-2 text-muted">Phone Number</label>
         </div>
+        <div className="form-floating mb-3 col-md-6">
+          <input
+            type="text"
+            value={userInput.city}
+            className="form-control"
+            placeholder="city..."
+            name="city"
+            onChange={handleUserInput}
+            required
+          />
+          <label className="ms-2 text-muted">City</label>
+        </div>
+        <div className="form-floating mb-3 col-md-6">
+          <input
+            type="text"
+            value={userInput.state}
+            className="form-control"
+            placeholder="state..."
+            name="state"
+            onChange={handleUserInput}
+            required
+          />
+          <label className="ms-2 text-muted">State</label>
+        </div>
+        <div className="form-floating mb-3 col-md-6">
+          <input
+            type="text"
+            value={userInput.postalCode}
+            className="form-control"
+            placeholder="postal code..."
+            name="postalCode"
+            onChange={handleUserInput}
+            required
+          />
+          <label className="ms-2 text-muted">Postal Code</label>
+        </div>
+
         <div className="form-group mt-3">
           <div className="card p-3" style={{ background: "ghostwhite" }}>
             <h5>
@@ -128,8 +173,9 @@ function CartPickUpDetail() {
           </div>
         </div>
         <button
+          style={{ backgroundColor: "#5D3D2E" }}
           type="submit"
-          className="btn btn-lg btn-success form-control mt-3"
+          className="btn btn-lg form-control text-white mt-3"
           disabled={loading}
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}

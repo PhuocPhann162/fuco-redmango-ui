@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   useGetAllUsersQuery,
   useLockUnLockUserMutation,
-  useRoleManagementMutation,
 } from "../../Apis/userApi";
 import { MainLoader } from "../../Components/Page/Common";
 import { apiResponse, userModel } from "../../Interfaces";
@@ -18,7 +17,6 @@ export default function ManageUsers() {
   // const [isModalShow, setIsModalShow] = useState(false);
   const { data, isLoading } = useGetAllUsersQuery("");
   const [lockUnLockUser] = useLockUnLockUserMutation();
-  const [roleManagement] = useRoleManagementMutation();
 
   useEffect(() => {
     if (data) {
@@ -26,12 +24,19 @@ export default function ManageUsers() {
     }
   }, [data]);
 
-  const handleLockUnLockUser = async (id: string) => {
+  const handleLockUnLockUser = async (id?: string) => {
     const response: apiResponse = await lockUnLockUser(id);
     console.log(response);
     if (response) {
-      const notify = response.data?.result.toString() ?? "";
-      toastNotify(notify);
+      if (response.data) {
+        const notify = response.data.result.toString();
+        toastNotify(notify);
+      } else {
+        toastNotify(
+          "Something went wrong while locking/unlocking user",
+          "error"
+        );
+      }
     }
   };
 
@@ -91,29 +96,42 @@ export default function ManageUsers() {
                     <td className="col-3 text-center d-flex w-100 gap-3">
                       {user.lockoutEnd &&
                       new Date(user.lockoutEnd).getTime() > Date.now() ? (
-                        <button
-                          className="btn btn-warning form-control"
-                          onClick={() => handleLockUnLockUser(user.id)}
-                        >
-                          Unlock <i className="bi bi-unlock-fill"></i>
-                        </button>
+                        <>
+                          <button
+                            className="btn btn-warning form-control"
+                            onClick={() => handleLockUnLockUser(user.id)}
+                          >
+                            Unlock <i className="bi bi-unlock-fill"></i>
+                          </button>
+                          <button
+                            disabled
+                            className="btn btn-info form-control"
+                            onClick={() =>
+                              navigate(`/user/permissionUser/${user.id}`)
+                            }
+                          >
+                            Permission
+                          </button>
+                        </>
                       ) : (
-                        <button
-                          className="btn btn-danger form-control"
-                          onClick={() => handleLockUnLockUser(user.id)}
-                        >
-                          Lock <i className="bi bi-lock-fill"></i>
-                        </button>
+                        <>
+                          <button
+                            className="btn btn-danger form-control"
+                            onClick={() => handleLockUnLockUser(user.id)}
+                          >
+                            Lock <i className="bi bi-lock-fill"></i>
+                          </button>
+                          <button
+                            className="btn btn-info form-control"
+                            onClick={() =>
+                              navigate(`/user/permissionUser/${user.id}`)
+                            }
+                          >
+                            Permission
+                          </button>
+                        </>
                       )}
 
-                      <button
-                        className="btn btn-info form-control"
-                        onClick={() =>
-                          navigate(`/user/permissionUser/${user.id}`)
-                        }
-                      >
-                        Permission
-                      </button>
                       {/* <Modal
                         title=" Are you sure?"
                         content="Do you really want to lock this user? This process cannot be undone."

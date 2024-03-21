@@ -79,153 +79,151 @@ function Register() {
   return (
     <div className="container">
       {loading && <MainLoader />}
-      <div className="card mt-5">
+      <div className="card mt-4 shadow">
         <div className="card-body">
-          <form method="post" onSubmit={handleSubmit}>
+          <form method="post" onSubmit={handleSubmit} className="row px-5">
             {userData && userData.role === SD_Roles.ADMIN ? (
-              <h1 className="text-center mb-4">Register - Admin Portal</h1>
+              <h1 className="text-center mb-4 mt-3">Register - Admin Portal</h1>
             ) : (
               <h1 className="text-center mb-4">Register</h1>
             )}
-            <div className="mb-3">
-              <label className="form-label">Username</label>
+            <div className="form-floating mb-3 col-md-12">
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter Username"
+                placeholder="Email"
                 name="userName"
                 value={userInput.userName}
                 onChange={handleUserInput}
                 required
               />
+              <label className="ms-2 text-muted">Email</label>
             </div>
-            <div className="row mb-3">
-              <div className="col">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Full Name"
-                  name="name"
-                  value={userInput.name}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Enter Phone Number"
-                  name="phoneNumber"
-                  value={userInput.phoneNumber}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Full Name"
+                name="name"
+                value={userInput.name}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Full Name</label>
             </div>
-            <div className="row mb-3">
-              <div className="col">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Enter Password"
-                  name="password"
-                  value={userInput.password}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Enter Confirm Password"
-                  name="confirmPassword"
-                  value={userInput.confirmPassword}
-                  onChange={handleUserInput}
-                  required
-                />
-                {passwordMatchError && (
-                  <div className="text-danger">{passwordMatchError}</div>
-                )}
-              </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Phone Number"
+                name="phoneNumber"
+                value={userInput.phoneNumber}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Phone Number</label>
             </div>
-            <div className="row mb-3">
-              <div className="col">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Street Address"
-                  name="streetAddress"
-                  value={userInput.streetAddress}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter City"
-                  name="city"
-                  value={userInput.city}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                name="password"
+                value={userInput.password}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Password</label>
             </div>
-            <div className="row mb-3">
-              <div className="col">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter State"
-                  name="state"
-                  value={userInput.state}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Postal Code"
-                  name="postalCode"
-                  value={userInput.postalCode}
-                  onChange={handleUserInput}
-                  required
-                />
-              </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={userInput.confirmPassword}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Confirm Password</label>
+              {passwordMatchError && (
+                <div className="text-danger">{passwordMatchError}</div>
+              )}
+            </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Street Address"
+                name="streetAddress"
+                value={userInput.streetAddress}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Street Address</label>
+            </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="City"
+                name="city"
+                value={userInput.city}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">City</label>
+            </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="State"
+                name="state"
+                value={userInput.state}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">State</label>
+            </div>
+            <div className="form-floating mb-3 col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Postal Code"
+                name="postalCode"
+                value={userInput.postalCode}
+                onChange={handleUserInput}
+                required
+              />
+              <label className="ms-2 text-muted">Postal Code</label>
             </div>
             {userData && userData.role === SD_Roles.ADMIN && (
-              <div className="row mb-3">
-                <div className="col">
-                  <select
-                    className="form-control form-select"
-                    required
-                    name="role"
-                    value={userInput.role}
-                    onChange={handleUserInput}
-                  >
-                    <option value="">--Select Role--</option>
-                    <option value={`${SD_Roles.CUSTOMER}`}>Customer</option>
-                    <option value={`${SD_Roles.EMPLOYEE}`}>Employee</option>
-                    <option value={`${SD_Roles.ADMIN}`}>Admin</option>
-                  </select>
-                </div>
+              <div className="col-md-12 mb-4 ">
+                <select
+                  className="form-control form-select p-2"
+                  required
+                  name="role"
+                  value={userInput.role}
+                  onChange={handleUserInput}
+                >
+                  <option disabled value="">
+                    --Select Role--
+                  </option>
+                  <option value={`${SD_Roles.CUSTOMER}`}>Customer</option>
+                  <option value={`${SD_Roles.EMPLOYEE}`}>Employee</option>
+                  <option value={`${SD_Roles.ADMIN}`}>Admin</option>
+                </select>
               </div>
             )}
-            <div className="row mb-3">
-              <div className="col text-center">
-                <button
-                  disabled={loading}
-                  type="submit"
-                  className="btn btn-success form-control"
-                >
-                  Register
-                </button>
-              </div>
+            <div className="col-md-12 text-center mb-3">
+              <button
+                disabled={loading}
+                type="submit"
+                className="btn btn-dark form-control p-2"
+              >
+                Register
+              </button>
             </div>
           </form>
         </div>

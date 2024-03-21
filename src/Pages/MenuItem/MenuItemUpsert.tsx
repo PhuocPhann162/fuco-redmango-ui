@@ -215,12 +215,12 @@ function MenuItemUpsert() {
                     </button>
                   </div>
                   <div className="col-6">
-                    <a
+                    <button
                       className="btn btn-secondary form-control mt-5"
                       onClick={() => navigate("/menuItem/menuItemList")}
                     >
                       Back to List
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -228,7 +228,7 @@ function MenuItemUpsert() {
                 <img
                   src={imageToDisplay}
                   style={{ width: "100%", borderRadius: "30px" }}
-                  alt="Upload Image"
+                  alt="Upload Here"
                 />
               </div>
             </div>

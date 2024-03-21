@@ -1,20 +1,69 @@
-import React, { useEffect } from "react";
-import { useGetUserInfoAndRolesQuery } from "../../Apis/userApi";
+import React, { useEffect, useState } from "react";
+import {
+  useGetUserInfoAndRolesQuery,
+  useRoleManagementMutation,
+} from "../../Apis/userApi";
 import { MainLoader } from "../../Components/Page/Common";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { inputHelper, toastNotify } from "../../Helper";
+import { apiResponse } from "../../Interfaces";
 
 export default function PermissionUsers() {
+  const navigate = useNavigate();
   const { userId } = useParams();
+  const [loading, setIsLoading] = useState(false);
+  const [userInfo, setUserInfor] = useState({
+    email: "",
+    name: "",
+    role: "",
+    userId: "",
+  });
+  const [roleList, setRoleList] = useState([]);
   const { data, isLoading } = useGetUserInfoAndRolesQuery(userId);
+  const [userInput, setUserInput] = useState({
+    role: data?.result?.applicationUser?.role,
+  });
+  const [roleManagement] = useRoleManagementMutation();
 
   useEffect(() => {
     if (data) {
-      console.log(data);
+      setUserInfor(data?.result?.applicationUser);
+      setRoleList(data?.result?.roleList);
+      console.log(data?.result?.applicationUser.role);
     }
   }, [data]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUserInput = (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
+    const tempData = inputHelper(e, userInput);
+    setUserInput(tempData);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setIsLoading(true);
+    console.log(userInput.role);
+
+    const formData = new FormData();
+    formData.append("Role", userInput.role);
+
+    const response: apiResponse = await roleManagement({
+      userId: userId,
+      role: formData,
+    });
+    console.log(response);
+    if (response) {
+      if (response.data?.result) {
+        setIsLoading(false);
+        navigate("/user/manageUsers");
+        toastNotify(`Role of User ${userInfo.email} updated successfully`);
+      } else {
+        setIsLoading(false);
+        toastNotify("Something wrong while updating user role", "error");
+      }
+    }
   };
 
   return (
@@ -22,7 +71,7 @@ export default function PermissionUsers() {
       {isLoading && <MainLoader />}
       {!isLoading && (
         <>
-          <div className="card shadow border-1 my-4 p-5 mx-5">
+          <div className="card shadow border-1 my-3 px-5 py-4 mx-5">
             <div className="card-header bg-secondary bg-gradient ml-0 py-3">
               <div className="row">
                 <div className="col-12 text-center">
@@ -37,28 +86,72 @@ export default function PermissionUsers() {
                 onSubmit={handleSubmit}
                 className="row"
               >
-                <input hidden value={userId} />
+                <input
+                  hidden
+                  value={userId}
+                  name="userId"
+                  onChange={handleUserInput}
+                />
                 <div className="p-3">
                   <div className="form-floating py-2 col-12">
-                    <input disabled className="form-control border-0 shadow" />
-                    <label className="ms-2">Name</label>
+                    <label className="ms-1" style={{ opacity: 0.5 }}>
+                      Email
+                    </label>
+                    <input
+                      readOnly
+                      value={userInfo && userInfo.email}
+                      className="form-control border-0 shadow mt-2"
+                    />
                   </div>
-                  <div className="form-floating py-2 col-12 mt-1">
-                    <select className="form-select">
-                      <option value="">Select a coupon code</option>
+                  <div className="form-floating py-2 col-12">
+                    <label className="ms-1" style={{ opacity: 0.5 }}>
+                      Full Name
+                    </label>
+                    <input
+                      readOnly
+                      value={userInfo && userInfo.name}
+                      className="form-control border-0 shadow mt-2"
+                    />
+                  </div>
+                  <div className="form-floating py-2 col-12">
+                    <label className="ms-1" style={{ opacity: 0.5 }}>
+                      Role
+                    </label>
+                    <select
+                      className="form-control form-select shadow mt-2"
+                      name="role"
+                      value={userInput.role}
+                      onChange={handleUserInput}
+                      required
+                    >
+                      <option value="" disabled>
+                        --Select Role--
+                      </option>
+                      {roleList.map((role: any) => (
+                        <option
+                          value={role.value}
+                          selected={role.value === userInfo.role}
+                        >
+                          {role.text.charAt(0).toUpperCase()! +
+                            role.text.slice(1)}
+                        </option>
+                      ))}
                     </select>
                   </div>
-                  <div className="row pt-2">
+                  <div className="row pt-5">
                     <div className="col-6 col-md-3">
                       <button
                         type="submit"
                         className="btn btn-dark form-control"
                       >
-                        Update Role
+                        {!loading ? "Update Role" : "Updating..."}
                       </button>
                     </div>
                     <div className="col-6 col-md-3">
-                      <button className="btn btn-outline-dark form-control">
+                      <button
+                        className="btn btn-outline-dark form-control"
+                        onClick={() => navigate("/user/manageUsers")}
+                      >
                         Back to List
                       </button>
                     </div>

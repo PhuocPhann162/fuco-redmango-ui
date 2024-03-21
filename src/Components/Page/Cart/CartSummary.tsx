@@ -139,7 +139,12 @@ function CartSummary() {
 
   return (
     <div className="container p-4 m-2">
-      <h4 className="text-center text-success">Cart Summary</h4>
+      <h4
+        style={{ fontWeight: "600", color: "#5D3D2E" }}
+        className="text-center"
+      >
+        Cart Summary
+      </h4>
 
       {shoppingCartFromStore &&
         shoppingCartFromStore?.cartItems?.map(
@@ -257,7 +262,7 @@ function CartSummary() {
             </div>
             <button
               type="submit"
-              className="btn btn-sm btn-success mx-2"
+              className="btn btn-sm btn-warning mx-2"
               disabled={loading}
             >
               {loading ? <MiniLoader /> : "Remove"}
