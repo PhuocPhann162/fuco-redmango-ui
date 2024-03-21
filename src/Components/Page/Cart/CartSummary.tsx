@@ -138,21 +138,21 @@ function CartSummary() {
   };
 
   return (
-    <div className="container p-4 m-2">
-      <h4
-        style={{ fontWeight: "600", color: "#5D3D2E" }}
-        className="text-center"
+    <div className="container px-4 py-3">
+      <h3
+        style={{ fontWeight: "650", color: "#5D3D2E", fontFamily: "" }}
+        className="ms-4"
       >
         Cart Summary
-      </h4>
-
+      </h3>
+      <hr />
       {shoppingCartFromStore &&
         shoppingCartFromStore?.cartItems?.map(
           (cartItem: cartItemModel, index: number) => (
             <div
               key={index}
               className="d-flex flex-sm-row flex-column align-items-center custom-card-shadow rounded m-3"
-              style={{ background: "ghostwhite" }}
+              style={{ backgroundColor: "#FAFAFA" }}
             >
               <div className="p-3">
                 <img
@@ -165,14 +165,21 @@ function CartSummary() {
 
               <div className="p-2 mx-3" style={{ width: "100%" }}>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h4 style={{ fontWeight: 300 }}>{cartItem.menuItem?.name}</h4>
+                  <h4 style={{ fontWeight: 500, color: "#5D3D2E" }}>
+                    {cartItem.menuItem?.name}
+                  </h4>
                   <h4>
                     $
                     {(cartItem.quantity! * cartItem.menuItem!.price).toFixed(2)}
                   </h4>
                 </div>
                 <div className="flex-fill">
-                  <h4 className="text-danger">{cartItem.menuItem!.price}</h4>
+                  <span
+                    style={{ fontWeight: 450 }}
+                    className="fs-5 text-secondary"
+                  >
+                    ${cartItem.menuItem!.price}
+                  </span>
                 </div>
                 <div className="d-flex justify-content-between">
                   <div
@@ -182,7 +189,7 @@ function CartSummary() {
                       height: "43px",
                     }}
                   >
-                    <span style={{ color: "rgba(22,22,22,.7)" }} role="button">
+                    <span style={{ color: "#ffa94d" }} role="button">
                       <i
                         className="bi bi-dash-circle-fill"
                         onClick={() => hanldeUpdateQuantity(-1, cartItem)}
@@ -191,7 +198,7 @@ function CartSummary() {
                     <span>
                       <b>{cartItem.quantity}</b>
                     </span>
-                    <span style={{ color: "rgba(22,22,22,.7)" }} role="button">
+                    <span style={{ color: "#ffa94d" }} role="button">
                       <i
                         className="bi bi-plus-circle-fill"
                         onClick={() => hanldeUpdateQuantity(1, cartItem)}
@@ -200,10 +207,10 @@ function CartSummary() {
                   </div>
 
                   <button
-                    className="btn btn-danger mx-1"
+                    className="btn btn-lg mb-1"
                     onClick={() => hanldeUpdateQuantity(0, cartItem)}
                   >
-                    Remove
+                    <i className="bi bi-trash text-danger"></i>
                   </button>
                 </div>
               </div>
@@ -213,8 +220,10 @@ function CartSummary() {
       <form onSubmit={handleSubmit}>
         {shoppingCartFromStore.couponCode == null ||
         shoppingCartFromStore.couponCode == "" ? (
-          <div className="form-group mt-3 d-flex align-items-center w-100">
-            <span className="p-2">Coupon: </span>
+          <div className="form-group mt-3 ms-4 d-flex align-items-center w-100">
+            <span className="p-2" style={{ fontWeight: 500 }}>
+              Promotion Code:{" "}
+            </span>
             <div className="mr-auto">
               <select
                 value={userInput.couponCode}
@@ -223,7 +232,7 @@ function CartSummary() {
                 onChange={handleUserInput}
                 required
               >
-                <option value="">Select a coupon code</option>
+                <option value="">Select your code</option>
                 {couponList.map((coupon: couponModel) => {
                   if (coupon.minAmount! <= shoppingCartFromStore.cartTotal!) {
                     return (
@@ -245,7 +254,7 @@ function CartSummary() {
           </div>
         ) : (
           <div className="form-group mt-3 d-flex align-items-center w-100">
-            <span className="p-2">Coupon: </span>
+            <h6 className="p-2">Coupon: </h6>
             <div className="mr-auto">
               <select
                 value={userInput.couponCode}

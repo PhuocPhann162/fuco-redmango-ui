@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,8 +22,8 @@ code {
 }
 
 .custom-buttons.active {
-  border-bottom: 3px solid #198754;
-  color: #198754 !important;
+  border-bottom: 3px solid #1098ad;
+  color: #1098ad !important;
 }
 
 .image-box {
@@ -89,4 +89,17 @@ code {
   padding: 2rem;
   border-radius: 5px;
   z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1098ad; /* Màu của thanh cuộn */
+  border-radius: 5px;
+}
+
+:hover::-webkit-scrollbar-thumb {
+  background-color: #5d3d2e; /* Màu của thanh cuộn khi hover */
 }

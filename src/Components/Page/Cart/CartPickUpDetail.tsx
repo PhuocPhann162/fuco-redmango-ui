@@ -78,7 +78,11 @@ function CartPickUpDetail() {
   return (
     <div className="border shadow pb-5 pt-3">
       <h1
-        style={{ fontWeight: "450", color: "#5D3D2E" }}
+        style={{
+          fontWeight: "450",
+          color: "#5D3D2E",
+          fontFamily: "sans-serif",
+        }}
         className="text-center"
       >
         Pickup Details
@@ -133,7 +137,7 @@ function CartPickUpDetail() {
           />
           <label className="ms-2 text-muted">City</label>
         </div>
-        <div className="form-floating mb-3 col-md-6">
+        <div className="form-floating mb-2 col-md-6">
           <input
             type="text"
             value={userInput.state}
@@ -145,7 +149,7 @@ function CartPickUpDetail() {
           />
           <label className="ms-2 text-muted">State</label>
         </div>
-        <div className="form-floating mb-3 col-md-6">
+        <div className="form-floating mb-2 col-md-6">
           <input
             type="text"
             value={userInput.postalCode}
@@ -158,27 +162,49 @@ function CartPickUpDetail() {
           <label className="ms-2 text-muted">Postal Code</label>
         </div>
 
-        <div className="form-group mt-3">
-          <div className="card p-3" style={{ background: "ghostwhite" }}>
-            <h5>
-              Grand Total : ${shoppingCartFromStore.cartTotal!.toFixed(2)}
-            </h5>
-            <h5>
-              Discount : $
+        <div className="p-3" style={{ background: "ghostwhite" }}>
+          <div className="d-flex justify-content-between mb-1 text-secondary">
+            <span>No of items</span>
+            <span>{totalItems}</span>
+          </div>
+          <div className="d-flex justify-content-between mb-1 text-secondary">
+            <span>Subtotal</span>
+            <span>
+              $
+              {(
+                shoppingCartFromStore.cartTotal! +
+                shoppingCartFromStore.discount!
+              ).toFixed(2)}
+            </span>
+          </div>
+          <div className="d-flex justify-content-between mb-3 text-secondary">
+            <span>Discount</span>
+            <span>
+              -$
               {shoppingCartFromStore.discount != null
                 ? shoppingCartFromStore.discount.toFixed(2)
                 : 0}
-            </h5>
-            <h5>No of items : {totalItems}</h5>
+            </span>
+          </div>
+          <hr />
+          <div
+            className="d-flex justify-content-between"
+            style={{ fontWeight: 700 }}
+          >
+            <h5>Total</h5>
+            <h5>${shoppingCartFromStore.cartTotal!.toFixed(2)}</h5>
           </div>
         </div>
         <button
           style={{ backgroundColor: "#5D3D2E" }}
           type="submit"
-          className="btn btn-lg form-control text-white mt-3"
+          className="btn btn-lg text-white mt-3"
           disabled={loading}
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
+        </button>
+        <button className="btn btn-lg btn-outline-secondary mt-2">
+          Countinue Shopping
         </button>
       </form>
     </div>

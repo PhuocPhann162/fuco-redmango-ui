@@ -32,7 +32,7 @@ function Header() {
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
-          <NavLink className="nav-link" aria-current="page" to="/">
+          <NavLink className="nav-link px-2" aria-current="page" to="/">
             <img
               src={logo}
               alt="Logo"
@@ -40,22 +40,22 @@ function Header() {
               className="m-1"
             />
           </NavLink>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+          <NavLink
+            className="nav-link text-white fs-4 px-1"
+            aria-current="page"
+            to="/"
+            style={{ fontFamily: "cursive" }}
           >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+            FucoMastery
+          </NavLink>
+          <div
+            className="collapse navbar-collapse px-1"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100 px-4">
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/">
-                  Home
+                  <i className="bi bi-house-heart"></i> Home
                 </NavLink>
               </li>
               {userData.role == SD_Roles.ADMIN ? (
@@ -66,33 +66,46 @@ function Header() {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    style={{ transition: "all 0.3s ease" }}
                   >
-                    Admin Panel
+                    <i className="bi bi-list-nested"></i> Admin Panel
                   </a>
                   <ul className="dropdown-menu">
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${1 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/order/myOrders")}
                     >
                       My Orders
                     </li>
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${2 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/order/allOrders")}
                     >
                       All Orders
                     </li>
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${3 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/menuItem/menuItemList")}
                     >
                       Menu Item
                     </li>
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${4 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/coupon/couponList")}
                     >
@@ -100,14 +113,20 @@ function Header() {
                     </li>
                     <hr />
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${5 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/register")}
                     >
                       Register Users
                     </li>
                     <li
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        transitionDelay: `${6 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
                       className="dropdown-item"
                       onClick={() => navigate("/user/manageUsers")}
                     >

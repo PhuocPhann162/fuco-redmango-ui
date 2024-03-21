@@ -156,19 +156,26 @@ function MenuItemList() {
           ))}
           <li className="nav-item dropdown" style={{ marginLeft: "auto" }}>
             <div
-              className="nav-link dropdown-toggle text-dark fs-6 border"
+              className="nav-link dropdown-toggle text-dark fs-6 border rounded mt-1"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               {sortName}
             </div>
-            <ul className="dropdown-menu">
+            <ul
+              className="dropdown-menu"
+              style={{ transition: "all 0.3s ease" }}
+            >
               {sortOptions.map((sortType, index) => (
                 <li
                   key={index}
                   className="dropdown-item"
                   onClick={() => handleSortClick(index)}
+                  style={{
+                    transitionDelay: `${index * 0.1}s`,
+                    cursor: "pointer",
+                  }}
                 >
                   {sortType}
                 </li>

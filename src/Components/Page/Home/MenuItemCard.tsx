@@ -55,7 +55,7 @@ function MenuItemCard(props: Props) {
           {props.menuItem.specialTag &&
             props.menuItem.specialTag.length > 0 && (
               <i
-                className="bi bi-star btn btn-success"
+                className="bi bi-star btn btn-warning"
                 style={{
                   position: "absolute",
                   top: "15px",
@@ -94,13 +94,16 @@ function MenuItemCard(props: Props) {
             <p className="card-title m-0 text-success fs-3">
               <Link
                 to={`/menuItemDetails/${props.menuItem.id}`}
-                style={{ textDecoration: "none" }}
-                className="text-success"
+                style={{ textDecoration: "none", fontWeight: 600 }}
+                className="text-dark"
               >
                 {props.menuItem.name}
               </Link>
             </p>
-            <p className="badge bg-secondary" style={{ fontSize: "12px" }}>
+            <p
+              className="badge"
+              style={{ fontSize: "12px", backgroundColor: "#5D3D2E" }}
+            >
               {props.menuItem.category}
             </p>
           </div>
