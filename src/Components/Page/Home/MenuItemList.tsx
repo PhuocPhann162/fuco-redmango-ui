@@ -156,7 +156,8 @@ function MenuItemList() {
           ))}
           <li className="nav-item dropdown" style={{ marginLeft: "auto" }}>
             <div
-              className="nav-link dropdown-toggle text-dark fs-6 border rounded mt-1"
+              className="nav-link dropdown-toggle text-dark fs-6 rounded mt-1"
+              style={{ border: "1px solid #25C19F" }}
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"

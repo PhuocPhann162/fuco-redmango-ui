@@ -41,10 +41,10 @@ function Header() {
             />
           </NavLink>
           <NavLink
-            className="nav-link text-white fs-4 px-1"
+            className="nav-link fs-4 px-1"
             aria-current="page"
             to="/"
-            style={{ fontFamily: "cursive" }}
+            style={{ fontFamily: "cursive", color: "#e3e3e3" }}
           >
             FucoMastery
           </NavLink>

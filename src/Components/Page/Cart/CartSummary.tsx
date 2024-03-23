@@ -207,10 +207,10 @@ function CartSummary() {
                   </div>
 
                   <button
-                    className="btn btn-lg mb-1"
+                    className="btn btn-outline-danger mb-1"
                     onClick={() => hanldeUpdateQuantity(0, cartItem)}
                   >
-                    <i className="bi bi-trash text-danger"></i>
+                    <i className="bi bi-trash"></i>
                   </button>
                 </div>
               </div>
@@ -237,7 +237,7 @@ function CartSummary() {
                   if (coupon.minAmount! <= shoppingCartFromStore.cartTotal!) {
                     return (
                       <option key={coupon.id} value={coupon.code}>
-                        Sale {coupon.discountAmount}$
+                        {coupon.discountAmount}$ OFF (Apply if )
                       </option>
                     );
                   }
@@ -249,7 +249,7 @@ function CartSummary() {
               className="btn btn-sm btn-success mx-2"
               disabled={loading}
             >
-              {loading ? <MiniLoader /> : "Apply"}
+              {loading ? <MiniLoader /> : "Apply Coupon"}
             </button>
           </div>
         ) : (
@@ -265,7 +265,7 @@ function CartSummary() {
                 disabled
               >
                 <option value={shoppingCartFromStore.couponCode}>
-                  Sale {shoppingCartFromStore.discount}$
+                  {shoppingCartFromStore.discount}$ OFF
                 </option>
               </select>
             </div>

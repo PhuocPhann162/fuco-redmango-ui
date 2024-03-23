@@ -76,7 +76,7 @@ function MenuItemCard(props: Props) {
             </div>
           ) : (
             <i
-              className="bi bi-cart-plus btn btn-outline-danger"
+              className="bi bi-cart-plus btn btn-outline-info"
               style={{
                 position: "absolute",
                 top: "15px",

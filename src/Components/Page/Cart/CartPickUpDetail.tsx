@@ -28,6 +28,7 @@ function CartPickUpDetail() {
   const initialUserData = {
     name: userData.fullName,
     email: userData.email,
+    streetAdress: userData.streetAddress,
     phoneNumber: userData.phoneNumber,
     city: userData.city,
     state: userData.state,
@@ -47,6 +48,7 @@ function CartPickUpDetail() {
     setUserInput({
       name: userData.fullName,
       email: userData.email,
+      streetAdress: userData.streetAddress,
       phoneNumber: userData.phoneNumber,
       city: userData.city,
       state: userData.state,
@@ -112,6 +114,18 @@ function CartPickUpDetail() {
             required
           />
           <label className="ms-2 text-muted">Email</label>
+        </div>
+        <div className="form-floating mb-3 col-md-12">
+          <input
+            type="text"
+            value={userInput.streetAdress}
+            className="form-control"
+            placeholder="email..."
+            name="streetAddress"
+            onChange={handleUserInput}
+            required
+          />
+          <label className="ms-2 text-muted">Address</label>
         </div>
         <div className="form-floating mb-3 col-md-6">
           <input

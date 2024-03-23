@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
 .custom-buttons {
   border: 0;
   background: transparent;
@@ -22,8 +32,8 @@ code {
 }
 
 .custom-buttons.active {
-  border-bottom: 3px solid #1098ad;
-  color: #1098ad !important;
+  border-bottom: 3px solid #25c19f;
+  color: #25c19f !important;
 }
 
 .image-box {
@@ -91,6 +101,7 @@ code {
   z-index: 1000;
 }
 
+/* Custome scroll bar */
 ::-webkit-scrollbar {
   width: 15px;
 }
@@ -102,4 +113,18 @@ code {
 
 :hover::-webkit-scrollbar-thumb {
   background-color: #5d3d2e; /* Màu của thanh cuộn khi hover */
+}
+
+/* Custom header color  */
+.navbar-nav .nav-item .nav-link.active {
+  color: #25c19f !important;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: #e3e3e3 !important;
+}
+
+.navbar-nav {
+  background-color: #242526 !important;
 }
