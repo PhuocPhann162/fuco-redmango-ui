@@ -79,8 +79,8 @@ function Register() {
   return (
     <div className="container">
       {loading && <MainLoader />}
-      <div className="card mt-4 shadow">
-        <div className="card-body">
+      <div className="card mt-5 shadow">
+        <div className="card-body py-5">
           <form method="post" onSubmit={handleSubmit} className="row px-5">
             {userData && userData.role === SD_Roles.ADMIN ? (
               <h1 className="text-center mb-4 mt-3">Register - Admin Portal</h1>
@@ -216,7 +216,7 @@ function Register() {
                 </select>
               </div>
             )}
-            <div className="col-md-12 text-center mb-3">
+            <div className="col-md-12 text-center mb-3 mt-4">
               <button
                 disabled={loading}
                 type="submit"
