@@ -20,6 +20,11 @@ const Avatar: React.FC<AvatarProps> = ({ AvatarState, handleCloseAvatar }) => {
         }
     };
 
+    const handleSaveAvatar = () => {
+        console.log('Save Avatar');
+        handleCloseAvatar();
+    }
+
     return (
         <div className="col-xl-4">
             {AvatarState ? (
@@ -28,12 +33,13 @@ const Avatar: React.FC<AvatarProps> = ({ AvatarState, handleCloseAvatar }) => {
 
                     <div className="row">
                         <div className="col-xl-12">
-                            <input type="file" accept="image/*" onChange={handleImageUpload} />
+                            <input type="file" accept="image/*" className="form-control" id="inputGroupFile02" onChange={handleImageUpload} />
                             <div className="row  p-3 justify-content-end">
-                                <button className="btn btn-secondary col-xl-4  text-start bg-success bg-gradient" type="button">
+                                <button className="btn btn-secondary col-xl-4  text-start bg-success bg-gradient" type="button"
+                                    onClick={handleSaveAvatar}>
                                     <span className="bi-check2-circle" /> Save
                                 </button>
-                                <button className="btn btn-secondary col-xl-4 ms-1 text-start bg-dark bg-gradient" type="button"
+                                <button className="btn btn-secondary col-xl-4 ms- text-start bg-dark bg-gradient" type="button"
                                     onClick={handleCloseAvatar}>
                                     <span className="bi-x-circle" /> Cancel
                                 </button>
