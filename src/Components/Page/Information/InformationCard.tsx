@@ -1,44 +1,92 @@
-function InformationCard(InformationState: any) {
+interface InformationProps {
+  InformationState: boolean;
+  handleCloseInformation: () => void;
+}
+const InformationCard: React.FC<InformationProps> = ({ InformationState, handleCloseInformation }) => {
 
   return (
     <form className="col-xl-6">
+
+      {InformationState === false ?
+        <div className="row">
+          <div className="col-xl-6">
+            <label className="form-label">Name</label>
+            <input type="text"
+              className="form-control "
+              value="Trần Đông Đông" id="Name" />
+          </div>
+          <div className="col-xl-6">
+            <label className="form-label">Email</label>
+            <input type="text"
+              className="form-control "
+              value="ongtrandong2@gmail.com" id="Email" />
+          </div>
+          <div className="col-xl-6">
+            <label className="form-label">Street Address</label>
+            <input type="text"
+              className="form-control "
+              value="12" id="StreetAddress" />
+          </div>
+          <div className="col-xl-6">
+            <label className="form-label">State</label>
+            <input type="text"
+              className="form-control "
+              value="36" id="State" />
+          </div>
+          <div className="col-xl-6">
+            <label className="form-label ">City</label>
+            <input type="text"
+              className="form-control "
+              value="Thanh Hoa" id="City" />
+          </div>
+          <div className="col-xl-6">
+            <label className="form-label">Postal Code</label>
+            <input type="text"
+              className="form-control "
+              value="212" id="Code" />
+          </div>
+        </div> :
+        <div>
           <div className="row">
             <div className="col-xl-6">
               <label className="form-label">Name</label>
-              <input type="text" className="form-control" id="inputName" />
+              <input type="text" className="form-control border-warning" id="inputName" />
             </div>
             <div className="col-xl-6">
               <label className="form-label">Email</label>
-              <input type="email" className="form-control" id="inputEmail" />
+              <input type="email" className="form-control border-warning" id="inputEmail" />
             </div>
             <div className="col-xl-6">
               <label className="form-label">Street Address</label>
-              <input type="text" className="form-control" id="inputStreetAddress" />
+              <input type="text" className="form-control border-warning" id="inputStreetAddress" />
             </div>
             <div className="col-xl-6">
               <label className="form-label">State</label>
-              <input type="text" className="form-control" id="inputStreetAddress" />
+              <input type="text" className="form-control border-warning" id="inputStreetAddress" />
             </div>
             <div className="col-xl-6">
               <label className="form-label">City</label>
-              <input type="text" className="form-control" id="inputCity" />
+              <input type="text" className="form-control border-warning" id="inputCity" />
             </div>
             <div className="col-xl-6">
               <label className="form-label">Postal Code</label>
-              <input type="text" className="form-control" id="inputPostalCode" />
+              <input type="text" className="form-control border-warning" id="inputPostalCode" />
             </div>
           </div>
           <div className="row-xl-5 pe-2">
             <div className="row justify-content-end">
-            <button className="btn btn-secondary col-xl-3 mt-3 text-start bg-success bg-gradient" type="button">
-              <span className="bi-check2-circle" /> Save
-            </button>
-            <button className="btn btn-secondary col-xl-3 ms-1 mt-3 text-start bg-dark bg-gradient" type="button">
-              <span className="bi-x-circle" /> Cancel
-            </button>
+              <button className="btn btn-secondary col-xl-3 mt-3 text-start bg-success bg-gradient" type="button">
+                <span className="bi-check2-circle" /> Save
+              </button>
+              <button className="btn btn-secondary col-xl-3 ms-1 mt-3 text-start bg-dark bg-gradient" type="button"
+                onClick={handleCloseInformation}>
+                <span className="bi-x-circle" /> Cancel
+              </button>
             </div>
           </div>
-        </form>
+        </div>}
+
+    </form>
   );
 }
 
