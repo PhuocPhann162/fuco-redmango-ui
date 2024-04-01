@@ -39,7 +39,7 @@ const Avatar: React.FC<AvatarProps> = ({ AvatarState, handleCloseAvatar }) => {
                                     onClick={handleSaveAvatar}>
                                     <span className="bi-check2-circle" /> Save
                                 </button>
-                                <button className="btn btn-secondary col-xl-4 ms- text-start bg-dark bg-gradient" type="button"
+                                <button className="btn btn-secondary col-xl-4 ms-1 text-start bg-dark bg-gradient" type="button"
                                     onClick={handleCloseAvatar}>
                                     <span className="bi-x-circle" /> Cancel
                                 </button>
