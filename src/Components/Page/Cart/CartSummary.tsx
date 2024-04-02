@@ -11,6 +11,7 @@ import { RootState } from "../../../Storage/Redux/store";
 import {
   applyOrRemoveCoupon,
   removeFromCart,
+  setShoppingCart,
   updateQuantity,
 } from "../../../Storage/Redux/shoppingCartSlice";
 import {
@@ -45,26 +46,26 @@ function CartSummary() {
 
   useEffect(() => {
     if (!loading && data) {
-      console.log(shoppingCartFromStore.cartTotal);
-      console.log(data);
       setCouponList(data.result);
     }
   }, [data]);
 
-  if (shoppingCartFromStore.cartItems.length == 0) {
-    return (
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-6">
-          <div
-            style={{ fontWeight: 450 }}
-            className="alert alert-secondary empty-cart-alert"
-            role="alert"
-          >
-            Your shopping cart is empty. Add products to continue shopping 🍜
+  if (shoppingCartFromStore?.cartItems !== null) {
+    if (shoppingCartFromStore?.cartItems.length === 0) {
+      return (
+        <div className="row justify-content-center mt-5">
+          <div className="col-md-6">
+            <div
+              style={{ fontWeight: 450 }}
+              className="alert alert-secondary empty-cart-alert"
+              role="alert"
+            >
+              Your shopping cart is empty. Add products to continue shopping 🍜
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
   const handleUserInput = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -81,6 +82,7 @@ function CartSummary() {
       updateQuantityBy === 0
     ) {
       // remove the item
+
       updateShoppingCart({
         userId: userData.id,
         menuItemId: cartItem.menuItem?.id,
@@ -88,6 +90,19 @@ function CartSummary() {
       });
 
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
+
+      if (shoppingCartFromStore?.cartItems) {
+        if (shoppingCartFromStore.cartItems.length === 1) {
+          dispatch(
+            setShoppingCart({
+              cartItems: [],
+              cartTotal: 0,
+              couponCode: "",
+              discount: 0,
+            })
+          );
+        }
+      }
     } else {
       // update the quantity with the new quantity
       updateShoppingCart({
@@ -218,8 +233,8 @@ function CartSummary() {
           )
         )}
       <form onSubmit={handleSubmit}>
-        {shoppingCartFromStore.couponCode == null ||
-        shoppingCartFromStore.couponCode == "" ? (
+        {shoppingCartFromStore?.couponCode == null ||
+        shoppingCartFromStore?.couponCode === "" ? (
           <div className="form-group mt-3 ms-4 d-flex align-items-center w-100">
             <span className="p-2" style={{ fontWeight: 500 }}>
               Promotion Code:{" "}
@@ -234,7 +249,7 @@ function CartSummary() {
               >
                 <option value="">Select your code</option>
                 {couponList.map((coupon: couponModel) => {
-                  if (coupon.minAmount! <= shoppingCartFromStore.cartTotal!) {
+                  if (coupon.minAmount! <= shoppingCartFromStore?.cartTotal!) {
                     return (
                       <option key={coupon.id} value={coupon.code}>
                         {coupon.discountAmount}$ OFF (Apply if Subtotal {`>`} $
@@ -265,8 +280,8 @@ function CartSummary() {
                 required
                 disabled
               >
-                <option value={shoppingCartFromStore.couponCode}>
-                  {shoppingCartFromStore.discount}$ OFF
+                <option value={shoppingCartFromStore?.couponCode}>
+                  {shoppingCartFromStore?.discount}$ OFF
                 </option>
               </select>
             </div>

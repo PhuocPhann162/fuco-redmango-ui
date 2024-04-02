@@ -9,10 +9,13 @@ export const ReviewList = ({ menuItemId }: { menuItemId: number }) => {
     <>
       {!isLoading && (
         <div className="mx-4 py-4">
-          <span style={{ color: "#5D3D2E" }} className="fw-bold fs-5">
+          <div
+            style={{ color: "#5D3D2E", fontFamily: "cursive" }}
+            className="fw-bold fs-5 pb-4"
+          >
             Customer Comments
-          </span>
-          {data && data.result.length > 0 ? (
+          </div>
+          {data && data?.result.length > 0 ? (
             data?.result.map((review: reviewModel) => (
               <Comment review={review} key={review.id} />
             ))

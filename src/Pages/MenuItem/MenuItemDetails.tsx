@@ -145,16 +145,19 @@ function MenuItemDetails() {
       <hr className="" />
       <div className="container mt-4">
         <div className="row">
-          <span className="h3" style={{ color: "#5D3D2E" }}>
-            Reviews
+          <span
+            className="h3 fw-bold"
+            style={{ color: "#5D3D2E", fontFamily: "monospace" }}
+          >
+            <i className="bi bi-yelp"></i> Reviews
           </span>
         </div>
         <div className="row mt-4">
-          <div className="col-md-6 shadow">
+          <div className="col-md-5 shadow">
             <ReviewAverage menuItemId={parseInt(menuItemId ?? "")} />
             <ReviewInsert menuItemId={parseInt(menuItemId ?? "")} />
           </div>
-          <div className="col-md-1"></div>
+          <div className="col-md-2"></div>
           <div className="col-md-5 shadow">
             <ReviewList menuItemId={parseInt(menuItemId ?? "")} />
           </div>

@@ -129,6 +129,7 @@ export default function PermissionUsers() {
                       </option>
                       {roleList.map((role: any) => (
                         <option
+                          key={role.value}
                           value={role.value}
                           selected={role.value === userInfo.role}
                         >

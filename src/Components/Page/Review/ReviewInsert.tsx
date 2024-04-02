@@ -4,6 +4,8 @@ import StarRating from "../../UI/StarRating";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Storage/Redux/store";
 import { useAddReviewMutation } from "../../../Apis/reviewApi";
+import { MainLoader } from "../Common";
+import { useNavigate } from "react-router-dom";
 
 const reviewData = {
   comment: "",
@@ -31,8 +33,13 @@ export const ReviewInsert = ({ menuItemId }: { menuItemId: number }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setIsLoading(true);
+
+    if (!userId) {
+      window.location.replace("/login");
+      setIsLoading(false);
+      return;
+    }
 
     const formData = new FormData();
 
@@ -45,39 +52,57 @@ export const ReviewInsert = ({ menuItemId }: { menuItemId: number }) => {
     if (response) {
       setIsLoading(false);
       toastNotify("Thank you for your review!!!");
+      setReviewInputs({
+        comment: "",
+        stars: 1,
+      });
     } else {
       toastNotify("An unexpected error occured", "error");
+      setReviewInputs({
+        comment: "",
+        stars: 1,
+      });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mx-4 py-4">
-        <span style={{ color: "#5D3D2E" }} className="fw-bold fs-5">
-          Add your opinion
-        </span>
-        <div className="py-2">
-          <StarRating
-            size={24}
-            defaultRating={1}
-            onSetRating={setRating}
-            color="#EF4444"
-          />
-        </div>
-        <div className="mt-2">
-          <textarea
-            className="w-100 form-control"
-            rows={3}
-            name="comment"
-            value={reviewInputs.comment}
-            onChange={handleReviewInput}
-            placeholder="Was it good? Was it bad? Let us know!"
-          />
-        </div>
-        <button type="submit" className="btn btn-dark mt-4 mb-2">
-          Submit Your Review
-        </button>
-      </div>
-    </form>
+    <>
+      {isLoading ? (
+        <MainLoader />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="mx-4 py-4">
+            <span
+              style={{ color: "#5D3D2E", fontFamily: "cursive" }}
+              className="fw-bold fs-5"
+            >
+              Add your opinion
+            </span>
+            <div className="py-2">
+              <StarRating
+                size={24}
+                defaultRating={1}
+                onSetRating={setRating}
+                color="#EF4444"
+                fontSize={20}
+              />
+            </div>
+            <div className="mt-2">
+              <textarea
+                className="w-100 form-control"
+                rows={4}
+                name="comment"
+                value={reviewInputs.comment}
+                onChange={handleReviewInput}
+                placeholder="Was it good? Was it bad? Let us know!"
+              />
+            </div>
+            <button type="submit" className="btn btn-dark mt-4 mb-2">
+              Submit Your Review
+            </button>
+          </div>
+        </form>
+      )}
+    </>
   );
 };
