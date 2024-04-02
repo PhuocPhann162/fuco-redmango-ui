@@ -7,6 +7,7 @@ import orderDetailsDTOModel from "./orderDetailsDTOModel";
 import orderDetailModel from "./orderDetailModel";
 import orderHeaderModel from "./orderHeaderModel";
 import couponModel from "./couponModel";
+import reviewModel from "./reviewModel";
 
 export type {
   menuItemModel,
@@ -18,4 +19,5 @@ export type {
   orderDetailModel,
   orderHeaderModel,
   couponModel,
+  reviewModel,
 };

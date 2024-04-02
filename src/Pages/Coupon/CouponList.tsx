@@ -51,7 +51,7 @@ export default function CouponList() {
               <div className="col-auto">
                 <img
                   src={decoration}
-                  alt="Image"
+                  alt="Decoration Header"
                   style={{
                     width: "100px",
                     height: "100px",

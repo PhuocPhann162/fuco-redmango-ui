@@ -237,7 +237,8 @@ function CartSummary() {
                   if (coupon.minAmount! <= shoppingCartFromStore.cartTotal!) {
                     return (
                       <option key={coupon.id} value={coupon.code}>
-                        {coupon.discountAmount}$ OFF (Apply if )
+                        {coupon.discountAmount}$ OFF (Apply if Subtotal {`>`} $
+                        {coupon.minAmount})
                       </option>
                     );
                   }

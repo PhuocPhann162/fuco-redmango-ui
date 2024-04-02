@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { inputHelper, toastNotify } from "../Helper";
-import { useRegisterUserMutation } from "../Apis/authApi";
-import { MainLoader } from "../Components/Page/Common";
-import { apiResponse, userModel } from "../Interfaces";
+import { inputHelper, toastNotify } from "../../Helper";
+import { useRegisterUserMutation } from "../../Apis/authApi";
+import { MainLoader } from "../../Components/Page/Common";
+import { apiResponse, userModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../Storage/Redux/store";
-import { SD_Roles } from "../Utility/SD";
+import { RootState } from "../../Storage/Redux/store";
+import { SD_Roles } from "../../Utility/SD";
 
 function Register() {
   const navigate = useNavigate();
@@ -83,9 +83,11 @@ function Register() {
         <div className="card-body py-5">
           <form method="post" onSubmit={handleSubmit} className="row px-5">
             {userData && userData.role === SD_Roles.ADMIN ? (
-              <h1 className="text-center mb-4 mt-3">Register - Admin Portal</h1>
+              <h1 className="text-center mb-4 mt-3">
+                Registration - Admin Portal
+              </h1>
             ) : (
-              <h1 className="text-center mb-4">Register</h1>
+              <h1 className="text-center mb-4">Registration</h1>
             )}
             <div className="form-floating mb-3 col-md-12">
               <input

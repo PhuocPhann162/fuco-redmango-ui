@@ -217,7 +217,11 @@ function CartPickUpDetail() {
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
         </button>
-        <button className="btn btn-lg btn-outline-secondary mt-2">
+        <button
+          type="button"
+          className="btn btn-lg btn-outline-secondary mt-2"
+          onClick={() => navigate("/")}
+        >
           Countinue Shopping
         </button>
       </form>
