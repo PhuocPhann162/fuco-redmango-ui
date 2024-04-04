@@ -1,5 +1,6 @@
+import { ProgressBar } from "../Components/Animation";
 import { Avatar, InformationCard } from "../Components/Page/Information";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Information() {
   const [isChangeAvatar, setAvatar] = useState<boolean>(false);
@@ -19,6 +20,19 @@ function Information() {
   const handleCloseInformation = () => {
     setInformation(false);
   };
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        setProgress(progress + 10);
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [progress]);
   return (
     <div className="container">
       <div className="row w-80 pt-3 justify-content-end" >
@@ -35,6 +49,16 @@ function Information() {
       <div className="container row justify-content-evenly ">
         <Avatar AvatarState= {isChangeAvatar} handleCloseAvatar={handleCloseAvatar}/>
         <InformationCard InformationState={isInformation} handleCloseInformation={handleCloseInformation}/>
+      </div>
+      <div className="container row justify-content-center">  
+        <div className="col-xl-6 mt-4">
+          <label className="form-label fs-2 fw-bold">Vip Process</label>
+          <div className="row justify-content-between">
+            <label className="form-label col-xl-1">Common</label>
+            <label className="form-label col-xl-1">Vip</label>
+          </div>
+          <ProgressBar progress={progress} />
+        </div>
       </div>
     </div>
   );
