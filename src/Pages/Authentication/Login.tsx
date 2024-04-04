@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { inputHelper, toastNotify } from "../Helper";
-import { useLoginUserMutation } from "../Apis/authApi";
-import { apiResponse, userModel } from "../Interfaces";
-import { MainLoader } from "../Components/Page/Common";
+import { inputHelper, toastNotify } from "../../Helper";
+import { useLoginUserMutation } from "../../Apis/authApi";
+import { apiResponse, userModel } from "../../Interfaces";
+import { MainLoader } from "../../Components/Page/Common";
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setLoggedInUser } from "../Storage/Redux/authSlice";
+import { setLoggedInUser } from "../../Storage/Redux/authSlice";
 
 function Login() {
   const [error, setError] = useState("");
@@ -82,17 +82,17 @@ function Login() {
               >
                 The best offer <br />
                 <span style={{ color: "hsl(218, 81%, 75%)" }}>
-                  for your business
+                  for your meals today!{" "}
                 </span>
               </h1>
               <p
                 className="mb-4 opacity-70"
                 style={{ color: "hsl(218, 81%, 85%)" }}
               >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Temporibus, expedita iusto veniam atque, magni tempora mollitia
-                dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-                ab ipsum nisi dolorem modi. Quos?
+                FucoMastery is your ultimate culinary destination, offering a
+                diverse menu, insightful content, and seamless ordering for food
+                enthusiasts everywhere. Discover, learn, and indulge with us
+                today!
               </p>
             </div>
 
@@ -146,6 +146,10 @@ function Login() {
                     {/* Checkbox */}
                     <div className="form-check d-flex justify-content-end mb-4">
                       <input
+                        style={{
+                          backgroundColor: "#5D3D2E",
+                          borderColor: "#5D3D2E",
+                        }}
                         className="form-check-input me-2"
                         type="checkbox"
                         value=""
@@ -165,13 +169,13 @@ function Login() {
                       <button
                         disabled={loading}
                         type="submit"
-                        className="btn btn-warning form-control "
+                        className="btn btn-warning form-control bg-gradient text-white"
                         style={{
                           width: "200px",
-                          fontWeight: "400",
+                          fontWeight: "450",
                         }}
                       >
-                        Login
+                        LOGIN
                       </button>
                     </div>
 

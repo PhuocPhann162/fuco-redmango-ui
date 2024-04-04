@@ -43,42 +43,43 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
               </tr>
             </thead>
             <tbody>
-              {orderData.map((orderItem: orderHeaderModel) => (
-                <tr className="border" key={orderItem.orderHeaderId}>
-                  <td className="col-1">{orderItem.orderHeaderId}</td>
-                  <td className="col-2">{orderItem.pickupName}</td>
-                  <td className="col-2">{orderItem.pickupPhoneNumber}</td>
-                  <td className="col-1">
-                    $ {orderItem.orderTotal!.toFixed(2)}
-                  </td>
-                  <td className="col-1">$ {orderItem.discountAmount!}</td>
-                  <td className="col-1">{orderItem.totalItems}</td>
-                  <td className="col-1">
-                    {new Date(orderItem.orderDate!).toLocaleDateString()}
-                  </td>
-                  <td className="col-2">
-                    <span
-                      className={`badge bg-${getStatusColor(
-                        orderItem.status!
-                      )}`}
-                    >
-                      {orderItem.status}
-                    </span>
-                  </td>
-                  <td className="col-1 text-center">
-                    <button
-                      className="btn btn-success"
-                      onClick={() => {
-                        navigate(
-                          "/order/orderDetails/" + orderItem.orderHeaderId
-                        );
-                      }}
-                    >
-                      Details
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {orderData &&
+                orderData.map((orderItem: orderHeaderModel) => (
+                  <tr className="border" key={orderItem.orderHeaderId}>
+                    <td className="col-1">{orderItem.orderHeaderId}</td>
+                    <td className="col-2">{orderItem.pickupName}</td>
+                    <td className="col-2">{orderItem.pickupPhoneNumber}</td>
+                    <td className="col-1">
+                      $ {orderItem.orderTotal!.toFixed(2)}
+                    </td>
+                    <td className="col-1">$ {orderItem.discountAmount!}</td>
+                    <td className="col-1">{orderItem.totalItems}</td>
+                    <td className="col-1">
+                      {new Date(orderItem.orderDate!).toLocaleDateString()}
+                    </td>
+                    <td className="col-2">
+                      <span
+                        className={`badge bg-${getStatusColor(
+                          orderItem.status!
+                        )}`}
+                      >
+                        {orderItem.status}
+                      </span>
+                    </td>
+                    <td className="col-1 text-center">
+                      <button
+                        className="btn btn-success"
+                        onClick={() => {
+                          navigate(
+                            "/order/orderDetails/" + orderItem.orderHeaderId
+                          );
+                        }}
+                      >
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

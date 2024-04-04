@@ -1,14 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
+import { useGetMenuItemByIdQuery } from "../../Apis/menuItemApi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
-import { MainLoader, MiniLoader } from "../Components/Page/Common";
-import { apiResponse, userModel } from "../Interfaces";
-import { toastNotify } from "../Helper";
+import { useUpdateShoppingCartMutation } from "../../Apis/shoppingCartApi";
+import { MainLoader, MiniLoader } from "../../Components/Page/Common";
+import { apiResponse, userModel } from "../../Interfaces";
+import { toastNotify } from "../../Helper";
 import { useSelector } from "react-redux";
-import { RootState } from "../Storage/Redux/store";
+import { RootState } from "../../Storage/Redux/store";
+import { ReviewInsert, ReviewList } from "../../Components/Page/Review";
+import { ReviewAverage } from "../../Components/Page/Review/ReviewAverage";
 
 // USER ID: 59acaa8e-160f-4a88-b755-ba23cb8cdd62
 
@@ -55,7 +57,7 @@ function MenuItemDetails() {
     <div className="container pt-4 pt-md-5">
       {!isLoading ? (
         <div className="row">
-          <div className="col-7">
+          <div className="col-7 mt-5">
             <h2 className="text-success">{data.result?.name}</h2>
             <span>
               <span
@@ -140,6 +142,27 @@ function MenuItemDetails() {
           <MainLoader />
         </div>
       )}
+      <hr className="" />
+      <div className="container mt-4">
+        <div className="row">
+          <span
+            className="h3 fw-bold"
+            style={{ color: "#5D3D2E", fontFamily: "monospace" }}
+          >
+            <i className="bi bi-yelp"></i> Reviews
+          </span>
+        </div>
+        <div className="row mt-4">
+          <div className="col-md-5 shadow">
+            <ReviewAverage menuItemId={parseInt(menuItemId ?? "")} />
+            <ReviewInsert menuItemId={parseInt(menuItemId ?? "")} />
+          </div>
+          <div className="col-md-2"></div>
+          <div className="col-md-5 shadow">
+            <ReviewList menuItemId={parseInt(menuItemId ?? "")} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

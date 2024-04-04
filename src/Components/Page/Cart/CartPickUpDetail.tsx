@@ -37,12 +37,13 @@ function CartPickUpDetail() {
 
   const [userInput, setUserInput] = useState(initialUserData);
 
-  shoppingCartFromStore &&
+  if (shoppingCartFromStore?.cartItems) {
     shoppingCartFromStore?.cartItems.map((cartItem: cartItemModel) => {
       totalItems += cartItem.quantity!;
 
       return null;
     });
+  }
 
   useEffect(() => {
     setUserInput({
@@ -186,8 +187,8 @@ function CartPickUpDetail() {
             <span>
               $
               {(
-                shoppingCartFromStore.cartTotal! +
-                shoppingCartFromStore.discount!
+                shoppingCartFromStore?.cartTotal! +
+                shoppingCartFromStore?.discount!
               ).toFixed(2)}
             </span>
           </div>
@@ -195,8 +196,8 @@ function CartPickUpDetail() {
             <span>Discount</span>
             <span>
               -$
-              {shoppingCartFromStore.discount != null
-                ? shoppingCartFromStore.discount.toFixed(2)
+              {shoppingCartFromStore?.discount != null
+                ? shoppingCartFromStore?.discount.toFixed(2)
                 : 0}
             </span>
           </div>
@@ -206,7 +207,7 @@ function CartPickUpDetail() {
             style={{ fontWeight: 700 }}
           >
             <h5>Total</h5>
-            <h5>${shoppingCartFromStore.cartTotal!.toFixed(2)}</h5>
+            <h5>${shoppingCartFromStore?.cartTotal!.toFixed(2)}</h5>
           </div>
         </div>
         <button
@@ -217,7 +218,11 @@ function CartPickUpDetail() {
         >
           {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
         </button>
-        <button className="btn btn-lg btn-outline-secondary mt-2">
+        <button
+          type="button"
+          className="btn btn-lg btn-outline-secondary mt-2"
+          onClick={() => navigate("/")}
+        >
           Countinue Shopping
         </button>
       </form>
