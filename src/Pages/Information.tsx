@@ -2,7 +2,16 @@ import { ProgressBar } from "../Components/Animation";
 import { Avatar, InformationCard } from "../Components/Page/Information";
 import { useState, useEffect } from "react";
 
-function Information() {
+interface CSSRegisterProperty {
+  registerProperty: (options: {
+    name: string;
+    syntax: string;
+    initialValue: string;
+    inherits: boolean;
+  }) => void;
+}
+
+const Information: React.FC<{ progress: number }> = ({ progress }) =>{
   const [isChangeAvatar, setAvatar] = useState<boolean>(false);
   const [isInformation, setInformation] = useState<boolean>(false);
   console.log("1: ",isChangeAvatar);
@@ -20,19 +29,16 @@ function Information() {
   const handleCloseInformation = () => {
     setInformation(false);
   };
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress < 100) {
-        setProgress(progress + 10);
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [progress]);
+    const CSS: CSSRegisterProperty = window.CSS as any;
+    CSS.registerProperty({
+      name: "--p",
+      syntax: "<integer>",
+      initialValue: "0",
+      inherits: true,
+    });
+  }, []);
   return (
     <div className="container">
       <div className="row w-80 pt-3 justify-content-end" >
@@ -52,7 +58,9 @@ function Information() {
       </div>
       <div className="container row justify-content-center">  
         <div className="col-xl-6 ">
+          <div className="row justify-content-between align-content-start">
           <ProgressBar progress={progress} />
+          </div>
         </div>
       </div>
     </div>
