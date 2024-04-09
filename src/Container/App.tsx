@@ -137,7 +137,7 @@ function App() {
             element={<PermissionUsers />}
           />
 
-          <Route path="/Information" element={<Information progress={0} />}></Route>
+          <Route path="/Information" element={<Information />}></Route>
 
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>

@@ -2,6 +2,7 @@ import React from "react";
 import "./progressbar.css";
 
 const ProgressBar = ({ progress }) => {
+  document.documentElement.style.setProperty('--p', '0');
   return (
     <div className="rol justify-content-b">
       <div className="progress2 progress-moved">
