@@ -51,12 +51,7 @@ function Information() {
         <InformationCard InformationState={isInformation} handleCloseInformation={handleCloseInformation}/>
       </div>
       <div className="container row justify-content-center">  
-        <div className="col-xl-6 mt-4">
-          <label className="form-label fs-2 fw-bold">Vip Process</label>
-          <div className="row justify-content-between">
-            <label className="form-label col-xl-1">Common</label>
-            <label className="form-label col-xl-1">Vip</label>
-          </div>
+        <div className="col-xl-6 ">
           <ProgressBar progress={progress} />
         </div>
       </div>
