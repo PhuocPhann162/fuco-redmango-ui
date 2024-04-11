@@ -16,12 +16,11 @@ body {
   margin-top: 220px;
   width: 400px;
   text-align: center;
-  position: relative;
 }
 
 .progress2 {
   border-radius: 30px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .progress-bar2 {
@@ -33,7 +32,8 @@ body {
 
 .progress-moved .progress-bar2 {
   background-color: #f3c623;
-  animation: progress 5s infinite;
+  animation: progress 5s;
+  animation-iteration-count: 1;
 }
 
 @keyframes progress {
@@ -42,8 +42,14 @@ body {
     background: #f9bcca;
   }
 
+  36% {
+    width: 36%;
+    background: #f3c623;
+    box-shadow: 0 0 40px #f3c623;
+  }
+
   100% {
-    width: 100%;
+    width: 36%;
     background: #f3c623;
     box-shadow: 0 0 40px #f3c623;
   }
@@ -51,7 +57,8 @@ body {
 
 .icon {
   color: #f3c623;
-  animation: icon 5s infinite;
+  animation: icon 5s;
+  animation-iteration-count: 1;
   background-color: transparent;
   font-size: 2.1em;
 }
@@ -61,7 +68,10 @@ body {
     opacity: 0.2;
     text-shadow: 0 0 0 #f3c623;
   }
-
+  36% {
+    opacity: 1;
+    text-shadow: 0 0 10px #f3c623;
+  }
   100% {
     opacity: 1;
     text-shadow: 0 0 10px #f3c623;
@@ -81,8 +91,11 @@ body {
 }
 
 @keyframes p {
-  90%,
+  0%,
+  36% {
+    --p: 36;
+  }
   100% {
-    --p: 100;
+    --p: 36;
   }
 }
