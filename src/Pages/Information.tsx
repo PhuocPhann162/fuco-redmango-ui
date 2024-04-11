@@ -20,18 +20,8 @@ function Information() {
   };
 
 
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress < 100) {
-        setProgress(progress + 10);
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000);
+  const progress = 50;
 
-    return () => clearInterval(interval);
-  }, [progress]);
   return (
     <div className="container">
       <div className="row w-80 pt-3 justify-content-end" >
