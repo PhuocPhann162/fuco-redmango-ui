@@ -20,7 +20,7 @@ function Information() {
   };
 
 
-  const progress = 50;
+  const progress = 70;
 
   return (
     <div className="container">
