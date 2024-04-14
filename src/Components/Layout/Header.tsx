@@ -132,6 +132,16 @@ function Header() {
                     >
                       Manager Users
                     </li>
+                    <li
+                      style={{
+                        transitionDelay: `${7 * 0.1}s`,
+                        cursor: "pointer",
+                      }}
+                      className="dropdown-item"
+                      onClick={() => navigate("/order/myOrders")}
+                    >
+                      Static
+                    </li>
                   </ul>
                 </li>
               ) : userData.role === SD_Roles.EMPLOYEE ? (
