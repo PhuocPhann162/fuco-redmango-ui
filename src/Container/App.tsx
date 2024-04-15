@@ -20,6 +20,7 @@ import {
   Payment,
   PermissionUsers,
   Register,
+  Revenue,
   ShoppingCart,
 } from "../Pages";
 import { Route, Routes } from "react-router-dom";
@@ -136,7 +137,7 @@ function App() {
             path="/user/permissionUser/:userId"
             element={<PermissionUsers />}
           />
-
+          <Route path="/statistics/revenue" element={<Revenue />}></Route>
           <Route path="/Information" element={<Information />}></Route>
 
           <Route path="/*" element={<NotFound />}></Route>

@@ -20,7 +20,7 @@ import CouponList from "./Coupon/CouponList";
 import CouponUpsert from "./Coupon/CouponUpsert";
 import ManageUsers from "./User/ManageUsers";
 import PermissionUsers from "./User/PermissionUsers";
-
+import Revenue from "./Statistics/Revenue";
 export {
   Home,
   NotFound,
@@ -44,4 +44,5 @@ export {
   CouponUpsert,
   ManageUsers,
   PermissionUsers,
+  Revenue,
 };

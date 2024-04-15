@@ -138,9 +138,9 @@ function Header() {
                         cursor: "pointer",
                       }}
                       className="dropdown-item"
-                      onClick={() => navigate("/order/myOrders")}
+                      onClick={() => navigate("/statistics/revenue")}
                     >
-                      Static
+                      Statistics
                     </li>
                   </ul>
                 </li>
