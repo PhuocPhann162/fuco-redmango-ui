@@ -5,5 +5,5 @@ import paymentApi from "./paymentApi";
 import orderApi from "./orderApi";
 import userApi from "./userApi";
 import reviewApi from "./reviewApi";
-
-export { menuItemApi, shoppingCartApi, authApi, paymentApi, orderApi, userApi };
+import chatBotApi from "./chatBotApi";
+export { menuItemApi, shoppingCartApi, authApi, paymentApi, orderApi, userApi, reviewApi, chatBotApi};
