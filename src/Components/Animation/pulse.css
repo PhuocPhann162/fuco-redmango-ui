@@ -1,0 +1,48 @@
+.pulse {
+    position: relative; /* Ensure proper positioning for pseudo-elements */
+    background: linear-gradient(
+        #1100ff,
+        #407ed7
+    );
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+    font-size: 50px;
+    color: #ffffff;
+    width: auto; /* Adjust size as needed */
+    height: auto; /* Adjust size as needed */
+}
+
+.pulse:before,
+.pulse:after {
+    content: '';
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: #8a82fb;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.pulse:before {
+    animation: pulse 2s ease-out infinite;
+}
+
+.pulse:after {
+    animation: pulse 2s 1s ease-out infinite;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1); 
+    }
+    to {
+        transform: scale(2); 
+    }
+}
+
+.icon-pulse-color{
+    color: #ffffff;
+}
