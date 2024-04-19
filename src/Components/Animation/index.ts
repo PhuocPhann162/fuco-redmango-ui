@@ -1,3 +1,3 @@
 import ProgressBar from "./Progressbar";
-import ChatButton from "./ChatBot";
+import ChatButton from "./ChatButton";
 export { ProgressBar , ChatButton};

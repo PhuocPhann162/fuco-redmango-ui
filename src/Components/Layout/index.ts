@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Modal from "./Modal";
-import ChatButton from "../Animation/ChatBot";
+import ChatFrame from "./ChatFrame";
 
-export { Header, Footer, Modal, ChatButton};
+export { Header, Footer, Modal, ChatFrame};
