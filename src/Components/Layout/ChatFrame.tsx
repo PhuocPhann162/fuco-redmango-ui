@@ -13,7 +13,7 @@ export default function ChatFrame({
       {isShow && (
         <div className="wrapper-modal">
           <div className="modal-body">
-            <h1>Chat Frame</h1>
+            <h1>Frame</h1>
           </div>
         </div>
       )}
