@@ -15,7 +15,7 @@ export default function ChatFrame({
         <div className="chat-messages"/>
         <div className="chat-input">
           <input type="text" placeholder="Type your message..." />
-          <button onClick={handleClose}>Close</button>
+          <button className="btn btn-primary" onClick={handleClose}>Close</button>
         </div>
       </div>
       )}
