@@ -12,7 +12,7 @@ export default function ChatFrame({
     <>
       {isShow && (
         <div className="chat-frame">
-        <div className="chat-messages"/>
+        <div/>
         <div className="chat-input">
           <input type="text" placeholder="Type your message..." />
           <button className="btn btn-primary" onClick={handleClose}>Close</button>
