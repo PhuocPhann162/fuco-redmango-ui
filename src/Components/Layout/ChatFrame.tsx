@@ -14,7 +14,7 @@ export default function ChatFrame({
         <div className="chat-frame">
         <div/>
         <div className="chat-input">
-          <input type="text" placeholder="Type" />
+          <input type="text" placeholder="..." />
           <button className="btn btn-primary rounder-circle" onClick={handleClose}>Close</button>
         </div>
       </div>
