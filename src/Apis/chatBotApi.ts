@@ -1,39 +1,21 @@
-const axios = require('axios');
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-interface ChatBotRequest {
-    content: string;
-}
-
-const chatBotApi = async ({content}: ChatBotRequest): Promise<void> => {
-    const options = {
-        method: 'POST',
-        url: 'https://chatgpt-42.p.rapidapi.com/conversationgpt4-2',
-        headers: {
-            'content-type': 'application/json',
-            'X-RapidAPI-Key': 'e486906368mshe1a17a4be58f4a7p18c8d6jsn3e2257ae96a9',
-            'X-RapidAPI-Host': 'chatgpt-42.p.rapidapi.com'
-        },
-        data: {
-            messages: [
-                {
-                    role: 'user',
-                    content: content
-                }
-            ],
-            system_prompt: '',
-            temperature: 0.9,
-            top_k: 5,
-            top_p: 0.9,
-            max_tokens: 256,
-            web_access: false
-        }
-    };
-    try {
-        const response = await axios.request(options);
-        console.log(response.data);
-    } catch (error) {
-        console.error(error);
+// Access your API key (see "Set up your API key" above)
+const genAI = new GoogleGenerativeAI("AIzaSyCzbnNDDBBRuy90h7-jFt0t4k61ujlvboc");
+interface Props {
+ message: string ;
     }
+
+async function chatBotApi(message :Props) {
+  // For text-only input, use the gemini-pro model
+  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+  const prompt = message.message;
+
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  console.log(text);
 }
 
 export default chatBotApi;

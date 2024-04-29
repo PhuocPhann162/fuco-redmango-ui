@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { chatBotApi } from "../../Apis";// replace with the actual path to chatBotApi
 
 type Props = {
   isShow?: boolean;
@@ -9,6 +10,13 @@ export default function ChatFrame({
   isShow,
   handleClose,
 }: Props) {
+  const [userMessage, setUserMessage] = useState("");
+  const [botMessage, setBotMessage] = useState("");
+
+  const handleSend = async () => {
+    const response = await chatBotApi({message: userMessage});
+    console.log(response);
+  };
   return (
     <>
       {isShow && (
@@ -35,11 +43,18 @@ export default function ChatFrame({
                     </div>
                   </div>
                   <div className="row">
-                    <div className="form-outline col-xl-8">
-                      <input className="form-control" id="textAreaExample"></input>
-                    </div>
-                    <button type="button" className="btn btn-primary col-xl-4">Send</button>
-                  </div>
+          <div className="form-outline col-xl-8">
+            <input
+              className="form-control"
+              id="textAreaExample"
+              value={userMessage}
+              onChange={(e) => setUserMessage(e.target.value)}
+            />
+          </div>
+          <button type="button" className="btn btn-primary col-xl-4" onClick={handleSend}>
+            Send
+          </button>
+        </div>
                 </div>
               </div>
             </div>
