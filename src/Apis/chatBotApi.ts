@@ -16,6 +16,7 @@ async function chatBotApi(message :Props) {
   const response = await result.response;
   const text = response.text();
   console.log(text);
+  return text;
 }
 
 export default chatBotApi;
