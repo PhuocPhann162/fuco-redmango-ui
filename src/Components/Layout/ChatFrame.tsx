@@ -58,7 +58,7 @@ export default function ChatFrame({
             <div className="col-xl-12">
               <div className="card" id="chat1" style={{ borderRadius: '15px', width: '300px', height: '500px' }}>
                 <div className="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0" style={{ borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }}>
-                  <label className="mb-0 fw-bold">RedMango Bot</label>
+                  <label className="mb-0 fw-bold">RedMango LiveBot</label>
                   <button type="button" className="btn-close" aria-label="Close" onClick={handleClose}></button>
                 </div>
                 <div className="card-body d-flex flex-column justify-content-between" >

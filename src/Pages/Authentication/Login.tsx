@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { setLoggedInUser } from "../../Storage/Redux/authSlice";
 
 function Login() {
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +62,6 @@ function Login() {
       navigate("/");
     } else if (response.error) {
       toastNotify(response.error.data.errorMessages[0], "error");
-      setError(response.error.data.errorMessages[0]);
     }
 
     setLoading(false);

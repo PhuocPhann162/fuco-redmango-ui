@@ -132,12 +132,12 @@ export default function CouponUpsert() {
                     </button>
                   </div>
                   <div className="col-6">
-                    <a
+                    <button
                       className="btn btn-secondary form-control mt-5"
                       onClick={() => navigate("/coupon/couponList")}
                     >
                       Back to List
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

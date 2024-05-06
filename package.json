@@ -6,6 +6,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@google/generative-ai": "^0.8.0",
+    "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/react-stripe-js": "^1.16.5",
     "@stripe/stripe-js": "^1.54.2",
@@ -55,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.5"
   }
 }

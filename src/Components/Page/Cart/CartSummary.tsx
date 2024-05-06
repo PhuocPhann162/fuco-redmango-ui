@@ -26,7 +26,7 @@ function CartSummary() {
   const dispatch = useDispatch();
   const [loading, setIsLoading] = useState(false);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
-  const { data, isLoading } = useGetCouponsQuery(null);
+  const { data } = useGetCouponsQuery(null);
   const [couponList, setCouponList] = useState([]);
 
   const shoppingCartFromStore: shoppingCartModel = useSelector(
@@ -45,7 +45,7 @@ function CartSummary() {
   const [userInput, setUserInput] = useState(initialUserData);
 
   useEffect(() => {
-    if (!loading && data) {
+    if (data) {
       setCouponList(data.result);
     }
   }, [data]);
@@ -132,7 +132,7 @@ function CartSummary() {
 
     if (data?.result && data.isSuccess) {
       if (
-        shoppingCartFromStore.couponCode == "" ||
+        shoppingCartFromStore.couponCode === "" ||
         !shoppingCartFromStore.couponCode
       ) {
         dispatch(applyOrRemoveCoupon({ couponCode: "", discount: 0 }));
@@ -257,6 +257,7 @@ function CartSummary() {
                       </option>
                     );
                   }
+                  return null;
                 })}
               </select>
             </div>

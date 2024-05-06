@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useGetAverageReviewQuery } from "../../../Apis/reviewApi";
 import StarRating from "../../UI/StarRating";
 

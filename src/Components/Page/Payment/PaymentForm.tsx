@@ -55,6 +55,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
         };
         orderDetailsDTO.push(tempOrderDetails);
         totalItems += item.quantity!;
+        return null;
       });
 
       const response: apiResponse = await createOrder({

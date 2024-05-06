@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { reviewModel } from "../../../Interfaces";
 import StarRating from "../../UI/StarRating";
 import { formatDistanceToNow } from "date-fns";

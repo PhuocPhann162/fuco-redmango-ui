@@ -6,7 +6,6 @@ import {
 import { MainLoader } from "../../Components/Page/Common";
 import { apiResponse, userModel } from "../../Interfaces";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../Components/Layout";
 import { toastNotify } from "../../Helper";
 
 let decoration = require("../../Assets/Images/decoration_5.jpg");

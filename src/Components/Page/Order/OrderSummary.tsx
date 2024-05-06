@@ -117,7 +117,7 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
             <button className="btn btn-secondary" onClick={() => navigate(-1)}>
               Back to Orders
             </button>
-            {userData.role == SD_Roles.ADMIN && (
+            {userData.role === SD_Roles.ADMIN && (
               <div className="d-flex">
                 {data.status! !== SD_Status.CANCELLED &&
                   data.status! !== SD_Status.COMPLETED && (
