@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Storage/Redux/store";
 import { MainLoader } from "../../Components/Page/Common";
 import { OrderList } from "../../Components/Page/Order";
-import { SD_Status } from "../../Utility/SD";
 
 let decoration = require("../../Assets/Images/decoration_2.jpg");
 
