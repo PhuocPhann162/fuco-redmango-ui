@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../Storage/Redux/store";
 import { useAddReviewMutation } from "../../../Apis/reviewApi";
 import { MainLoader } from "../Common";
-import { useNavigate } from "react-router-dom";
 
 const reviewData = {
   comment: "",

@@ -53,7 +53,6 @@ export default function PermissionUsers() {
       userId: userId,
       role: formData,
     });
-    console.log(response);
     if (response) {
       if (response.data?.result) {
         setIsLoading(false);

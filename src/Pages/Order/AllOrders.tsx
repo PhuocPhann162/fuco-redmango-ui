@@ -102,7 +102,7 @@ function AllOrders() {
               <div className="col-auto">
                 <img
                   src={decoration}
-                  alt="Image"
+                  alt="All Order Decoration"
                   style={{
                     width: "100px",
                     height: "100px",

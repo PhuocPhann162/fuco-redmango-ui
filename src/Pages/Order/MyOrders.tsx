@@ -9,13 +9,13 @@ import { SD_Status } from "../../Utility/SD";
 
 let decoration = require("../../Assets/Images/decoration_2.jpg");
 
-const filterOptions = [
-  "All",
-  SD_Status.CONFIRMED,
-  SD_Status.BEING_COOKED,
-  SD_Status.READY_FOR_PICKUP,
-  SD_Status.COMPLETED,
-];
+// const filterOptions = [
+//   "All",
+//   SD_Status.CONFIRMED,
+//   SD_Status.BEING_COOKED,
+//   SD_Status.READY_FOR_PICKUP,
+//   SD_Status.COMPLETED,
+// ];
 
 function MyOrders() {
   const userId = useSelector((state: RootState) => state.userAuthStore.id);
@@ -30,7 +30,7 @@ function MyOrders() {
               <div className="col-auto">
                 <img
                   src={decoration}
-                  alt="Image"
+                  alt="My Orders"
                   style={{
                     width: "100px",
                     height: "100px",

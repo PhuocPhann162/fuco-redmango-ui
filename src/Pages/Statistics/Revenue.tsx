@@ -4,7 +4,6 @@ import DailyChart from "../../Components/Page/Statistics/DailyRevenue";
 import MonthlyChart from "../../Components/Page/Statistics/MonthlyRevenue";
 import YearlyChart from "../../Components/Page/Statistics/YearlyRevenue";
 
-
 let decoration = require("../../Assets/Images/decoration_6.jpg");
 
 function Revenue() {
@@ -45,22 +44,40 @@ function Revenue() {
           <div className="col-xl-2">
             <h2 className="text-success">Revenue</h2>
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="DailyChart" onChange={e => setChart(e.target.value)} checked={chart === "DailyChart"} />
-              <label className="form-check-label">
-                Daily Revenue
-              </label>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                value="DailyChart"
+                onChange={(e) => setChart(e.target.value)}
+                checked={chart === "DailyChart"}
+              />
+              <label className="form-check-label">Daily Revenue</label>
             </div>
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="MonthlyChart" onChange={e => setChart(e.target.value)} checked={chart === "MonthlyChart"} />
-              <label className="form-check-label" >
-                Monthly Revenue
-              </label>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2"
+                value="MonthlyChart"
+                onChange={(e) => setChart(e.target.value)}
+                checked={chart === "MonthlyChart"}
+              />
+              <label className="form-check-label">Monthly Revenue</label>
             </div>
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="YearlyChart" onChange={e => setChart(e.target.value)} checked={chart === "YearlyChart"} />
-              <label className="form-check-label">
-                Yearly Revenue
-              </label>
+              <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault3"
+                value="YearlyChart"
+                onChange={(e) => setChart(e.target.value)}
+                checked={chart === "YearlyChart"}
+              />
+              <label className="form-check-label">Yearly Revenue</label>
             </div>
           </div>
         </div>
@@ -71,6 +88,6 @@ function Revenue() {
 
 export default Revenue;
 
-{/* <LineChart /> */ }
-{/* <BarChart /> */ }
-{/* <DoughnutChart /> */ }
+/* <LineChart /> */
+/* <BarChart /> */
+/* <DoughnutChart /> */
