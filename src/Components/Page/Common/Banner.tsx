@@ -1,43 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import "./banner.css";
-import { useDispatch } from "react-redux";
-import { setSearchItems } from "../../../Storage/Redux/menuItemSlice";
 
 function Banner() {
-  // const [value, setValue] = useState("");
-  // const dispatch = useDispatch();
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   dispatch(setSearchItems(e.target.value));
-  //   setValue(e.target.value);
-  // };
-
+  
   return (
-    <div className="custom-banner">
-      <div
-        className="m-auto d-flex align-items-center"
-        style={{
-          width: "400px",
-          height: "50vh",
-        }}
-      >
-        {/* <div className="d-flex align-items-center" style={{ width: "100%" }}>
-          <input
-            type={"text"}
-            className="form-control rounded-pill"
-            style={{
-              width: "100%",
-              padding: "20px 20px",
-            }}
-            placeholder="Search for Food Items!"
-            value={value}
-            onChange={handleChange}
-          />
-          <span style={{ position: "relative", left: "-43px" }}>
-            <i className="bi bi-search"></i>
-          </span>
-        </div> */}
+    <div id="carouselExampleDark" className="carousel slide custom-banner" data-bs-ride="carousel">
+      <div className="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
+      <div className="carousel-inner">
+        <div className="carousel-item active" data-bs-interval="10000">
+          <img src="/src/Assets/Images/confirmed.jpg" className="d-block w-100" alt="..." />
+        </div>
+        <div className="carousel-item" data-bs-interval="2000">
+          <img src="https://placehold.co/1296x404" className="d-block w-100" alt="..." />
+        </div>
+        <div className="carousel-item">
+          <img src="https://placehold.co/1296x404" className="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
     </div>
   );
 }

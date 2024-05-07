@@ -107,12 +107,16 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #5d3d2e; /* Màu của thanh cuộn */
+  /* background-color: #5d3d2e; Màu của thanh cuộn */
+  background-color: blueviolet;
+  /* visibility: hidden; */
+  width: 5px; /* Decrease the width to make the scrollbar smaller */
   border-radius: 5px;
 }
 
 :hover::-webkit-scrollbar-thumb {
-  background-color: #5d3d2e; /* Màu của thanh cuộn khi hover */
+  /* background-color: #5d3d2e; Màu của thanh cuộn khi hover */
+  background-color: rgb(76, 43, 226);
 }
 
 /* Custom header color  */
