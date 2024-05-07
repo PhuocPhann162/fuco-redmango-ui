@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { format } from "date-fns";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -18,7 +19,7 @@ ChartJS.register(
 );
 
 export default function MonthlyChart() {
-  const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const labels = Array.from({ length: 12 }, (_, i) => format(new Date(2021, i, 1), "MMMM"));
   const data = {
     labels: labels,
     datasets: [{

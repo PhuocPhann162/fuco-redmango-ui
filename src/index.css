@@ -117,7 +117,7 @@ a {
 
 /* Custom header color  */
 .navbar-nav .nav-item .nav-link.active {
-  color: #25c19f !important;
+  color: #f0b70d !important;
   font-weight: 500;
 }
 
@@ -126,7 +126,8 @@ a {
 }
 
 .navbar-nav {
-  background-color: #242526 !important;
+  /* background-color: #242526 !important; */
+  backgroround-color: #D2691E!important;
 }
 
 /* Custom login form  */

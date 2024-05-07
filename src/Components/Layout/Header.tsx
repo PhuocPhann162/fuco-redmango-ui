@@ -30,8 +30,9 @@ function Header() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div className="container-fluid">
+      {/* <nav className="navbar navbar-expand-lg bg-dark navbar-dark" style={{backgroundColor:"GrayText"}}> */}
+      <nav className="navbar navbar-expand-lg " style={{backgroundColor: "rgb(93, 61, 46)"}}>
+        <div className="container-fluid" >
           <NavLink className="nav-link px-2" aria-current="page" to="/">
             <img
               src={logo}

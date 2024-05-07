@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { setSearchItems } from "../../../Storage/Redux/menuItemSlice";
 
 function Banner() {
-  const [value, setValue] = useState("");
-  const dispatch = useDispatch();
+  // const [value, setValue] = useState("");
+  // const dispatch = useDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchItems(e.target.value));
-    setValue(e.target.value);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   dispatch(setSearchItems(e.target.value));
+  //   setValue(e.target.value);
+  // };
 
   return (
     <div className="custom-banner">
@@ -21,7 +21,7 @@ function Banner() {
           height: "50vh",
         }}
       >
-        <div className="d-flex align-items-center" style={{ width: "100%" }}>
+        {/* <div className="d-flex align-items-center" style={{ width: "100%" }}>
           <input
             type={"text"}
             className="form-control rounded-pill"
@@ -36,7 +36,7 @@ function Banner() {
           <span style={{ position: "relative", left: "-43px" }}>
             <i className="bi bi-search"></i>
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
