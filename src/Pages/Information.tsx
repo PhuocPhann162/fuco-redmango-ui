@@ -1,4 +1,4 @@
-import { ProgressBar } from "../Components/Animation";
+
 import { Avatar, InformationCard } from "../Components/Page/Information";
 import { useState } from "react";
 
@@ -18,8 +18,6 @@ function Information() {
   const handleCloseInformation = () => {
     setInformation(false);
   };
-
-  const progress = 70;
 
   return (
     <div className="container">
@@ -56,11 +54,6 @@ function Information() {
           InformationState={isInformation}
           handleCloseInformation={handleCloseInformation}
         />
-      </div>
-      <div className="container row justify-content-center">
-        <div className="col-xl-6 ">
-          <ProgressBar progress={progress} />
-        </div>
       </div>
     </div>
   );

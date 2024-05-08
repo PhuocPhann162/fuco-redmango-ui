@@ -1,9 +1,10 @@
+import { ProgressBar } from "../../Animation";
 interface InformationProps {
   InformationState: boolean;
   handleCloseInformation: () => void;
 }
 const InformationCard: React.FC<InformationProps> = ({ InformationState, handleCloseInformation }) => {
-
+  const progress = 70;
   const handleSaveInformation = () => {
     console.log('Save Information');
     handleCloseInformation();
@@ -90,6 +91,11 @@ const InformationCard: React.FC<InformationProps> = ({ InformationState, handleC
             </div>
           </div>
         </div>}
+        <div className="container row justify-content-center">
+        <div className="col-xl-12 ">
+          <ProgressBar progress={progress} />
+        </div>
+      </div>
 
     </form>
   );
