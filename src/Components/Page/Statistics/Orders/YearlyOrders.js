@@ -17,7 +17,7 @@ ChartJS.register(
   Legend
 );
 
-export default function YearlyChart() {
+export default function YearlyOrdersChart() {
   const labels = ["2020", "2021", "2022", "2023", "2024"];
   const data = {
     labels: labels,

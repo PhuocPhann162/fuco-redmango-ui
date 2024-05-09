@@ -1,24 +1,24 @@
 import React from "react";
+import { Banner1 , Banner2, Banner3 } from "../../../Assets/Images";
 import "./banner.css";
-
 function Banner() {
   
   return (
-    <div id="carouselExampleDark" className="carousel slide custom-banner" data-bs-ride="carousel">
+    <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-      <div className="carousel-inner">
+      <div className="carousel-inner custom-banner">
         <div className="carousel-item active" data-bs-interval="10000">
-          <img src="/src/Assets/Images/confirmed.jpg" className="d-block w-100" alt="..." />
+          <img src={Banner1} className="d-block w-100 banner-style1" alt="..." />
         </div>
-        <div className="carousel-item" data-bs-interval="2000">
-          <img src="https://placehold.co/1296x404" className="d-block w-100" alt="..." />
+        <div className="carousel-item" data-bs-interval="5000">
+          <img src={Banner2} className="d-block w-100 banner-style2" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src="https://placehold.co/1296x404" className="d-block w-100" alt="..." />
+          <img src={Banner3} className="d-block w-100 banner-style3" alt="..." />
         </div>
       </div>
       <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

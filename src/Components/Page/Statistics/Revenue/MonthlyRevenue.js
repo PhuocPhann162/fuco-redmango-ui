@@ -18,7 +18,7 @@ ChartJS.register(
   Legend
 );
 
-export default function MonthlyChart() {
+export default function MonthlyRevenueChart() {
   const labels = Array.from({ length: 12 }, (_, i) => format(new Date(2021, i, 1), "MMMM"));
   const data = {
     labels: labels,
