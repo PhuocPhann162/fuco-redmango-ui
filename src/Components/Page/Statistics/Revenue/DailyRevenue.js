@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Line } from "react-chartjs-2";
-import React, { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +12,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,7 +25,7 @@ ChartJS.register(
 );
 
 export default function DailyRevenueChart() {
-  const [month, setMonth] = useState("11-2021");
+  const [startDate, setStartDate] = useState(new Date());
 
   const labels = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -43,13 +47,14 @@ export default function DailyRevenueChart() {
     ],
   };
   const options = {};
+
   return (
     <div>
-      <input
-        type="date"
-        value={month}
-        format="MM-YYYY"
-        onChange={(e) => setMonth(e.target.value)}
+      <DatePicker 
+        selected={startDate} 
+        onChange={(date) => setStartDate(date)} 
+        dateFormat="MM/yyyy" 
+        showMonthYearPicker
       />
       <Line options={options} data={data} />
     </div>
