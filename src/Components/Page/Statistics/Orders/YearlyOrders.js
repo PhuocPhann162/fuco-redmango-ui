@@ -1,4 +1,7 @@
 import { Bar } from "react-chartjs-2";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,8 +20,9 @@ ChartJS.register(
   Legend
 );
 
-export default function YearlyOrdersChart() {
+export default function YearlyRevenueChart() {
   const labels = ["2020", "2021", "2022", "2023", "2024"];
+  const [startDate, setStartDate] = useState(new Date());
   const data = {
     labels: labels,
     datasets: [{
@@ -42,5 +46,16 @@ export default function YearlyOrdersChart() {
     }]
   };
   const options = {};
-  return <Bar options={options} data={data} />;
+  return (
+    <div>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        dateFormat="yyyy"
+        showMonthYearPicker
+        style = {{width: "fit-content"}}
+      />
+      <Bar options={options} data={data} />
+    </div>
+  );
 }
