@@ -8,6 +8,7 @@ import orderDetailModel from "./orderDetailModel";
 import orderHeaderModel from "./orderHeaderModel";
 import couponModel from "./couponModel";
 import reviewModel from "./reviewModel";
+import statisticModel from "./statisticModel";
 
 export type {
   menuItemModel,
@@ -20,4 +21,5 @@ export type {
   orderHeaderModel,
   couponModel,
   reviewModel,
+  statisticModel,
 };

@@ -1,13 +1,13 @@
-import React from "react";
 import { useState } from "react";
-
-import DailyRevenueChart from "../../Components/Page/Statistics/Revenue/DailyRevenue";
-import MonthlyRevenueChart from "../../Components/Page/Statistics/Revenue/MonthlyRevenue";
-import YearlyRevenueChart from "../../Components/Page/Statistics/Revenue/YearlyRevenue";
 
 import DailyOrdersChart from "../../Components/Page/Statistics/Orders/DailyOrders";
 import MonthlyOrdersChart from "../../Components/Page/Statistics/Orders/MonthlyOrders";
 import YearlyOrdersChart from "../../Components/Page/Statistics/Orders/YearlyOrders";
+import {
+  DailyRevenue,
+  MonthlyRevenue,
+  YearlyRevenue,
+} from "../../Components/Page/Statistics";
 
 let decoration = require("../../Assets/Images/decoration_6.jpg");
 
@@ -39,11 +39,11 @@ function Revenue() {
         <div className="row justify-content-center">
           <div className="col-xl-8">
             {chart === "DailyChart" ? (
-              <DailyRevenueChart />
+              <DailyRevenue />
             ) : chart === "MonthlyChart" ? (
-              <MonthlyRevenueChart />
+              <MonthlyRevenue />
             ) : chart === "YearlyChart" ? (
-              <YearlyRevenueChart />
+              <YearlyRevenue />
             ) : chart === "DailyOrdersChart" ? (
               <DailyOrdersChart />
             ) : chart === "MonthlyOrdersChart" ? (
