@@ -1,18 +1,20 @@
 import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
 import { format } from "date-fns";
 import { ReactNode, useEffect, useState } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import ReactDatePicker from "react-datepicker";
-import { useGetRevenueStatisticQuery } from "../../../../Apis/statisticApi";
+import { useGetOrdersStatisticQuery } from "../../../../Apis/statisticApi";
 
 Chart.register(...registerables);
 
-export const MonthlyRevenue = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [monthlyRevenue, setMonthlyRevenue] = useState<any>();
-  const { data, isLoading } = useGetRevenueStatisticQuery({
-    type: "monthly",
-    year: startDate.getFullYear(),
+export const YearlyOrders = () => {
+  const [startYear, setStartYear] = useState(new Date(2021, 1, 1));
+  const [endYear, setEndYear] = useState(new Date(2025, 1, 1));
+  const [yearlyRevenue, setMonthlyRevenue] = useState<any>();
+  const { data, isLoading } = useGetOrdersStatisticQuery({
+    type: "yearly",
+    year: startYear.getFullYear(),
+    endYear: endYear.getFullYear(),
   });
 
   useEffect(() => {
@@ -22,18 +24,19 @@ export const MonthlyRevenue = () => {
     }
   }, [data]);
 
-  const labels = Array.from({ length: 12 }, (_, i) =>
-    format(new Date(2021, i, 1), "MMMM")
+  const labels = Array.from(
+    { length: endYear.getFullYear() + 1 - startYear.getFullYear() },
+    (_, i) => format(new Date(startYear.getFullYear() + i, 1, 1), "yyyy")
   );
   console.log(labels);
   const renderChart = (percents: number[]) => {
-    if (!monthlyRevenue) return null;
+    if (!yearlyRevenue) return null;
     const dataLine: ChartData<"bar"> = {
       labels: labels,
       datasets: [
         {
-          label: monthlyRevenue.label,
-          data: monthlyRevenue.revenueData,
+          label: yearlyRevenue.label,
+          data: yearlyRevenue.ordersData,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(255, 159, 64, 0.2)",
@@ -95,12 +98,24 @@ export const MonthlyRevenue = () => {
 
   return (
     <div>
-      <ReactDatePicker
-        selected={startDate}
-        onChange={(date: any) => setStartDate(date)}
-        dateFormat="yyyy"
-        showYearPicker
-      />
+      <div className="flex flex-col">
+        <div>From</div>
+        <ReactDatePicker
+          selected={startYear}
+          onChange={(date: any) => setStartYear(date)}
+          dateFormat="yyyy"
+          showYearPicker
+        />
+      </div>
+      <div className="flex flex-col">
+        <div>To</div>
+        <ReactDatePicker
+          selected={endYear}
+          onChange={(date: any) => setEndYear(date)}
+          dateFormat="yyyy"
+          showYearPicker
+        />
+      </div>
       {render()}
     </div>
   );

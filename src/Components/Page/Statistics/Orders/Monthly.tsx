@@ -3,14 +3,14 @@ import { format } from "date-fns";
 import { ReactNode, useEffect, useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
 import ReactDatePicker from "react-datepicker";
-import { useGetRevenueStatisticQuery } from "../../../../Apis/statisticApi";
+import { useGetOrdersStatisticQuery } from "../../../../Apis/statisticApi";
 
 Chart.register(...registerables);
 
-export const MonthlyRevenue = () => {
+export const MonthlyOrders = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [monthlyRevenue, setMonthlyRevenue] = useState<any>();
-  const { data, isLoading } = useGetRevenueStatisticQuery({
+  const { data, isLoading } = useGetOrdersStatisticQuery({
     type: "monthly",
     year: startDate.getFullYear(),
   });
@@ -25,7 +25,6 @@ export const MonthlyRevenue = () => {
   const labels = Array.from({ length: 12 }, (_, i) =>
     format(new Date(2021, i, 1), "MMMM")
   );
-  console.log(labels);
   const renderChart = (percents: number[]) => {
     if (!monthlyRevenue) return null;
     const dataLine: ChartData<"bar"> = {
@@ -33,7 +32,7 @@ export const MonthlyRevenue = () => {
       datasets: [
         {
           label: monthlyRevenue.label,
-          data: monthlyRevenue.revenueData,
+          data: monthlyRevenue.ordersData,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(255, 159, 64, 0.2)",

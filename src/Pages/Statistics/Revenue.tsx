@@ -4,10 +4,14 @@ import DailyOrdersChart from "../../Components/Page/Statistics/Orders/DailyOrder
 import MonthlyOrdersChart from "../../Components/Page/Statistics/Orders/MonthlyOrders";
 import YearlyOrdersChart from "../../Components/Page/Statistics/Orders/YearlyOrders";
 import {
+  DailyOrders,
   DailyRevenue,
+  MonthlyOrders,
   MonthlyRevenue,
+  YearlyOrders,
   YearlyRevenue,
 } from "../../Components/Page/Statistics";
+import "react-datepicker/dist/react-datepicker.css";
 
 let decoration = require("../../Assets/Images/decoration_6.jpg");
 
@@ -45,11 +49,11 @@ function Revenue() {
             ) : chart === "YearlyChart" ? (
               <YearlyRevenue />
             ) : chart === "DailyOrdersChart" ? (
-              <DailyOrdersChart />
+              <DailyOrders />
             ) : chart === "MonthlyOrdersChart" ? (
-              <MonthlyOrdersChart />
+              <MonthlyOrders />
             ) : chart === "YearlyOrdersChart" ? (
-              <YearlyOrdersChart />
+              <YearlyOrders />
             ) : null}
           </div>
           <div className="col-xl-2">

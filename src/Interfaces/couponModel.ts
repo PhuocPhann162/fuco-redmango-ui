@@ -3,4 +3,5 @@ export default interface couponModel {
   code?: string;
   discountAmount?: number;
   minAmount?: number;
+  expiration?: Date;
 }

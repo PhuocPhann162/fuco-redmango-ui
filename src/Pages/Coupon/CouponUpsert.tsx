@@ -7,11 +7,13 @@ import {
 } from "../../Apis/couponApi";
 import { inputHelper, toastNotify } from "../../Helper";
 import { MainLoader } from "../../Components/Page/Common";
+import { differenceInDays, format } from "date-fns";
 
 const couponData = {
-  code: "",
-  discountAmount: 0,
-  minAmount: 0,
+  code: "10OFF",
+  discountAmount: 10,
+  minAmount: 100,
+  expirationDis: 7,
 };
 
 export default function CouponUpsert() {
@@ -27,10 +29,16 @@ export default function CouponUpsert() {
   useEffect(() => {
     if (data && data.result) {
       console.log(data);
+      const expirationDate = new Date(data?.result.expiration);
+      const currentDate = new Date();
+
+      // Tính khoảng cách số ngày giữa ngày expiration và ngày hiện tại
+      const daysDifference = differenceInDays(expirationDate, currentDate);
       const tempData = {
         code: data.result.code,
         discountAmount: data.result.discountAmount,
         minAmount: data.result.minAmount,
+        expirationDis: daysDifference + 1,
       };
       setCouponInputs(tempData);
     }
@@ -55,6 +63,7 @@ export default function CouponUpsert() {
     formData.append("Code", couponInputs.code);
     formData.append("DiscountAmount", couponInputs.discountAmount.toString());
     formData.append("MinAmount", couponInputs.minAmount.toString());
+    formData.append("Expiration", couponInputs.expirationDis.toString());
 
     let response;
 
@@ -96,32 +105,54 @@ export default function CouponUpsert() {
           >
             <div className="row mt-3">
               <div className="col-md-7">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Coupon Code"
-                  name="code"
-                  value={couponInputs.code}
-                  onChange={handleCouponInput}
-                  required
-                />
-                <input
-                  type="number"
-                  className="form-control mt-3"
-                  placeholder="Enter Discount Amount"
-                  name="discountAmount"
-                  value={couponInputs.discountAmount}
-                  onChange={handleCouponInput}
-                />
-                <input
-                  type="number"
-                  className="form-control mt-3"
-                  required
-                  placeholder="Enter Min Amount"
-                  name="minAmount"
-                  value={couponInputs.minAmount}
-                  onChange={handleCouponInput}
-                />
+                <div className="form-floating mb-3 col-md-12">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Coupon Code"
+                    name="code"
+                    value={couponInputs.code}
+                    onChange={handleCouponInput}
+                    required
+                  />
+                  <label className="ms-2 text-muted">Code</label>
+                </div>
+
+                <div className="form-floating mb-3 col-md-12">
+                  <input
+                    type="number"
+                    className="form-control mt-3"
+                    placeholder="Enter Discount Amount"
+                    name="discountAmount"
+                    value={couponInputs.discountAmount}
+                    onChange={handleCouponInput}
+                  />
+                  <label className="ms-2 text-muted">Discount Amount</label>
+                </div>
+                <div className="form-floating mb-3 col-md-12">
+                  <input
+                    type="number"
+                    className="form-control mt-3"
+                    required
+                    placeholder="Enter Min Amount"
+                    name="minAmount"
+                    value={couponInputs.minAmount}
+                    onChange={handleCouponInput}
+                  />
+                  <label className="ms-2 text-muted">Min Amount</label>
+                </div>
+                <div className="form-floating mb-3 col-md-12">
+                  <input
+                    type="number"
+                    className="form-control mt-3"
+                    required
+                    placeholder="Enter Expiration Date"
+                    name="expirationDis"
+                    value={couponInputs.expirationDis}
+                    onChange={handleCouponInput}
+                  />
+                  <label className="ms-2 text-muted">Expiration (Days)</label>
+                </div>
                 <div className="row">
                   <div className="col-6">
                     <button

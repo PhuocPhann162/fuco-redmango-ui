@@ -8,6 +8,7 @@ import { MainLoader } from "../../Components/Page/Common";
 import { couponModel } from "../../Interfaces";
 import { toast } from "react-toastify";
 import { Modal } from "../../Components/Layout";
+import { differenceInDays, format } from "date-fns";
 
 let decoration = require("../../Assets/Images/decoration_4.png");
 
@@ -75,21 +76,33 @@ export default function CouponList() {
           </div>
 
           <div className="p-2">
-            <div style={{ fontWeight: 700 }} className="row border ">
-              <div className="col-2">Id</div>
+            <div style={{ fontWeight: 700 }} className="row border">
+              <div className="col-1">Id</div>
               <div className="col-2">Code</div>
-              <div className="col-3">Discount Amount</div>
-              <div className="col-3">Min Amount</div>
+              <div className="col-2">Discount Amount</div>
+              <div className="col-2">Expiration Date</div>
+              <div className="col-2">Min Amount</div>
+              <div className="col-1">Status</div>
               <div className="col-2">Action</div>
             </div>
-            {data.result.map((coupon: couponModel) => (
+            {data?.result.map((coupon: couponModel) => (
               <div className="row border" key={coupon.id}>
-                <div className="col-2">{cnt++}</div>
+                <div className="col-1">{cnt++}</div>
                 <div className="col-2">{coupon.code}</div>
-                <div className="col-3">
+                <div className="col-2">
                   $ {coupon.discountAmount?.toFixed(2)}
                 </div>
-                <div className="col-3">$ {coupon.minAmount?.toFixed(2)}</div>
+                <div className="col-2">
+                  {new Date(coupon?.expiration!).toLocaleDateString()}
+                </div>
+                <div className="col-2">$ {coupon.minAmount?.toFixed(2)}</div>
+                <div className="col-1">
+                  {differenceInDays(new Date(coupon.expiration!), new Date()) +
+                    1 <=
+                  0
+                    ? "Expired"
+                    : "Active"}
+                </div>
                 <div className="col-2">
                   <button
                     className="btn btn-warning"

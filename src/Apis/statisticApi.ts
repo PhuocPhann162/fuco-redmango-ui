@@ -24,8 +24,22 @@ const statisticApi = createApi({
       }),
       providesTags: ["Statistics"],
     }),
+    getOrdersStatistic: builder.query({
+      query: ({ type, year, month, endYear }) => ({
+        url: `statistic/orders`,
+        method: "GET",
+        params: {
+          ...(type && { type }),
+          ...(year && { year }),
+          ...(endYear && { endYear }),
+          ...(month && { month }),
+        },
+      }),
+      providesTags: ["Statistics"],
+    }),
   }),
 });
 
 export default statisticApi;
-export const { useGetRevenueStatisticQuery } = statisticApi;
+export const { useGetRevenueStatisticQuery, useGetOrdersStatisticQuery } =
+  statisticApi;

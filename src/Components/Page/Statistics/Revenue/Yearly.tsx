@@ -104,7 +104,7 @@ export const YearlyRevenue = () => {
           selected={startYear}
           onChange={(date: any) => setStartYear(date)}
           dateFormat="yyyy"
-          showMonthYearPicker
+          showYearPicker
         />
       </div>
       <div className="flex flex-col">
@@ -113,7 +113,7 @@ export const YearlyRevenue = () => {
           selected={endYear}
           onChange={(date: any) => setEndYear(date)}
           dateFormat="yyyy"
-          showMonthYearPicker
+          showYearPicker
         />
       </div>
       {render()}
