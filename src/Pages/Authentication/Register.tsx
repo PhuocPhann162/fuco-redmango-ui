@@ -91,7 +91,7 @@ function Register() {
             )}
             <div className="form-floating mb-3 col-md-12">
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 placeholder="Email"
                 name="userName"
@@ -190,7 +190,7 @@ function Register() {
             </div>
             <div className="form-floating mb-3 col-md-6">
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Postal Code"
                 name="postalCode"

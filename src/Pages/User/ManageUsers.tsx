@@ -97,10 +97,10 @@ export default function ManageUsers() {
                       new Date(user.lockoutEnd).getTime() > Date.now() ? (
                         <>
                           <button
-                            className="btn btn-warning form-control"
+                            className="btn btn-outline-warning form-control"
                             onClick={() => handleLockUnLockUser(user.id)}
                           >
-                            Unlock <i className="bi bi-unlock-fill"></i>
+                            Active <i className="bi bi-unlock-fill"></i>
                           </button>
                           <button
                             disabled

@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-import DailyOrdersChart from "../../Components/Page/Statistics/Orders/DailyOrders";
-import MonthlyOrdersChart from "../../Components/Page/Statistics/Orders/MonthlyOrders";
-import YearlyOrdersChart from "../../Components/Page/Statistics/Orders/YearlyOrders";
 import {
   DailyOrders,
   DailyRevenue,

@@ -69,9 +69,9 @@ function MenuItemList() {
       category === "All"
         ? [...data.result]
         : data.result.filter(
-          (item: menuItemModel) =>
-            item.category.toUpperCase() === category.toUpperCase()
-        );
+            (item: menuItemModel) =>
+              item.category.toUpperCase() === category.toUpperCase()
+          );
 
     // search functionality
     if (search) {
@@ -145,22 +145,22 @@ function MenuItemList() {
     <div className="container row">
       <div className="my-3">
         <ul className="nav w-100 d-flex justify-content-center">
-        <div className="d-flex align-items-center col-xl-3" >
-          <input
-            type={"text"}
-            className="form-control rounded-pill"
-            style={{
-              width: "100%",
-              padding: "20px 20px",
-            }}
-            placeholder="Search for Food Items!"
-            value={value}
-            onChange={handleChange}
-          />
-          <span style={{ position: "relative", left: "-43px" }}>
-            <i className="bi bi-search"></i>
-          </span>
-        </div>
+          <div className="d-flex align-items-center col-xl-3">
+            <input
+              type={"text"}
+              className="form-control rounded-pill"
+              style={{
+                width: "100%",
+                padding: "20px 20px",
+              }}
+              placeholder="Search for Food Items!"
+              value={value}
+              onChange={handleChange}
+            />
+            <span style={{ position: "relative", left: "-43px" }}>
+              <i className="bi bi-search"></i>
+            </span>
+          </div>
           {categoryList.map((categoryName: string, index: number) => (
             <li
               className="nav-item"
@@ -168,8 +168,9 @@ function MenuItemList() {
               key={index}
             >
               <button
-                className={`nav-link p-0 pb-2 custom-buttons fs-5 ${index === 0 && "active"
-                  }`}
+                className={`nav-link p-0 pb-2 custom-buttons fs-5 ${
+                  index === 0 && "active"
+                }`}
                 onClick={() => handleFilterCategories(index)}
               >
                 {categoryName}
