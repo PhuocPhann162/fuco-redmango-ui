@@ -1,0 +1,41 @@
+@media (min-width: 1200px) {
+    .widthModal {
+        min-width: 800px;
+    }
+
+}
+
+@media (max-width: 1199px) {
+    .widthModal {
+        width: 100%;
+    }
+}
+
+@media (min-width: 600px) {
+
+    .borderColumn{
+        border-left: 1px solid black;
+    }
+}
+
+@media (max-width: 599px) {
+
+    .borderColumn{
+        border-top: 1px solid grey;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .widthModal {
+        width: 325px;
+    }
+
+}
+
+.fontInfo{
+    font-size: 16px;
+    font-family: cursive;
+}

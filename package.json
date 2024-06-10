@@ -2,9 +2,17 @@
   "name": "redmango",
   "version": "0.1.0",
   "private": true,
+  "babelMacros" : {
+    "fontawesome-svg-core" : {
+      "license": "free"
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@google/generative-ai": "^0.8.0",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^1.9.7",
@@ -19,6 +27,7 @@
     "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18.0.9",
     "axios": "^1.6.8",
+    "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.10.2",
     "chart.js": "^4.4.2",
@@ -26,14 +35,14 @@
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
-    "react-print": "^1.3.1",
-    "react-to-print": "^2.14.15",
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",
+    "react-print": "^1.3.1",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.14.15",
     "react-toastify": "^9.1.3",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"

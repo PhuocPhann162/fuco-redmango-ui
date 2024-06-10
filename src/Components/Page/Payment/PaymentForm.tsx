@@ -1,19 +1,12 @@
-import {
-  useStripe,
-  useElements,
-  PaymentElement,
-} from "@stripe/react-stripe-js";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import { toastNotify } from "../../../Helper";
-import orderSummaryProps from "../Order";
-import {
-  apiResponse,
-  cartItemModel,
-  orderDetailsDTOModel,
-} from "../../../Interfaces";
 import { useCreateOrderMutation } from "../../../Apis/orderApi";
 import { SD_Status } from "../../../Utility/SD";
 import { useNavigate } from "react-router-dom";
+import { CheckOutResultModal } from "../../UI/Invoice";
+import orderSummaryProps from "../Order";
+import { cartItemModel, orderDetailsDTOModel, apiResponse } from "../../../Interfaces";
 
 const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const stripe = useStripe();
@@ -21,6 +14,24 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const [createOrder] = useCreateOrderMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [order, setOrder] = useState<orderSummaryProps | null>(null);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const InvoiceData = {
+    data: data,
+    userInput: userInput,
+  };
+
+  const handleOpenModal = () => {
+    setOrder(InvoiceData);
+    setIsSuccess(true);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +42,6 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
     setIsProcessing(true);
 
     const result = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
         return_url: "https://example.com/order/123/complete",
@@ -40,7 +50,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
     });
 
     if (result.error) {
-      toastNotify("An unexpected error occured", "error");
+      toastNotify("An unexpected error occurred", "error");
       setIsProcessing(false);
     } else {
       let totalItems = 0;
@@ -77,15 +87,16 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
 
       if (response) {
         if (response.data?.result.status === SD_Status.CONFIRMED) {
-          navigate(
-            `/order/orderConfirmed/${response.data.result.orderHeaderId}`
-          );
+          // navigate(
+          //   `/order/orderConfirmed/${response.data.result.orderHeaderId}`
+          // );
+          handleOpenModal();
         } else {
           setIsProcessing(false);
           navigate("/failed");
         }
       } else {
-        toastNotify("An unexpected error occured", "error");
+        toastNotify("An unexpected error occurred", "error");
         navigate("/failed");
       }
     }
@@ -93,17 +104,27 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button
-        disabled={!stripe || isProcessing}
-        className="btn btn-success w-100 mt-5"
-      >
-        <span id="button-text">
-          {isProcessing ? "Processing..." : "Submit Order"}
-        </span>
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <PaymentElement />
+        <button
+          disabled={!stripe || isProcessing}
+          className="btn btn-success w-100 mt-5"
+        >
+          <span id="button-text">
+            {isProcessing ? "Processing..." : "Submit Order"}
+          </span>
+        </button>
+      </form>
+      {order && (
+        <CheckOutResultModal
+          order={order}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          isSuccess={isSuccess}
+        />
+      )}
+    </>
   );
 };
 
