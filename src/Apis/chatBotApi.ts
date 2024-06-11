@@ -11,8 +11,8 @@ interface Props {
 
 
     
-    const MODEL_NAME = "gemini-1.5-pro-latest";
-    const API_KEY = "AIzaSyCzbnNDDBBRuy90h7-jFt0t4k61ujlvboc";
+    const MODEL_NAME = "gemini-1.5-pro";
+    const API_KEY = "AIzaSyD34EO9YMsyAMnQODMhB3yw_3oHqzXiAVw";
 
 async function chatBotApi(message :Props) {
   // For text-only input, use the gemini-pro model
