@@ -8,7 +8,6 @@ import {
   YearlyOrders,
   YearlyRevenue,
 } from "../../Components/Page/Statistics";
-import "react-datepicker/dist/react-datepicker.css";
 
 let decoration = require("../../Assets/Images/decoration_6.jpg");
 
@@ -65,7 +64,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "DailyChart"}
               />
-              <label className="form-check-label">Daily Revenue</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Daily Revenue
+              </label>
             </div>
             <div className="form-check">
               <input
@@ -77,7 +78,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "MonthlyChart"}
               />
-              <label className="form-check-label">Monthly Revenue</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Monthly Revenue
+              </label>
             </div>
             <div className="form-check">
               <input
@@ -89,7 +92,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "YearlyChart"}
               />
-              <label className="form-check-label">Yearly Revenue</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault3">
+                Yearly Revenue
+              </label>
             </div>
           </div>
           <div className="col-xl-2">
@@ -104,7 +109,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "DailyOrdersChart"}
               />
-              <label className="form-check-label">Daily Orders</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault4">
+                Daily Orders
+              </label>
             </div>
             <div className="form-check">
               <input
@@ -116,7 +123,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "MonthlyOrdersChart"}
               />
-              <label className="form-check-label">Monthly Orders</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault5">
+                Monthly Orders
+              </label>
             </div>
             <div className="form-check">
               <input
@@ -128,7 +137,9 @@ function Revenue() {
                 onChange={(e) => setChart(e.target.value)}
                 checked={chart === "YearlyOrdersChart"}
               />
-              <label className="form-check-label">Yearly Orders</label>
+              <label className="form-check-label" htmlFor="flexRadioDefault6">
+                Yearly Orders
+              </label>
             </div>
           </div>
         </div>

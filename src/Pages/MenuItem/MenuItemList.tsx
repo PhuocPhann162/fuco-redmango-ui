@@ -98,7 +98,7 @@ function MenuItemList() {
                 <div className="col-1">{cnt++}</div>
                 <div className="col-2">{menuItem.name}</div>
                 <div className="col-2">{menuItem.category}</div>
-                <div className="col-1">{menuItem.price}</div>
+                <div className="col-1">${menuItem.price}</div>
                 <div className="col-2">{menuItem.specialTag}</div>
                 <div className="col-1">
                   <button

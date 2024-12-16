@@ -3,6 +3,7 @@ import React from "react";
 function MainLoader() {
   return (
     <div
+      data-testid="main-loader"
       style={{
         position: "fixed",
         top: "0",
@@ -17,6 +18,7 @@ function MainLoader() {
       <div
         className={`spinner-border text-warning`}
         style={{ width: "4rem", height: "4rem" }}
+        role="status"
       >
         {" "}
       </div>

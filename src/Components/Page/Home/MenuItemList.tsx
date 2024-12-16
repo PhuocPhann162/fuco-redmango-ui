@@ -144,7 +144,10 @@ function MenuItemList() {
   return (
     <div className="container row">
       <div className="my-3">
-        <ul className="nav w-100 d-flex justify-content-center">
+        <ul
+          className="nav w-100 d-flex justify-content-center"
+          data-testid="category-list"
+        >
           <div className="d-flex align-items-center col-xl-3">
             <input
               type={"text"}
@@ -163,11 +166,13 @@ function MenuItemList() {
           </div>
           {categoryList.map((categoryName: string, index: number) => (
             <li
+              data-testid="category-filter-li"
               className="nav-item"
               style={{ ...(index === 0 && { marginLeft: "auto" }) }}
               key={index}
             >
               <button
+                data-testid="category-filter-btn"
                 className={`nav-link p-0 pb-2 custom-buttons fs-5 ${
                   index === 0 && "active"
                 }`}
@@ -193,6 +198,7 @@ function MenuItemList() {
             >
               {sortOptions.map((sortType, index) => (
                 <li
+                  data-testid="sort-price-name-li"
                   key={index}
                   className="dropdown-item"
                   onClick={() => handleSortClick(index)}

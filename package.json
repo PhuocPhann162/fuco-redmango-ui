@@ -2,14 +2,20 @@
   "name": "redmango",
   "version": "0.1.0",
   "private": true,
-  "babelMacros" : {
-    "fontawesome-svg-core" : {
+  "babelMacros": {
+    "fontawesome-svg-core": {
       "license": "free"
     }
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@bundled-es-modules)/).*/"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@faker-js/faker": "^9.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -18,10 +24,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/react-stripe-js": "^1.16.5",
     "@stripe/stripe-js": "^1.54.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.10",
     "@types/react": "^18.0.26",
     "@types/react-datepicker": "^6.2.0",
@@ -32,7 +35,9 @@
     "bootstrap-icons": "^1.10.2",
     "chart.js": "^4.4.2",
     "date-fns": "^3.3.1",
+    "jest-fixed-jsdom": "^0.0.9",
     "jwt-decode": "^3.1.2",
+    "msw": "^2.6.8",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-chartjs-2": "^5.2.0",
@@ -45,13 +50,17 @@
     "react-to-print": "^2.14.15",
     "react-toastify": "^9.1.3",
     "typescript": "^4.9.4",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tsc:check-app": "tsc --noEmit --project \"./tsconfig.json\"",
+    "tsc:check-cypress": "tsc --noEmit --project \"./cypress/tsconfig.json\"",
+    "test:e2e": "cypress run --headed --config-file \"./cypress/config/cypress-base.json\""
   },
   "eslintConfig": {
     "extends": [
@@ -72,6 +81,18 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "^7.24.5"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.24.5",
+    "@babel/preset-env": "^7.26.0",
+    "@jest/globals": "^29.7.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
+    "cypress": "^9.7.0",
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "ts-jest": "^29.1.5"
   }
 }

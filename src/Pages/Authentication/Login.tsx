@@ -17,6 +17,7 @@ function Login() {
     userName: "",
     password: "",
   });
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tempData = inputHelper(e, userInput);
@@ -153,6 +154,7 @@ function Login() {
                         value=""
                         id="form2Example33"
                         checked
+                        onChange={(e) => setIsChecked(e.target.checked)}
                       />
                       <label
                         className="form-check-label"

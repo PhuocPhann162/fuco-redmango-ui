@@ -36,14 +36,17 @@ function MenuItemCard(props: Props) {
     setIsAddingToCart(false);
   };
   return (
-    <div className="col-md-4 col-12 p-4">
+    <div className="col-md-4 col-12 p-4" data-testid="menuItem-Card">
       <div
         className="card"
         style={{ boxShadow: "0 1px 7px 0 rgb(0 0 0 / 50%)" }}
       >
         <div className="card-body pt-2">
           <div className="row col-10 offset-1 p-4">
-            <Link to={`/menuItemDetails/${props.menuItem.id}`}>
+            <Link
+              data-testid="view-detail-item-a"
+              to={`/menuItemDetails/${props.menuItem.id}`}
+            >
               <img
                 src={props.menuItem.image}
                 style={{ borderRadius: "50%" }}
@@ -76,6 +79,7 @@ function MenuItemCard(props: Props) {
             </div>
           ) : (
             <i
+              data-testid="btn-add-to-cart"
               className="bi bi-cart-plus btn btn-outline-info"
               style={{
                 position: "absolute",

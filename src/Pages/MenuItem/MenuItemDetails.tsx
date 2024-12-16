@@ -117,8 +117,9 @@ function MenuItemDetails() {
 
               <div className="col-5 ">
                 <button
+                  data-testid="backToHome-btn"
                   className="btn btn-secondary form-control"
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigate("/")}
                 >
                   Back to Home
                 </button>

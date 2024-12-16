@@ -64,7 +64,7 @@ function Register() {
     });
     if (response.data) {
       if (userInput.role === "") {
-        toastNotify("Registration new account successfully! ");
+        toastNotify("Registration new account successfully!");
       } else {
         toastNotify("Registration successfully! Please login to continue.");
         navigate("/login");
@@ -127,6 +127,7 @@ function Register() {
             </div>
             <div className="form-floating mb-3 col-md-6">
               <input
+                id="password"
                 type="password"
                 className="form-control"
                 placeholder="Password"
@@ -135,10 +136,13 @@ function Register() {
                 onChange={handleUserInput}
                 required
               />
-              <label className="ms-2 text-muted">Password</label>
+              <label className="ms-2 text-muted" htmlFor="password">
+                Password
+              </label>
             </div>
             <div className="form-floating mb-3 col-md-6">
               <input
+                id="confirmPassword"
                 type="password"
                 className="form-control"
                 placeholder="Confirm Password"
@@ -147,7 +151,9 @@ function Register() {
                 onChange={handleUserInput}
                 required
               />
-              <label className="ms-2 text-muted">Confirm Password</label>
+              <label className="ms-2 text-muted" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
               {passwordMatchError && (
                 <div className="text-danger">{passwordMatchError}</div>
               )}

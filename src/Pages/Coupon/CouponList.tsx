@@ -8,7 +8,7 @@ import { MainLoader } from "../../Components/Page/Common";
 import { couponModel } from "../../Interfaces";
 import { toast } from "react-toastify";
 import { Modal } from "../../Components/Layout";
-import { differenceInDays, format } from "date-fns";
+import { differenceInDays } from "date-fns";
 
 let decoration = require("../../Assets/Images/decoration_4.png");
 
@@ -85,49 +85,53 @@ export default function CouponList() {
               <div className="col-1">Status</div>
               <div className="col-2">Action</div>
             </div>
-            {data?.result.map((coupon: couponModel) => (
-              <div className="row border" key={coupon.id}>
-                <div className="col-1">{cnt++}</div>
-                <div className="col-2">{coupon.code}</div>
-                <div className="col-2">
-                  $ {coupon.discountAmount?.toFixed(2)}
+            {data.result &&
+              data?.result.map((coupon: couponModel) => (
+                <div className="row border" key={coupon.id}>
+                  <div className="col-1">{cnt++}</div>
+                  <div className="col-2">{coupon.code}</div>
+                  <div className="col-2">
+                    $ {coupon.discountAmount?.toFixed(2)}
+                  </div>
+                  <div className="col-2">
+                    {new Date(coupon?.expiration!).toLocaleDateString()}
+                  </div>
+                  <div className="col-2">$ {coupon.minAmount?.toFixed(2)}</div>
+                  <div className="col-1">
+                    {differenceInDays(
+                      new Date(coupon.expiration!),
+                      new Date()
+                    ) +
+                      1 <=
+                    0
+                      ? "Expired"
+                      : "Active"}
+                  </div>
+                  <div className="col-2">
+                    <button
+                      className="btn btn-warning"
+                      onClick={() =>
+                        navigate("/coupon/couponUpsert/" + coupon.id)
+                      }
+                    >
+                      <i className="bi bi-pencil-fill"></i>
+                    </button>
+                    <button
+                      className="btn btn-danger mx-2"
+                      onClick={() => setIsModalShow(true)}
+                    >
+                      <i className="bi bi-trash-fill"></i>
+                    </button>
+                    <Modal
+                      title=" Are you sure?"
+                      content="Do you really want to delete this coupon? This process cannot be undone."
+                      isShow={isModalShow}
+                      onClose={() => setIsModalShow(false)}
+                      onConfirm={() => handleDeleteCoupon(coupon.id!)}
+                    />
+                  </div>
                 </div>
-                <div className="col-2">
-                  {new Date(coupon?.expiration!).toLocaleDateString()}
-                </div>
-                <div className="col-2">$ {coupon.minAmount?.toFixed(2)}</div>
-                <div className="col-1">
-                  {differenceInDays(new Date(coupon.expiration!), new Date()) +
-                    1 <=
-                  0
-                    ? "Expired"
-                    : "Active"}
-                </div>
-                <div className="col-2">
-                  <button
-                    className="btn btn-warning"
-                    onClick={() =>
-                      navigate("/coupon/couponUpsert/" + coupon.id)
-                    }
-                  >
-                    <i className="bi bi-pencil-fill"></i>
-                  </button>
-                  <button
-                    className="btn btn-danger mx-2"
-                    onClick={() => setIsModalShow(true)}
-                  >
-                    <i className="bi bi-trash-fill"></i>
-                  </button>
-                  <Modal
-                    title=" Are you sure?"
-                    content="Do you really want to delete this coupon? This process cannot be undone."
-                    isShow={isModalShow}
-                    onClose={() => setIsModalShow(false)}
-                    onConfirm={() => handleDeleteCoupon(coupon.id!)}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       )}
