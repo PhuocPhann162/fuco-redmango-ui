@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import orderSummaryProps from "./orderSummaryProps";
 import { cartItemModel } from "../../../Interfaces";
 import { getStatusColor } from "../../../Helper";
@@ -25,12 +25,6 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
           corlor: "success",
           value: SD_Status.COMPLETED,
         };
-
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data]);
 
   const handleNextStatus = async () => {
     setIsLoading(true);
@@ -65,9 +59,13 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
             </span>
           </div>
           <div className="mt-2">
-            <div className="border py-3 px-2">Name : {userInput.name}</div>
-            <div className="border py-3 px-2">Email : {userInput.email}</div>
-            <div className="border py-3 px-2">
+            <div data-testid="name-person-order" className="border py-3 px-2">
+              Name : {userInput.name}
+            </div>
+            <div data-testid="email-person-order" className="border py-3 px-2">
+              Email : {userInput.email}
+            </div>
+            <div data-testid="phone-person-order" className="border py-3 px-2">
               Phone : {userInput.phoneNumber}
             </div>
             <div className="border py-3 px-2">
@@ -130,6 +128,7 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
                     </button>
                   )}
                 <button
+                  data-testid="update-next-status-btn"
                   disabled={loading}
                   onClick={handleNextStatus}
                   className={`btn btn-${nextStatus.corlor}`}

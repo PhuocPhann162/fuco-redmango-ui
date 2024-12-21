@@ -63,7 +63,7 @@ function Header() {
                 </NavLink>
               </li>
               {userData.role === SD_Roles.ADMIN ? (
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown" data-testid="admin-panel-li">
                   <a
                     className="nav-link dropdown-toggle"
                     href="/#"
@@ -86,6 +86,7 @@ function Header() {
                       My Orders
                     </li>
                     <li
+                      data-testid="all-order-manage-li"
                       style={{
                         transitionDelay: `${2 * 0.1}s`,
                         cursor: "pointer",
@@ -96,6 +97,7 @@ function Header() {
                       All Orders
                     </li>
                     <li
+                      data-testid="menuItem-list-li"
                       style={{
                         transitionDelay: `${3 * 0.1}s`,
                         cursor: "pointer",
@@ -106,6 +108,7 @@ function Header() {
                       Menu Item
                     </li>
                     <li
+                      data-testid="coupon-list-li"
                       style={{
                         transitionDelay: `${4 * 0.1}s`,
                         cursor: "pointer",
@@ -127,6 +130,7 @@ function Header() {
                       Register Users
                     </li>
                     <li
+                      data-testid="manage-users-li"
                       style={{
                         transitionDelay: `${6 * 0.1}s`,
                         cursor: "pointer",
@@ -137,6 +141,7 @@ function Header() {
                       Manager Users
                     </li>
                     <li
+                      data-testid="revenue-statistic-li"
                       style={{
                         transitionDelay: `${7 * 0.1}s`,
                         cursor: "pointer",

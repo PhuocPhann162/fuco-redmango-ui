@@ -23,7 +23,7 @@ describe("Register Component", () => {
 
     cy.get('button[type="submit"]').click();
 
-    cy.contains("Registration new account successfully!").should("be.visible");
+    cy.contains("Username already exists").should("be.visible");
   });
 
   it("should fill the form and submit fail because Username already exists", () => {

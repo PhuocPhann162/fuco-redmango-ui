@@ -1,4 +1,3 @@
-import React from "react";
 import { CartPickUpDetail, CartSummary } from "../../Components/Page/Cart";
 import { withAuth } from "../../HOC";
 

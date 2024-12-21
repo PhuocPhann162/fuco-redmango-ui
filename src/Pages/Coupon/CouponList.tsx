@@ -77,7 +77,9 @@ export default function CouponList() {
 
           <div className="p-2">
             <div style={{ fontWeight: 700 }} className="row border">
-              <div className="col-1">Id</div>
+              <div data-testid="coupon-id-col" className="col-1">
+                Id
+              </div>
               <div className="col-2">Code</div>
               <div className="col-2">Discount Amount</div>
               <div className="col-2">Expiration Date</div>
@@ -87,17 +89,25 @@ export default function CouponList() {
             </div>
             {data.result &&
               data?.result.map((coupon: couponModel) => (
-                <div className="row border" key={coupon.id}>
+                <div
+                  data-testid="coupon-row-data"
+                  className="row border"
+                  key={coupon.id}
+                >
                   <div className="col-1">{cnt++}</div>
-                  <div className="col-2">{coupon.code}</div>
-                  <div className="col-2">
+                  <div data-testid="coupon-code-col" className="col-2">
+                    {coupon.code}
+                  </div>
+                  <div data-testid="coupon-discount-col" className="col-2">
                     $ {coupon.discountAmount?.toFixed(2)}
                   </div>
-                  <div className="col-2">
+                  <div data-testid="coupon-expiration-col" className="col-2">
                     {new Date(coupon?.expiration!).toLocaleDateString()}
                   </div>
-                  <div className="col-2">$ {coupon.minAmount?.toFixed(2)}</div>
-                  <div className="col-1">
+                  <div data-testid="coupon-min-col" className="col-2">
+                    $ {coupon.minAmount?.toFixed(2)}
+                  </div>
+                  <div data-testid="coupon-status-col" className="col-1">
                     {differenceInDays(
                       new Date(coupon.expiration!),
                       new Date()
@@ -123,6 +133,7 @@ export default function CouponList() {
                       <i className="bi bi-trash-fill"></i>
                     </button>
                     <Modal
+                      data-testid="confirm-delete-modal"
                       title=" Are you sure?"
                       content="Do you really want to delete this coupon? This process cannot be undone."
                       isShow={isModalShow}

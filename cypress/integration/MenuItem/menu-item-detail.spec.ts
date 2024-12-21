@@ -1,10 +1,10 @@
 describe("MenuItemDetails - UI Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/menuItemDetails/1");
+    cy.visit("http://localhost:3000/menuItemDetails/2");
   });
 
   it("should display the correct title, image, and buttons", () => {
-    cy.contains("h2", "Spring Roll").should("exist");
+    cy.contains("h2", "Idli").should("exist");
     cy.get('[data-testid="backToHome-btn"]').should("be.visible");
     cy.get(".btn-warning").contains("Add to Cart").should("exist");
     cy.get("img").should("have.attr", "src").and("not.be.empty");
@@ -17,7 +17,7 @@ describe("MenuItemDetails - UI Tests", () => {
 
 describe("MenuItemDetails - Add to Cart Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/menuItemDetails/1");
+    cy.visit("http://localhost:3000/menuItemDetails/2");
   });
 
   it("should add the item to cart with default quantity", () => {
@@ -35,7 +35,7 @@ describe("MenuItemDetails - Add to Cart Tests", () => {
         cy.get('[data-testid="view-detail-item-a"]').click();
       });
 
-    cy.url().should("include", "/menuItemDetails/1");
+    cy.url().should("include", "/menuItemDetails/2");
 
     cy.get('button:contains("Add to Cart")').should("be.visible");
 
@@ -64,7 +64,7 @@ describe("MenuItemDetails - Add to Cart Tests", () => {
 
 describe("MenuItemDetails - Navigation Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/menuItemDetails/1");
+    cy.visit("http://localhost:3000/menuItemDetails/2");
   });
 
   it("should redirect to home page when clicking Back to Home button", () => {
@@ -75,7 +75,7 @@ describe("MenuItemDetails - Navigation Tests", () => {
 
 describe("MenuItemDetails - Loader Tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/menuItemDetails/1");
+    cy.visit("http://localhost:3000/menuItemDetails/2");
   });
 
   it("should display MainLoader while fetching data", () => {
@@ -98,7 +98,7 @@ describe("MenuItemDetails - Loader Tests", () => {
         cy.get('[data-testid="view-detail-item-a"]').click();
       });
 
-    cy.url().should("include", "/menuItemDetails/1");
+    cy.url().should("include", "/menuItemDetails/2");
     cy.get('button:contains("Add to Cart")').click();
     cy.get('[data-testid="mini-loader"]').should("be.visible");
     cy.contains("Item added to cart successfully").should("be.visible");

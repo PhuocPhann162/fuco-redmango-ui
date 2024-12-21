@@ -211,6 +211,7 @@ function CartPickUpDetail() {
           </div>
         </div>
         <button
+          data-testid="place-order-btn"
           style={{ backgroundColor: "#5D3D2E" }}
           type="submit"
           className="btn btn-lg text-white mt-3"

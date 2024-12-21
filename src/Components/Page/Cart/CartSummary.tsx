@@ -165,6 +165,7 @@ function CartSummary() {
         shoppingCartFromStore?.cartItems?.map(
           (cartItem: cartItemModel, index: number) => (
             <div
+              data-testid="cart-item-section"
               key={index}
               className="d-flex flex-sm-row flex-column align-items-center custom-card-shadow rounded m-3"
               style={{ backgroundColor: "#FAFAFA" }}

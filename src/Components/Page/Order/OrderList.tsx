@@ -45,7 +45,11 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
             <tbody>
               {orderData &&
                 orderData.map((orderItem: orderHeaderModel) => (
-                  <tr className="border" key={orderItem.orderHeaderId}>
+                  <tr
+                    data-testid="order-data-row"
+                    className="border"
+                    key={orderItem.orderHeaderId}
+                  >
                     <td className="col-1">{orderItem.orderHeaderId}</td>
                     <td className="col-2">{orderItem.pickupName}</td>
                     <td className="col-2">{orderItem.pickupPhoneNumber}</td>
@@ -68,6 +72,7 @@ function OrderList({ orderData, isLoading }: OrderListProps) {
                     </td>
                     <td className="col-1 text-center">
                       <button
+                        data-testid="order-detail-view-btn"
                         className="btn btn-success"
                         onClick={() => {
                           navigate(

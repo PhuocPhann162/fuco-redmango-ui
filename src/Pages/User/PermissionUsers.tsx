@@ -97,6 +97,7 @@ export default function PermissionUsers() {
                       Email
                     </label>
                     <input
+                      data-testid="email-permission-input"
                       readOnly
                       value={userInfo && userInfo.email}
                       className="form-control border-0 shadow mt-2"
@@ -107,6 +108,7 @@ export default function PermissionUsers() {
                       Full Name
                     </label>
                     <input
+                      data-testid="fullName-permission-input"
                       readOnly
                       value={userInfo && userInfo.name}
                       className="form-control border-0 shadow mt-2"

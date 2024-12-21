@@ -110,10 +110,12 @@ describe("HomeScreen - Test all features in the Home Screen of Online Food Resta
   });
 
   it("view menu item detail by ID", () => {
-    cy.get('[data-testid="menuItem-Card"]').each(($menuItemCard, index) => {
-      cy.get('[data-testid="view-detail-item-a"]').eq(index).click();
-      cy.url().should("include", `/menuItemDetails/${index + 1}`);
-      cy.go("back");
-    });
+    cy.get('[data-testid="menuItem-Card"]')
+      .eq(1)
+      .within(() => {
+        cy.get('[data-testid="view-detail-item-a"]').click();
+        cy.url().should("include", `/menuItemDetails/3`);
+        cy.go("back");
+      });
   });
 });

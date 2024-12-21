@@ -125,6 +125,7 @@ function AllOrders() {
                 onChange={handleChange}
               />
               <select
+                data-testid="filter-status-select"
                 className="form-select w-50 mx-2"
                 name="status"
                 onChange={handleChange}
@@ -149,6 +150,7 @@ function AllOrders() {
             <div>Row per page: </div>
             <div>
               <select
+                data-testid="page-size-select"
                 className="form-select mx-2"
                 style={{ width: "80px" }}
                 value={currentPageSize}
@@ -165,6 +167,7 @@ function AllOrders() {
             </div>
             <div className="mx-2">{getPageDetails()}</div>
             <button
+              data-testid="prev-current-btn"
               onClick={() => handlePageOptionsChange("prev")}
               disabled={pageOptions.pageNumber === 1}
               className="btn btn-outline-primary px-3 mx-2"
@@ -172,6 +175,7 @@ function AllOrders() {
               <i className="bi bi-chevron-left"></i>
             </button>
             <button
+              data-testid="next-current-btn"
               onClick={() => handlePageOptionsChange("next")}
               disabled={
                 pageOptions.pageNumber * pageOptions.pageSize >= totalRecords

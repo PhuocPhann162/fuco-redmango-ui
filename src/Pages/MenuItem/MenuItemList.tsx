@@ -102,6 +102,7 @@ function MenuItemList() {
                 <div className="col-2">{menuItem.specialTag}</div>
                 <div className="col-1">
                   <button
+                    data-testid="edit-menuItem-btn"
                     className="btn btn-warning"
                     onClick={() =>
                       navigate("/menuItem/menuItemUpsert/" + menuItem.id)
